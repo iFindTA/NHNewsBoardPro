@@ -1,0 +1,18 @@
+//
+//  NHNewsBoardPro-Prefix.pch
+//  NHNewsBoardPro
+//
+//  Created by hu jiaju on 16/4/1.
+//  Copyright © 2016年 hu jiaju. All rights reserved.
+//
+
+#ifndef NHNewsBoardPro_Prefix_pch
+#define NHNewsBoardPro_Prefix_pch
+
+#define MAS_SHORTHAND
+#import "Masonry.h"
+#define MAS_SHORTHAND_GLOBALS
+#import <PBToolKits/PBToolKits.h>
+#import <DKNightVersion/DKNightVersion.h>
+
+#endif /* NHNewsBoardPro_Prefix_pch */

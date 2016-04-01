@@ -1,0 +1,337 @@
+{
+"list": [
+{
+"id": 6231,
+"title": "互联网金融协会今日挂牌成立 入会条件和会费曝光",
+"intro": "互联网金融协会今日正式成立，共时妹第一时间获悉协会入会条件和会费以及理事单位名单。",
+"zan": 0,
+"add_time": "26分钟前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/21694a0dca5f6ac44a636cb2712495461580267e/56f4ce1e99f47.jpg"
+]
+},
+{
+"id": 6229,
+"title": "互联网金融协会正式挂牌 看看互金大佬们怎么说",
+"intro": "​在业界备受关注的中国互联网金融协会今天上午正式在上海成立挂牌。",
+"zan": 0,
+"add_time": "2小时前",
+"from": "环球科技",
+"image": [
+"https://img.gongshidai.com/cjv2/17a3d099c23f625884c72c8980aec044c802ea59/56f4b6a11cff7.jpg"
+]
+},
+{
+"id": 6228,
+"title": "中国互联网金融协会年会费可能近亿",
+"intro": "目前中国互联网金融协会一共431家会员单位，按照最低会费20万每年计算，预计年收会员费都接近一亿元。",
+"zan": 0,
+"add_time": "2小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/f773051902e02f7b167ab26aaaf943cb1f32f7e7/56f4b4bdb72fb.jpg"
+]
+},
+{
+"id": 6227,
+"title": "P2P私募拆分岔路口 变身自动投标就能合规？",
+"intro": "互联网金融平台对私募产品的拆分、转让业务的变化正在引来业界讨论。",
+"zan": 0,
+"add_time": "2小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/3186f5e55559b5e3e03f3018a1181e1dc6ff8bb8/56f4ae714fed9.jpg"
+]
+},
+{
+"id": 6225,
+"title": "重磅：杨雄、潘功胜出席中国互金协会成立大会!",
+"intro": "杨雄、潘功胜出席中国互联网金融协会成立大会!另附会议议程和142家候选理事名单。",
+"zan": 0,
+"add_time": "4小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/332f510a0e1d8a2852e34291a67d8886039c2a3f/56f495740a9bf.jpg"
+]
+},
+{
+"id": 6224,
+"title": "场景嵌入式互联网保险产品热销",
+"intro": "1月，互联网财产保险保费收入725335.6万元，同比增长5.24%。",
+"zan": 0,
+"add_time": "4小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/2b58fc72b0a0959133a392c83f0f961cdeaffbff/56f492f36caab.jpg"
+]
+},
+{
+"id": 6223,
+"title": "银行再收紧监管又趋严 P2P如何搞定资金存管",
+"intro": "近期，银行与P2P合作资金存管遭遇收紧趋势，P2P该如何应对监管要求的银行存管？",
+"zan": 0,
+"add_time": "4小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/774363d65627f51b72defb8360a6f3f576f77abf/56f49185b7310.jpg"
+]
+},
+{
+"id": 6220,
+"title": "京东金融金麟:众筹是高于生活的梦想",
+"intro": "如何看待众筹的本质和发展潜力？众筹投资者如何保障自身的利益？",
+"zan": 0,
+"add_time": "16小时前",
+"from": "第一财经",
+"image": [
+"https://img.gongshidai.com/cjv2/1fd5c7637186310cd1422626fc0a2814fef7fdb4/56f3ecab74811.jpg"
+]
+},
+{
+"id": 6219,
+"title": "盘点那些让人无言以对的奇葩平台…",
+"intro": "有一种东西比微信红包的速度还要快！那就是P2P问题平台。",
+"zan": 0,
+"add_time": "16小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/f7fb0414416745feaab0ea547a2f03c37e4b98a9/56f3ea05e71a5.jpg"
+]
+},
+{
+"id": 6218,
+"title": "马蔚华：不解决这个问题 微众和网商不能称为银行",
+"intro": "招商银行前行长马蔚华表示，不给网上开户，微众银行和网上银行不能称之为银行，只能叫有牌照的技术公司。",
+"zan": 0,
+"add_time": "17小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/08d627f8da971d82bc5b1bf4e529e44ea2263a06/56f3e5a1902db.jpg"
+]
+},
+{
+"id": 6217,
+"title": "互金协会首批会员约400家  平台不足40家 ",
+"intro": "据悉，首批互金协会会员数量约400家左右，P2P平台不足40家。",
+"zan": 0,
+"add_time": "17小时前",
+"from": "金钱报",
+"image": [
+"https://img.gongshidai.com/cjv2/795ba94f70e8d25b9064277207f9172c91cb8e20/56f3dd784241e.jpg"
+]
+},
+{
+"id": 6216,
+"title": "起底骗贷黑色产业链：只需1万，可骗贷千万？ ",
+"intro": "e租宝700亿大骗局，为何能堂而皇之存在数年？甚至欺骗一个时代？",
+"zan": 0,
+"add_time": "17小时前",
+"from": "勿同财经",
+"image": [
+"https://img.gongshidai.com/cjv2/e55e4bc33b8fa4abd7770d3a716b011910c22184/56f3dbc1ba5fb.jpg"
+]
+},
+{
+"id": 6215,
+"title": "中国互联网金融协会明日正式挂牌上海 ",
+"intro": "根据互联网金融协会在3月9日发布的通知，该协会将于明日在上海黄浦区召开成立大会。",
+"zan": 0,
+"add_time": "17小时前",
+"from": "零壹财经",
+"image": [
+"https://img.gongshidai.com/cjv2/2a9b7a2f0e8c5fe6cba349b5938a6004801fa096/56f3da7a75dc1.jpg"
+]
+},
+{
+"id": 6214,
+"title": "京东重金收购“白条”域名，白条将独立？ ",
+"intro": "“白条”走出京东后，将为京东金融集团带来多大价值?",
+"zan": 0,
+"add_time": "17小时前",
+"from": "零壹财经",
+"image": [
+"https://img.gongshidai.com/cjv2/3ee1bacd0b8a1ed68baae13c02c973218c6d6a2f/56f3d9170f35b.jpg"
+]
+},
+{
+"id": 6213,
+"title": "互联网创新金融CEO峰会第二弹：纯干货分享",
+"intro": "互联网创新金融CEO峰会的纯干货分享，快来快来！搬好板凳！",
+"zan": 0,
+"add_time": "18小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/d203c9e7a95c66f505849ea2a1b3d25c88ff4e60/56f3cb8ca0023.png"
+]
+},
+{
+"id": 6212,
+"title": "不被治愈反被污 细数那些年毒疫苗般的平台营销 ",
+"intro": "汗金所的樱花营销方式遭痛批，还有哪些平台营销令人苦笑不得？",
+"zan": 0,
+"add_time": "19小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/77c1df4a6e5316453a93024e25b4927d940b4ba1/56f3bcf0bc42b.jpg"
+]
+},
+{
+"id": 6211,
+"title": "互金平台校园地推 学生代理一天赚5000元",
+"intro": "校园贷款为何能够盛行？互金平台在校园内地推，招校园代理。",
+"zan": 0,
+"add_time": "20小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/bb0a2558fc59a47df8a27c03562b3ac75194a8a1/56f3b7864e32c.jpg"
+]
+},
+{
+"id": 6209,
+"title": "蚂蚁金服彭蕾:合格的互金长啥样？",
+"intro": "“蚂蚁”眼中什么才是合格的互联网金融？伪互金和真互金为什么“隔了不止一座山”？",
+"zan": 0,
+"add_time": "20小时前",
+"from": "人民日报",
+"image": [
+"https://img.gongshidai.com/cjv2/0a9de3896e7c149690fbd5b0554bf6f51a6724d3/56f3b49b0013e.jpg"
+]
+},
+{
+"id": 6206,
+"title": "陆金所明确联席董事长 李仁杰、计葵生各有分工",
+"intro": "据悉，李仁杰已正式担任陆金所董事长一职，原董事长计葵生担任联席董事长兼CEO。",
+"zan": 0,
+"add_time": "20小时前",
+"from": "财新网",
+"image": [
+"https://img.gongshidai.com/cjv2/415aa554f5fde5e1ffc5a8eff8e2d9ab375cffec/56f3af5e74bf5.jpg"
+]
+},
+{
+"id": 6205,
+"title": "博鳌聚焦众筹：280多家平台80多家倒闭或转型",
+"intro": "博鳌论坛上，与会嘉宾透露280多家众筹平台有84家倒闭或转型。",
+"zan": 0,
+"add_time": "21小时前",
+"from": "新华社",
+"image": [
+"https://img.gongshidai.com/cjv2/4d8a02ed62c702a40fca558a5d8cb7be4fea9676/56f3ab5a0ac63.jpg"
+]
+},
+{
+"id": 6204,
+"title": "李克强博鳌发声：中国经济这样看，这么干！",
+"intro": "经济形势的好坏，关系到大家的饭碗。是时候，知道些经济风向了。",
+"zan": 0,
+"add_time": "21小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/ade81194b51556279817116cabc0b8d362516c4b/56f3aa0c84ae7.jpg"
+]
+},
+{
+"id": 6203,
+"title": "恶意欠话费将影响芝麻分 芝麻信用首入电信行业",
+"intro": "注意啦！恶意欠话费将影响芝麻分！",
+"zan": 0,
+"add_time": "22小时前",
+"from": "零壹财经",
+"image": [
+"https://img.gongshidai.com/cjv2/58baa2e8bf762b53d37416854dcacd972cc76e4f/56f39819a9954.png"
+]
+},
+{
+"id": 6202,
+"title": "互联网创新金融CEO峰会：一场创新与风险的激辩",
+"intro": "互联网金融界大佬齐聚一堂，共同讨论监管下的互联网金融发展。看看有你吗？",
+"zan": 0,
+"add_time": "23小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/a597d5abcb2060beb3991f2beaa0525c03e9d468/56f391ae7211c.png"
+]
+},
+{
+"id": 6201,
+"title": "大揭秘：哪些互金岗位薪酬有泡沫？ ",
+"intro": "互联网金融行业待遇如何？真的是薪酬最高么？",
+"zan": 0,
+"add_time": "23小时前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/b5821c9d0899c07702b204cd2168e664edb29fe9/56f390ed89895.png"
+]
+},
+{
+"id": 6196,
+"title": "京东金融牵手金融机构将上线企业端理财业务",
+"intro": "京东金融将携手金融机构上线企业端理财业务，预计6月上线。",
+"zan": 0,
+"add_time": "1天前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/ca0dcff255879a267535831f8f41108032d1780a/56f3827d56c2f.png"
+]
+},
+{
+"id": 6195,
+"title": "博鳌论坛：专家预测股权众筹将有新浪潮",
+"intro": "随着互联网金融的发展，众筹必然会火，而且会更火。",
+"zan": 0,
+"add_time": "1天前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/6d075c36f24a36f335239b05bc988fdef93e9288/56f37c407f818.jpg"
+]
+},
+{
+"id": 6193,
+"title": "李克强博鳌亚洲论坛演讲全文",
+"intro": "博鳌亚洲论坛2016年年会开幕式于3月24日上午9时30分举行，国务院总理李克强发表主旨演讲。",
+"zan": 0,
+"add_time": "1天前",
+"from": "新华社",
+"image": [
+"https://img.gongshidai.com/cjv2/d15e8be784611eff62790e239fa556ea91ee6dbb/56f3781dd8033.jpg"
+]
+},
+{
+"id": 6192,
+"title": "蚂蚁金服受困于“资产荒” 芝麻信用成招牌",
+"intro": "身处优质“资产荒”的今天，蚂蚁金服也不能独善其身。",
+"zan": 0,
+"add_time": "1天前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/c3cfb81d498db615582b3e70e1ff4ad4f53b93eb/56f3594cd25fc.jpg"
+]
+},
+{
+"id": 6191,
+"title": "上海“首付贷”类场外配资或从严监管",
+"intro": "上海楼市调控风声频出， “首付贷”类场外配资或从严监管。",
+"zan": 0,
+"add_time": "1天前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/6b946c9add4c4a3d5a634154d13decfaf9d8a171/56f3504cb890b.jpg"
+]
+},
+{
+"id": 6190,
+"title": "网商银行APP上线，支持最高500万大额理财",
+"intro": "​网商银行APP集合了贷款、转账、理财等金融服务，还推出了余利宝，提供最高500万元的大额理财。 ",
+"zan": 0,
+"add_time": "1天前",
+"from": "共时财经",
+"image": [
+"https://img.gongshidai.com/cjv2/8fc5f7c1395d04c013e63c0842b191a7c61d6065/56f34e87ae37b.jpg"
+]
+}
+],
+"p": 1,
+"ctkey": "tuijian",
+"code": 0
+}
