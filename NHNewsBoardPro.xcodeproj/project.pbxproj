@@ -1,0 +1,523 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		608D46F51CAE15E90028CA7F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46F41CAE15E90028CA7F /* main.m */; };
+		608D46F81CAE15E90028CA7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46F71CAE15E90028CA7F /* AppDelegate.m */; };
+		608D46FB1CAE15E90028CA7F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46FA1CAE15E90028CA7F /* ViewController.m */; };
+		608D46FE1CAE15E90028CA7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 608D46FC1CAE15E90028CA7F /* Main.storyboard */; };
+		608D47001CAE15E90028CA7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 608D46FF1CAE15E90028CA7F /* Assets.xcassets */; };
+		608D47031CAE15E90028CA7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 608D47011CAE15E90028CA7F /* LaunchScreen.storyboard */; };
+		608D470E1CAE15E90028CA7F /* NHNewsBoardProTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D470D1CAE15E90028CA7F /* NHNewsBoardProTests.m */; };
+		608D47191CAE15EA0028CA7F /* NHNewsBoardProUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47181CAE15EA0028CA7F /* NHNewsBoardProUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		608D470A1CAE15E90028CA7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 608D46E81CAE15E80028CA7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 608D46EF1CAE15E80028CA7F;
+			remoteInfo = NHNewsBoardPro;
+		};
+		608D47151CAE15E90028CA7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 608D46E81CAE15E80028CA7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 608D46EF1CAE15E80028CA7F;
+			remoteInfo = NHNewsBoardPro;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		608D46F01CAE15E80028CA7F /* NHNewsBoardPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHNewsBoardPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		608D46F41CAE15E90028CA7F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		608D46F61CAE15E90028CA7F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		608D46F71CAE15E90028CA7F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		608D46F91CAE15E90028CA7F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		608D46FA1CAE15E90028CA7F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		608D46FD1CAE15E90028CA7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		608D46FF1CAE15E90028CA7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		608D47021CAE15E90028CA7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		608D47041CAE15E90028CA7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		608D47091CAE15E90028CA7F /* NHNewsBoardProTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NHNewsBoardProTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		608D470D1CAE15E90028CA7F /* NHNewsBoardProTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NHNewsBoardProTests.m; sourceTree = "<group>"; };
+		608D470F1CAE15E90028CA7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		608D47141CAE15E90028CA7F /* NHNewsBoardProUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NHNewsBoardProUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		608D47181CAE15EA0028CA7F /* NHNewsBoardProUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NHNewsBoardProUITests.m; sourceTree = "<group>"; };
+		608D471A1CAE15EA0028CA7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		608D46ED1CAE15E80028CA7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		608D47061CAE15E90028CA7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		608D47111CAE15E90028CA7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		608D46E71CAE15E80028CA7F = {
+			isa = PBXGroup;
+			children = (
+				608D46F21CAE15E90028CA7F /* NHNewsBoardPro */,
+				608D470C1CAE15E90028CA7F /* NHNewsBoardProTests */,
+				608D47171CAE15E90028CA7F /* NHNewsBoardProUITests */,
+				608D46F11CAE15E80028CA7F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		608D46F11CAE15E80028CA7F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				608D46F01CAE15E80028CA7F /* NHNewsBoardPro.app */,
+				608D47091CAE15E90028CA7F /* NHNewsBoardProTests.xctest */,
+				608D47141CAE15E90028CA7F /* NHNewsBoardProUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		608D46F21CAE15E90028CA7F /* NHNewsBoardPro */ = {
+			isa = PBXGroup;
+			children = (
+				608D46F61CAE15E90028CA7F /* AppDelegate.h */,
+				608D46F71CAE15E90028CA7F /* AppDelegate.m */,
+				608D46F91CAE15E90028CA7F /* ViewController.h */,
+				608D46FA1CAE15E90028CA7F /* ViewController.m */,
+				608D46FC1CAE15E90028CA7F /* Main.storyboard */,
+				608D46FF1CAE15E90028CA7F /* Assets.xcassets */,
+				608D47011CAE15E90028CA7F /* LaunchScreen.storyboard */,
+				608D47041CAE15E90028CA7F /* Info.plist */,
+				608D46F31CAE15E90028CA7F /* Supporting Files */,
+			);
+			path = NHNewsBoardPro;
+			sourceTree = "<group>";
+		};
+		608D46F31CAE15E90028CA7F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				608D46F41CAE15E90028CA7F /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		608D470C1CAE15E90028CA7F /* NHNewsBoardProTests */ = {
+			isa = PBXGroup;
+			children = (
+				608D470D1CAE15E90028CA7F /* NHNewsBoardProTests.m */,
+				608D470F1CAE15E90028CA7F /* Info.plist */,
+			);
+			path = NHNewsBoardProTests;
+			sourceTree = "<group>";
+		};
+		608D47171CAE15E90028CA7F /* NHNewsBoardProUITests */ = {
+			isa = PBXGroup;
+			children = (
+				608D47181CAE15EA0028CA7F /* NHNewsBoardProUITests.m */,
+				608D471A1CAE15EA0028CA7F /* Info.plist */,
+			);
+			path = NHNewsBoardProUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		608D46EF1CAE15E80028CA7F /* NHNewsBoardPro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 608D471D1CAE15EA0028CA7F /* Build configuration list for PBXNativeTarget "NHNewsBoardPro" */;
+			buildPhases = (
+				608D46EC1CAE15E80028CA7F /* Sources */,
+				608D46ED1CAE15E80028CA7F /* Frameworks */,
+				608D46EE1CAE15E80028CA7F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NHNewsBoardPro;
+			productName = NHNewsBoardPro;
+			productReference = 608D46F01CAE15E80028CA7F /* NHNewsBoardPro.app */;
+			productType = "com.apple.product-type.application";
+		};
+		608D47081CAE15E90028CA7F /* NHNewsBoardProTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 608D47201CAE15EA0028CA7F /* Build configuration list for PBXNativeTarget "NHNewsBoardProTests" */;
+			buildPhases = (
+				608D47051CAE15E90028CA7F /* Sources */,
+				608D47061CAE15E90028CA7F /* Frameworks */,
+				608D47071CAE15E90028CA7F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				608D470B1CAE15E90028CA7F /* PBXTargetDependency */,
+			);
+			name = NHNewsBoardProTests;
+			productName = NHNewsBoardProTests;
+			productReference = 608D47091CAE15E90028CA7F /* NHNewsBoardProTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		608D47131CAE15E90028CA7F /* NHNewsBoardProUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 608D47231CAE15EA0028CA7F /* Build configuration list for PBXNativeTarget "NHNewsBoardProUITests" */;
+			buildPhases = (
+				608D47101CAE15E90028CA7F /* Sources */,
+				608D47111CAE15E90028CA7F /* Frameworks */,
+				608D47121CAE15E90028CA7F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				608D47161CAE15E90028CA7F /* PBXTargetDependency */,
+			);
+			name = NHNewsBoardProUITests;
+			productName = NHNewsBoardProUITests;
+			productReference = 608D47141CAE15E90028CA7F /* NHNewsBoardProUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		608D46E81CAE15E80028CA7F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "hu jiaju";
+				TargetAttributes = {
+					608D46EF1CAE15E80028CA7F = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					608D47081CAE15E90028CA7F = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 608D46EF1CAE15E80028CA7F;
+					};
+					608D47131CAE15E90028CA7F = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 608D46EF1CAE15E80028CA7F;
+					};
+				};
+			};
+			buildConfigurationList = 608D46EB1CAE15E80028CA7F /* Build configuration list for PBXProject "NHNewsBoardPro" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 608D46E71CAE15E80028CA7F;
+			productRefGroup = 608D46F11CAE15E80028CA7F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				608D46EF1CAE15E80028CA7F /* NHNewsBoardPro */,
+				608D47081CAE15E90028CA7F /* NHNewsBoardProTests */,
+				608D47131CAE15E90028CA7F /* NHNewsBoardProUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		608D46EE1CAE15E80028CA7F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				608D47031CAE15E90028CA7F /* LaunchScreen.storyboard in Resources */,
+				608D47001CAE15E90028CA7F /* Assets.xcassets in Resources */,
+				608D46FE1CAE15E90028CA7F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		608D47071CAE15E90028CA7F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		608D47121CAE15E90028CA7F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		608D46EC1CAE15E80028CA7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				608D46FB1CAE15E90028CA7F /* ViewController.m in Sources */,
+				608D46F81CAE15E90028CA7F /* AppDelegate.m in Sources */,
+				608D46F51CAE15E90028CA7F /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		608D47051CAE15E90028CA7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				608D470E1CAE15E90028CA7F /* NHNewsBoardProTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		608D47101CAE15E90028CA7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				608D47191CAE15EA0028CA7F /* NHNewsBoardProUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		608D470B1CAE15E90028CA7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 608D46EF1CAE15E80028CA7F /* NHNewsBoardPro */;
+			targetProxy = 608D470A1CAE15E90028CA7F /* PBXContainerItemProxy */;
+		};
+		608D47161CAE15E90028CA7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 608D46EF1CAE15E80028CA7F /* NHNewsBoardPro */;
+			targetProxy = 608D47151CAE15E90028CA7F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		608D46FC1CAE15E90028CA7F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				608D46FD1CAE15E90028CA7F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		608D47011CAE15E90028CA7F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				608D47021CAE15E90028CA7F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		608D471B1CAE15EA0028CA7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		608D471C1CAE15EA0028CA7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		608D471E1CAE15EA0028CA7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NHNewsBoardPro/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = PullBear.NHNewsBoardPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		608D471F1CAE15EA0028CA7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NHNewsBoardPro/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = PullBear.NHNewsBoardPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		608D47211CAE15EA0028CA7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = NHNewsBoardProTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = PullBear.NHNewsBoardProTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NHNewsBoardPro.app/NHNewsBoardPro";
+			};
+			name = Debug;
+		};
+		608D47221CAE15EA0028CA7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = NHNewsBoardProTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = PullBear.NHNewsBoardProTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NHNewsBoardPro.app/NHNewsBoardPro";
+			};
+			name = Release;
+		};
+		608D47241CAE15EA0028CA7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = NHNewsBoardProUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = PullBear.NHNewsBoardProUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = NHNewsBoardPro;
+			};
+			name = Debug;
+		};
+		608D47251CAE15EA0028CA7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = NHNewsBoardProUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = PullBear.NHNewsBoardProUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = NHNewsBoardPro;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		608D46EB1CAE15E80028CA7F /* Build configuration list for PBXProject "NHNewsBoardPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				608D471B1CAE15EA0028CA7F /* Debug */,
+				608D471C1CAE15EA0028CA7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		608D471D1CAE15EA0028CA7F /* Build configuration list for PBXNativeTarget "NHNewsBoardPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				608D471E1CAE15EA0028CA7F /* Debug */,
+				608D471F1CAE15EA0028CA7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		608D47201CAE15EA0028CA7F /* Build configuration list for PBXNativeTarget "NHNewsBoardProTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				608D47211CAE15EA0028CA7F /* Debug */,
+				608D47221CAE15EA0028CA7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		608D47231CAE15EA0028CA7F /* Build configuration list for PBXNativeTarget "NHNewsBoardProUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				608D47241CAE15EA0028CA7F /* Debug */,
+				608D47251CAE15EA0028CA7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 608D46E81CAE15E80028CA7F /* Project object */;
+}
