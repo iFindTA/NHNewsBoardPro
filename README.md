@@ -2,8 +2,11 @@
 news board Architecture for ios(objc) some like neteasy!
 
 ##### 前言
-先看效果：
+先看看demo效果：
+
 ![image](https://raw.githubusercontent.com/iFindTA/screenshots/master/neteasy_0.png)
+
+
 网易新闻的使用率这个大家有目共睹，一些新闻资讯类app的UED也仿照网易（新闻tab）的架构，向大公司看齐这个是好事情(不多说)，本公司也有产品类似的布局，有帅哥疑惑于网易怎么实现的，本人不才简单探索了一下（新闻tab）的布局，并写了个简单的demo效果如上
 
 网上包括git上有各种仿网易的实现，这里使用了 [美团网](http://www.meituan.com/) [董铂然](https://github.com/dsxNiubility) 的catch的网易新闻接口（get接口),前人栽树，咱们拿来用（他的新闻tab实现是scrollView＋controller，这里是collectionView），向他致敬！
