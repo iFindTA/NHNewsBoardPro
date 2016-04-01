@@ -27,7 +27,6 @@
 		608D47AC1CAE19290028CA7F /* SSWAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47421CAE19290028CA7F /* SSWAnimator.m */; };
 		608D47AD1CAE19290028CA7F /* SSWDirectionalPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47441CAE19290028CA7F /* SSWDirectionalPanGestureRecognizer.m */; };
 		608D47AE1CAE19290028CA7F /* NHDefaultVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47481CAE19290028CA7F /* NHDefaultVCR.m */; };
-		608D47AF1CAE19290028CA7F /* NHContentInfolVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D474B1CAE19290028CA7F /* NHContentInfolVCR.m */; };
 		608D47B01CAE19290028CA7F /* NHEditChannelVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D474D1CAE19290028CA7F /* NHEditChannelVCR.m */; };
 		608D47B11CAE19290028CA7F /* NHNewsDetailsVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47501CAE19290028CA7F /* NHNewsDetailsVCR.m */; };
 		608D47B21CAE19290028CA7F /* NHDiscoveryVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47531CAE19290028CA7F /* NHDiscoveryVCR.m */; };
@@ -148,8 +147,6 @@
 		608D47441CAE19290028CA7F /* SSWDirectionalPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSWDirectionalPanGestureRecognizer.m; sourceTree = "<group>"; };
 		608D47471CAE19290028CA7F /* NHDefaultVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHDefaultVCR.h; sourceTree = "<group>"; };
 		608D47481CAE19290028CA7F /* NHDefaultVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHDefaultVCR.m; sourceTree = "<group>"; };
-		608D474A1CAE19290028CA7F /* NHContentInfolVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHContentInfolVCR.h; sourceTree = "<group>"; };
-		608D474B1CAE19290028CA7F /* NHContentInfolVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHContentInfolVCR.m; sourceTree = "<group>"; };
 		608D474C1CAE19290028CA7F /* NHEditChannelVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHEditChannelVCR.h; sourceTree = "<group>"; };
 		608D474D1CAE19290028CA7F /* NHEditChannelVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHEditChannelVCR.m; sourceTree = "<group>"; };
 		608D474F1CAE19290028CA7F /* NHNewsDetailsVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHNewsDetailsVCR.h; sourceTree = "<group>"; };
@@ -438,22 +435,12 @@
 		608D47491CAE19290028CA7F /* subClasses */ = {
 			isa = PBXGroup;
 			children = (
-				608D474A1CAE19290028CA7F /* NHContentInfolVCR.h */,
-				608D474B1CAE19290028CA7F /* NHContentInfolVCR.m */,
-				608D474C1CAE19290028CA7F /* NHEditChannelVCR.h */,
-				608D474D1CAE19290028CA7F /* NHEditChannelVCR.m */,
-				608D474E1CAE19290028CA7F /* NHMainPager */,
 				608D474F1CAE19290028CA7F /* NHNewsDetailsVCR.h */,
 				608D47501CAE19290028CA7F /* NHNewsDetailsVCR.m */,
+				608D474C1CAE19290028CA7F /* NHEditChannelVCR.h */,
+				608D474D1CAE19290028CA7F /* NHEditChannelVCR.m */,
 			);
 			path = subClasses;
-			sourceTree = "<group>";
-		};
-		608D474E1CAE19290028CA7F /* NHMainPager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NHMainPager;
 			sourceTree = "<group>";
 		};
 		608D47511CAE19290028CA7F /* dsicovery */ = {
@@ -996,7 +983,6 @@
 				608D47C21CAE19290028CA7F /* NHNewsTitleCell.m in Sources */,
 				608D47B41CAE19290028CA7F /* NHPersonalVCR.m in Sources */,
 				608D47A51CAE19290028CA7F /* NHScrollView.m in Sources */,
-				608D47AF1CAE19290028CA7F /* NHContentInfolVCR.m in Sources */,
 				608D46FB1CAE15E90028CA7F /* ViewController.m in Sources */,
 				608D47C61CAE19290028CA7F /* NHADsImgCell.m in Sources */,
 				608D47BA1CAE19290028CA7F /* NHPager.m in Sources */,
