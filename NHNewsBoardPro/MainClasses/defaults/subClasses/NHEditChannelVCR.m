@@ -17,10 +17,9 @@
 @property (nonatomic, copy) NSString *title;
 
 @property (nonatomic, strong) UIButton *delete;
+@property (nonatomic, strong) UIImageView *bgImg;
 
 @property (nonatomic, assign) BOOL isExist;
-
-@property (nonatomic, strong) UILongPressGestureRecognizer *longGesture;
 
 /**
  *  @brief wethear show delete button
@@ -34,6 +33,8 @@
 @interface NHItemChannel ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
+
+@property (nonatomic, strong) UILongPressGestureRecognizer *longGesture;
 
 @end
 
@@ -64,6 +65,7 @@
     UIImage *border = [UIImage imageNamed:@"channel_grid_circle"];
     UIImageView *bg = [[UIImageView alloc] initWithImage:border];
     [self addSubview:bg];
+    self.bgImg = bg;
     [bg mas_makeConstraints:^(MASConstraintMaker *make) {
         strongify(self)
         make.edges.equalTo(self);
@@ -92,7 +94,7 @@
         make.width.height.equalTo(@(mark.size.width*0.5));
     }];
     
-    UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] init];
+    UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(channelLongGesture:)];
     longGesture.minimumPressDuration = 1;
     [self addGestureRecognizer:longGesture];
 }
@@ -104,15 +106,25 @@
 }
 
 - (void)setFont:(UIFont *)font {
+    _font = font;
     self.titleLabel.font = font;
 }
 
 - (void)setTitleColor:(UIColor *)titleColor {
+    _titleColor = titleColor;
     self.titleLabel.textColor = titleColor;
 }
 
 - (void)setTitle:(NSString *)title {
+    _title = title;
     self.titleLabel.text = title;
+}
+
+- (void)channelLongGesture:(UILongPressGestureRecognizer * _Nonnull)gesture {
+    
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"长按手势");
+    }
 }
 
 @end
@@ -270,31 +282,24 @@
         UIColor *titleColor = dragable?[UIColor lightGrayColor]:[UIColor redColor];
         NSInteger __row = idx/numPerLine;NSInteger __col = idx%numPerLine;
         CGRect bounds = CGRectMake(NHBoundaryOffset+(NH_ITEM_WIDTH+cap)*__col, NHBoundaryOffset*2+(NH_ITEM_HEIGHT+cap)*__row, NH_ITEM_WIDTH, NH_ITEM_HEIGHT);
-        if (!dragable) {
-            UILabel *label = [[UILabel alloc] initWithFrame:bounds];
-            label.font = titleFont;
-            label.textAlignment = NSTextAlignmentCenter;
-            label.textColor = titleColor;
-            label.text = obj;
-            [self.scrollView addSubview:label];
-        }else{
+        if (dragable) {
             UIImageView *imgBg = [[UIImageView alloc] initWithFrame:bounds];
             imgBg.image = dragable?bgImg_v:nil;
             [self.scrollView addSubview:imgBg];
-            
-            NHItemChannel *tmp = [[NHItemChannel alloc] initWithFrame:bounds];
-            tmp.font = titleFont;
-            tmp.titleColor = titleColor;
-            tmp.title = obj;
-            tmp.isExist = true;
-            tmp.delete.tag = idx;
-            [tmp addTarget:self action:@selector(channelSelectedEvent:) forControlEvents:UIControlEventTouchUpInside];
-            [tmp.delete addTarget:self action:@selector(channelDeleteTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
-            //手势
-            [tmp.longGesture addTarget:self action:@selector(channelLongGesture:)];
-            
-            [self.scrollView addSubview:tmp];
         }
+        
+        NHItemChannel *tmp = [[NHItemChannel alloc] initWithFrame:bounds];
+        tmp.font = titleFont;
+        tmp.titleColor = titleColor;
+        tmp.title = obj;
+        tmp.isExist = true;
+        tmp.delete.tag = idx;
+        tmp.bgImg.hidden = !dragable;
+        tmp.exclusiveTouch = true;
+        [tmp addTarget:self action:@selector(channelSelectedEvent:) forControlEvents:UIControlEventTouchUpInside];
+        [tmp.delete addTarget:self action:@selector(channelDeleteTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.scrollView addSubview:tmp];
     }];
     
     CGSize contentSize = CGSizeMake(PBSCREEN_WIDTH, NHBoundaryOffset*2+(NH_ITEM_HEIGHT+cap)*rows);
@@ -312,11 +317,27 @@
 - (void)channelSelectedEvent:(NHItemChannel *)tmp {
     
     NSString *tmp_title = tmp.title;
-    if ([tmp_title isEqualToString:NHIndexTitle]) {
+    if ([tmp_title isEqualToString:self.selectedChannel]) {
         return;
     }
     self.selectedChannel = [tmp_title copy];
     
+    UIColor *titleColor_n = [UIColor lightGrayColor];
+    UIColor *titleColor_s = [UIColor redColor];
+    NSArray *subviews = [self.scrollView subviews];
+    weakify(self)
+    [subviews enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        strongify(self)
+        if ([obj isKindOfClass:[NHItemChannel class]]) {
+            NHItemChannel *tmp = (NHItemChannel *)obj;
+            if (tmp.isExist) {
+                //点击的是上边的item Event:切换频道
+                BOOL selected = [tmp.title isEqualToString:self.selectedChannel];
+                tmp.titleColor = selected?titleColor_s:titleColor_n;
+            }
+        }
+    }];
 }
 //点击小叉叉
 - (void)channelDeleteTouchEvent:(UIButton *)tmp {
@@ -327,12 +348,6 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     return true;
-}
-- (void)channelLongGesture:(UILongPressGestureRecognizer * _Nonnull)gesture {
-    
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"长按手势");
-    }
 }
 
 // setter method

@@ -70,6 +70,15 @@ const NSString *kItemShare = @"toolBarActionShare";
     }];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    UIStatusBarStyle style = UIStatusBarStyleLightContent;
+    if ([NSStringFromClass(self.class) isEqualToString:@"NHNewsDetailsVCR"]) {
+        style = UIStatusBarStyleDefault;
+    }
+    [[UIApplication sharedApplication] setStatusBarStyle:style];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self setNeedsStatusBarAppearanceUpdate];
