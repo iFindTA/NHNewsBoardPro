@@ -1,3 +1,5 @@
+target "NHNewsBoardPro" do
+
 platform :ios, '8.0'
 pod 'Masonry', '~> 0.6.3'
 pod 'PBToolKits', '~> 0.3.98'
@@ -10,3 +12,5 @@ pod 'SVProgressHUD', '~> 1.0'
 pod 'Reachability', '~> 3.2'
 pod 'MJRefresh', '~> 3.1.0'
 pod 'FXBlurView', '~> 1.6.4'
+
+end

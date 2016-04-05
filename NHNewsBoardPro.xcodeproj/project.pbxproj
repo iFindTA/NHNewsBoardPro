@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56076CD02B837BD49E817193 /* libPods-NHNewsBoardPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F8439D430D5F417F6C334 /* libPods-NHNewsBoardPro.a */; };
 		608D46F51CAE15E90028CA7F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46F41CAE15E90028CA7F /* main.m */; };
 		608D46F81CAE15E90028CA7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46F71CAE15E90028CA7F /* AppDelegate.m */; };
 		608D46FB1CAE15E90028CA7F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46FA1CAE15E90028CA7F /* ViewController.m */; };
@@ -103,7 +104,6 @@
 
 /* Begin PBXFileReference section */
 		3C1568B4AAC0B432DD9FC506 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		57C050EAF65CF21F135D7F5B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		608D46F01CAE15E80028CA7F /* NHNewsBoardPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHNewsBoardPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		608D46F41CAE15E90028CA7F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		608D46F61CAE15E90028CA7F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -230,7 +230,9 @@
 		608D47E91CAE1A210028CA7F /* NewsURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NewsURLs.plist; sourceTree = "<group>"; };
 		608D47EA1CAE1A210028CA7F /* NH_SQLS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NH_SQLS.txt; sourceTree = "<group>"; };
 		608D47EB1CAE1A210028CA7F /* tuijian.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tuijian.txt; sourceTree = "<group>"; };
-		733C3A69B6FEA9ECB6AAA444 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A9DF2819578742449773E59A /* Pods-NHNewsBoardPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NHNewsBoardPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-NHNewsBoardPro/Pods-NHNewsBoardPro.release.xcconfig"; sourceTree = "<group>"; };
+		B8B49CC975B355BC86614444 /* Pods-NHNewsBoardPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NHNewsBoardPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NHNewsBoardPro/Pods-NHNewsBoardPro.debug.xcconfig"; sourceTree = "<group>"; };
+		CE4F8439D430D5F417F6C334 /* libPods-NHNewsBoardPro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NHNewsBoardPro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 			files = (
 				608D47CE1CAE19290028CA7F /* libssl.a in Frameworks */,
 				CC68AFED80A72D8D1ACE1420 /* libPods.a in Frameworks */,
+				56076CD02B837BD49E817193 /* libPods-NHNewsBoardPro.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				3C1568B4AAC0B432DD9FC506 /* libPods.a */,
+				CE4F8439D430D5F417F6C334 /* libPods-NHNewsBoardPro.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -316,8 +320,8 @@
 		608D46F31CAE15E90028CA7F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				608D47041CAE15E90028CA7F /* Info.plist */,
 				608D47D01CAE1A210028CA7F /* Resources */,
+				608D47041CAE15E90028CA7F /* Info.plist */,
 				608D46F41CAE15E90028CA7F /* main.m */,
 				608D47261CAE18750028CA7F /* NHNewsBoardPro-Prefix.pch */,
 			);
@@ -765,8 +769,8 @@
 		CDFDEC726D5092B429C0BC53 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				57C050EAF65CF21F135D7F5B /* Pods.debug.xcconfig */,
-				733C3A69B6FEA9ECB6AAA444 /* Pods.release.xcconfig */,
+				B8B49CC975B355BC86614444 /* Pods-NHNewsBoardPro.debug.xcconfig */,
+				A9DF2819578742449773E59A /* Pods-NHNewsBoardPro.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -778,12 +782,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 608D471D1CAE15EA0028CA7F /* Build configuration list for PBXNativeTarget "NHNewsBoardPro" */;
 			buildPhases = (
-				BBC61007D80DA9A16F897199 /* Check Pods Manifest.lock */,
+				BBC61007D80DA9A16F897199 /* 📦 Check Pods Manifest.lock */,
 				608D46EC1CAE15E80028CA7F /* Sources */,
 				608D46ED1CAE15E80028CA7F /* Frameworks */,
 				608D46EE1CAE15E80028CA7F /* Resources */,
-				997EF95F09A20CFD9D3E09AB /* Embed Pods Frameworks */,
-				C3DA26156D881AE06625FF90 /* Copy Pods Resources */,
+				997EF95F09A20CFD9D3E09AB /* 📦 Embed Pods Frameworks */,
+				C3DA26156D881AE06625FF90 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -925,29 +929,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		997EF95F09A20CFD9D3E09AB /* Embed Pods Frameworks */ = {
+		997EF95F09A20CFD9D3E09AB /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NHNewsBoardPro/Pods-NHNewsBoardPro-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BBC61007D80DA9A16F897199 /* Check Pods Manifest.lock */ = {
+		BBC61007D80DA9A16F897199 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -955,19 +959,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C3DA26156D881AE06625FF90 /* Copy Pods Resources */ = {
+		C3DA26156D881AE06625FF90 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NHNewsBoardPro/Pods-NHNewsBoardPro-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1160,7 +1164,7 @@
 		};
 		608D471E1CAE15EA0028CA7F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57C050EAF65CF21F135D7F5B /* Pods.debug.xcconfig */;
+			baseConfigurationReference = B8B49CC975B355BC86614444 /* Pods-NHNewsBoardPro.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1179,7 +1183,7 @@
 		};
 		608D471F1CAE15EA0028CA7F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 733C3A69B6FEA9ECB6AAA444 /* Pods.release.xcconfig */;
+			baseConfigurationReference = A9DF2819578742449773E59A /* Pods-NHNewsBoardPro.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

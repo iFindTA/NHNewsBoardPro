@@ -39,7 +39,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-NHNewsBoardPro.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -72,11 +72,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>014D9C891ECF2667CBDB613093CA71EE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>17392667E38E4938ACA525E988BB433B</key>
 		<dict>
 			<key>primary</key>
@@ -102,12 +97,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8F74D9EA91F4C43190670066BAC37D44</key>
+		<key>6CC37B45E676111CD8627E65916BEB7F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>94877B79A77F4C067249581FE316EA90</key>
+		<key>7DEBBCA0C120E18483D0327994CB01D5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>88BFC7C54479F59BCA404C3234100FB9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8F74D9EA91F4C43190670066BAC37D44</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,22 +122,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B8764818D5D9895A3A67F72B4A9300DD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BAC6AD049FA631231309A2830E8EF162</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C524C4AB6108CA9FF2B846B4036E7D9C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>D638B9D6EB1F12C419CB5BCB69120921</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F8E6F0AC7D9ACE28B9BA9E9616C98BE0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FFDAACD6772EA2D4BA7321CF79078A03</key>
 		<dict>
 			<key>primary</key>
 			<true/>
