@@ -19,8 +19,11 @@ news board Architecture for ios(objc) some like neteasy!
 ![image](https://raw.githubusercontent.com/iFindTA/screenshots/master/neteasy_2.png)
 
 ######UI分析：
+
 1，UIApplication的根视图为NTESNBNavigationController（继承自NETESNBUIViewController，此Controller继承自UIViewController），此controller较重要，管理着push／pop操作（**而不是tabBar对应的controller去push／pop，原因见下）**，并且要注意：**此导航控制器的navigationBar是hidden的！**
+
 2，NTESNBNavigationController的rootController为NTESNBTabBarController（同样为自定义）
+
 3，NTESNBTabBarController第一个Tab（即新闻tab）为NTESNBNewsListPageController，此controller承载着大家的迷惑，子导航（NTESNBChannelNaviView）就是大家看到的:
 
 ![image](https://raw.githubusercontent.com/iFindTA/screenshots/master/neteasy_1.png)
