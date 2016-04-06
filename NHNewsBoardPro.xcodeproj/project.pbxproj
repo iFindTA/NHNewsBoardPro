@@ -82,6 +82,8 @@
 		608D47FF1CAE1A220028CA7F /* NewsURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 608D47E91CAE1A210028CA7F /* NewsURLs.plist */; };
 		608D48001CAE1A220028CA7F /* NH_SQLS.txt in Resources */ = {isa = PBXBuildFile; fileRef = 608D47EA1CAE1A210028CA7F /* NH_SQLS.txt */; };
 		608D48011CAE1A220028CA7F /* tuijian.txt in Resources */ = {isa = PBXBuildFile; fileRef = 608D47EB1CAE1A210028CA7F /* tuijian.txt */; };
+		60951B2E1CB4F91200E0D0C8 /* NHCnnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 60951B2D1CB4F91200E0D0C8 /* NHCnnItem.m */; };
+		60951B311CB4F92E00E0D0C8 /* NHEditCNNScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 60951B301CB4F92E00E0D0C8 /* NHEditCNNScroller.m */; };
 		CC68AFED80A72D8D1ACE1420 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1568B4AAC0B432DD9FC506 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -230,6 +232,10 @@
 		608D47E91CAE1A210028CA7F /* NewsURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NewsURLs.plist; sourceTree = "<group>"; };
 		608D47EA1CAE1A210028CA7F /* NH_SQLS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NH_SQLS.txt; sourceTree = "<group>"; };
 		608D47EB1CAE1A210028CA7F /* tuijian.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tuijian.txt; sourceTree = "<group>"; };
+		60951B2C1CB4F91200E0D0C8 /* NHCnnItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHCnnItem.h; sourceTree = "<group>"; };
+		60951B2D1CB4F91200E0D0C8 /* NHCnnItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHCnnItem.m; sourceTree = "<group>"; };
+		60951B2F1CB4F92E00E0D0C8 /* NHEditCNNScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHEditCNNScroller.h; sourceTree = "<group>"; };
+		60951B301CB4F92E00E0D0C8 /* NHEditCNNScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHEditCNNScroller.m; sourceTree = "<group>"; };
 		A9DF2819578742449773E59A /* Pods-NHNewsBoardPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NHNewsBoardPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-NHNewsBoardPro/Pods-NHNewsBoardPro.release.xcconfig"; sourceTree = "<group>"; };
 		B8B49CC975B355BC86614444 /* Pods-NHNewsBoardPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NHNewsBoardPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NHNewsBoardPro/Pods-NHNewsBoardPro.debug.xcconfig"; sourceTree = "<group>"; };
 		CE4F8439D430D5F417F6C334 /* libPods-NHNewsBoardPro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NHNewsBoardPro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -419,7 +425,6 @@
 			children = (
 				608D47461CAE19290028CA7F /* defaults */,
 				608D47511CAE19290028CA7F /* dsicovery */,
-				608D47571CAE19290028CA7F /* HorizScroll */,
 				608D47581CAE19290028CA7F /* personals */,
 				608D47681CAE19290028CA7F /* tests */,
 			);
@@ -464,13 +469,6 @@
 				608D47561CAE19290028CA7F /* NHPresentVCR.m */,
 			);
 			path = subClasses;
-			sourceTree = "<group>";
-		};
-		608D47571CAE19290028CA7F /* HorizScroll */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HorizScroll;
 			sourceTree = "<group>";
 		};
 		608D47581CAE19290028CA7F /* personals */ = {
@@ -563,6 +561,7 @@
 		608D47731CAE19290028CA7F /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				60951B2B1CB4F82200E0D0C8 /* NHEditChanneler */,
 				608D47741CAE19290028CA7F /* NHImageView */,
 				608D47751CAE19290028CA7F /* NHNaviSubscriber */,
 				608D47791CAE19290028CA7F /* NHPageReuser */,
@@ -764,6 +763,17 @@
 				608D47EB1CAE1A210028CA7F /* tuijian.txt */,
 			);
 			path = text;
+			sourceTree = "<group>";
+		};
+		60951B2B1CB4F82200E0D0C8 /* NHEditChanneler */ = {
+			isa = PBXGroup;
+			children = (
+				60951B2C1CB4F91200E0D0C8 /* NHCnnItem.h */,
+				60951B2D1CB4F91200E0D0C8 /* NHCnnItem.m */,
+				60951B2F1CB4F92E00E0D0C8 /* NHEditCNNScroller.h */,
+				60951B301CB4F92E00E0D0C8 /* NHEditCNNScroller.m */,
+			);
+			path = NHEditChanneler;
 			sourceTree = "<group>";
 		};
 		CDFDEC726D5092B429C0BC53 /* Pods */ = {
@@ -1004,6 +1014,7 @@
 				608D47B01CAE19290028CA7F /* NHEditChannelVCR.m in Sources */,
 				608D46F81CAE15E90028CA7F /* AppDelegate.m in Sources */,
 				608D47B81CAE19290028CA7F /* NHSettingsVCR.m in Sources */,
+				60951B311CB4F92E00E0D0C8 /* NHEditCNNScroller.m in Sources */,
 				608D47C01CAE19290028CA7F /* NHPageReuser.m in Sources */,
 				608D47AC1CAE19290028CA7F /* SSWAnimator.m in Sources */,
 				608D47C71CAE19290028CA7F /* NHWinAnimateVCR.m in Sources */,
@@ -1012,6 +1023,7 @@
 				608D47A41CAE19290028CA7F /* NHLabel.m in Sources */,
 				608D47CA1CAE19290028CA7F /* NHDBEngine.m in Sources */,
 				608D47C11CAE19290028CA7F /* NHPageScroller.m in Sources */,
+				60951B2E1CB4F91200E0D0C8 /* NHCnnItem.m in Sources */,
 				608D47BE1CAE19290028CA7F /* NHSubscriber.m in Sources */,
 				608D47AE1CAE19290028CA7F /* NHDefaultVCR.m in Sources */,
 				608D47C51CAE19290028CA7F /* NHReView.m in Sources */,

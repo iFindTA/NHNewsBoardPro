@@ -89,7 +89,7 @@
     
     [self configureADsCell];
     
-    CGFloat offset = 8.f;
+    //CGFloat offset = 8.f;
     CGFloat font_offset = NH_NEWS_TITLE_FONT_OFFSET;
     UIFont *title_font = NH_NEWS_TITLE_FONT;
     UIFont *reply_font = [UIFont fontWithName:title_font.fontName size:title_font.pointSize-font_offset*3];

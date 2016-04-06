@@ -7,139 +7,19 @@
 //
 
 #import "NHEditChannelVCR.h"
-
-#pragma mark -- Item for display --
-
-@interface NHItemChannel : UIControl
-
-@property (nonatomic, strong) UIFont *font;
-@property (nonatomic, strong) UIColor *titleColor;
-@property (nonatomic, copy) NSString *title;
-
-@property (nonatomic, strong) UIButton *delete;
-@property (nonatomic, strong) UIImageView *bgImg;
-
-@property (nonatomic, assign) BOOL isExist;
-
-/**
- *  @brief wethear show delete button
- *
- *  @param show enable
- */
-- (void)showDelete:(BOOL)show;
-
-@end
-
-@interface NHItemChannel ()
-
-@property (nonatomic, strong) UILabel *titleLabel;
-
-@property (nonatomic, strong) UILongPressGestureRecognizer *longGesture;
-
-@end
-
-@implementation NHItemChannel
-
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self __initSetup];
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self __initSetup];
-    }
-    return self;
-}
-
-- (void)__initSetup {
-    
-//    CGBCornerColor corner = {8,0xF5F5F5};
-//    CGBWidthColor border = {1,0xC8C8C8};
-//    [self pb_addRound:corner withBorder:border];
-    weakify(self)
-    UIImage *border = [UIImage imageNamed:@"channel_grid_circle"];
-    UIImageView *bg = [[UIImageView alloc] initWithImage:border];
-    [self addSubview:bg];
-    self.bgImg = bg;
-    [bg mas_makeConstraints:^(MASConstraintMaker *make) {
-        strongify(self)
-        make.edges.equalTo(self);
-    }];
-    UIFont *font = [UIFont pb_deviceFontForTitle];
-    UILabel *label = [[UILabel alloc] init];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = font;
-    label.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:label];
-    self.titleLabel = label;
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        strongify(self)
-        make.edges.equalTo(self);
-    }];
-    
-    UIImage *mark = [UIImage imageNamed:@"sub_navi_edit_delete"];
-    UIButton *tmp = [[UIButton alloc] init];
-    [tmp setImage:mark forState:UIControlStateNormal];
-    tmp.hidden = true;
-    [self addSubview:tmp];
-    self.delete = tmp;
-    [tmp mas_makeConstraints:^(MASConstraintMaker *make) {
-       strongify(self)
-        make.top.left.equalTo(self);
-        make.width.height.equalTo(@(mark.size.width*0.5));
-    }];
-    
-    UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(channelLongGesture:)];
-    longGesture.minimumPressDuration = 1;
-    [self addGestureRecognizer:longGesture];
-}
-
-- (void)showDelete:(BOOL)show {
-    if (self.isExist) {
-        self.delete.hidden = !show;
-    }
-}
-
-- (void)setFont:(UIFont *)font {
-    _font = font;
-    self.titleLabel.font = font;
-}
-
-- (void)setTitleColor:(UIColor *)titleColor {
-    _titleColor = titleColor;
-    self.titleLabel.textColor = titleColor;
-}
-
-- (void)setTitle:(NSString *)title {
-    _title = title;
-    self.titleLabel.text = title;
-}
-
-- (void)channelLongGesture:(UILongPressGestureRecognizer * _Nonnull)gesture {
-    
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"长按手势");
-    }
-}
-
-@end
-
-#define NHIndexTitle          @"推荐"
+#import "NHEditCNNScroller.h"
 
 @interface NHEditChannelVCR ()<UIGestureRecognizerDelegate>
 
-@property (nullable, nonatomic, strong) UIScrollView *scrollView;
+@property (nullable, nonatomic, strong) NHEditCNNScroller *scrollView;
 @property (nonatomic, strong) UILabel *changeFlag,*moreFlag;
 @property (nonatomic, strong) UIButton *sortFlag;
 @property (nonatomic, assign) BOOL dragEnable;
 
 @property (nonatomic, copy) NSString *selectedChannel;
 @property (nonatomic, copy) NHSwitchChannel switchBlock;
+
+//@property (nonatomic, strong) NHEditExistView *subUpView;
 
 @end
 
@@ -194,25 +74,27 @@
         make.right.equalTo(self.view).offset(-offset);
     }];
     
-    self.selectedChannel = PBFormat(@"%@",NHIndexTitle);
+    //self.selectedChannel = PBFormat(@"%@",NHIndexTitle);
     
-    UIScrollView *scroll = [[UIScrollView alloc] init];
-    scroll.backgroundColor = NHWhiteColor;
-    [self.view addSubview:scroll];
-    self.scrollView = scroll;
-    [scroll mas_makeConstraints:^(MASConstraintMaker *make) {
-        strongify(self)
-        make.top.mas_equalTo(subNavi.mas_bottom).offset(0);
-        make.left.bottom.right.equalTo(self.view).offset(0);
-    }];
+    
+    
+//    NHEditExistView *sub = [[NHEditExistView alloc] initWithFrame:CGRectZero];
+//    sub.backgroundColor = NHWhiteColor;
+//    [self.view addSubview:sub];
+//    self.subUpView = sub;
+//    [sub mas_makeConstraints:^(MASConstraintMaker *make) {
+//        strongify(self)
+//        make.top.mas_equalTo(subNavi.mas_bottom).offset(0);
+//        make.left.bottom.right.equalTo(self.view).offset(0);
+//    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self buildExistChannels];
+    //[self buildExistChannels];
     
-    [self buildOtherChannels];
+    //[self buildOtherChannels];
 }
 
 //- (UIScrollView *)scrollView {
@@ -226,6 +108,7 @@
 
 - (void)navigationBarActionClose {
     [super navigationBarActionClose];
+    
     [self dismissViewControllerAnimated:true completion:^{
         
     }];
@@ -234,19 +117,23 @@
 - (void)dragSortAction {
     
     self.dragEnable = !self.dragEnable;
+    [self updateSortDragBtnTitle];
+    
+    [self.scrollView subNaviEventForSort:self.dragEnable];
+    
+    
+}
+
+- (BOOL)canDrag:(NSString * _Nonnull)til {
+    
+    return ![til isEqualToString:NHNewsForceUpdateChannel];
+}
+
+- (void)updateSortDragBtnTitle {
     NSString *title = self.dragEnable?@"完成":@"排序删除";
     [self.sortFlag setTitle:title forState:UIControlStateNormal];
     title = self.dragEnable?@"拖动排序":@"切换栏目";
     self.changeFlag.text = title;
-    NSArray *subviews = [self.scrollView subviews];
-    weakify(self)
-    [subviews enumerateObjectsUsingBlock:^(UIView *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        strongify(self)
-        if ([obj isKindOfClass:[NHItemChannel class]]) {
-            NHItemChannel *item = (NHItemChannel *)obj;
-            [item showDelete:self.dragEnable];
-        }
-    }];
 }
 
 // setter method
@@ -255,99 +142,30 @@
         _existSource = nil;
     }
     _existSource = existSource;
+    
+    [self __initSetupScroll];
+    
     //[self buildExistChannels];
-}
-#define NH_ITEM_WIDTH     70
-#define NH_ITEM_HEIGHT    30
-- (void)buildExistChannels {
     
-    //TODO:这里需要考虑iPad
-    NSInteger numPerLine = 4;
-    CGFloat cap = (PBSCREEN_WIDTH-NHBoundaryOffset*2-NH_ITEM_WIDTH*numPerLine)/(numPerLine-1);
-    NSInteger counts = self.existSource.count;
-    if (counts == 0) {
-        return;
-    }
-    NSInteger rows = counts/numPerLine;
-    if (counts%numPerLine!=0) {
-        rows+=1;
-    }
-    UIFont *titleFont = [UIFont pb_deviceFontForTitle];
-    UIImage *bgImg_v = [UIImage imageNamed:@"channel_compact_placeholder_inactive"];
-    weakify(self)
-    [self.existSource enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        strongify(self)
-        BOOL dragable = [self canDrag:obj];
-        
-        UIColor *titleColor = dragable?[UIColor lightGrayColor]:[UIColor redColor];
-        NSInteger __row = idx/numPerLine;NSInteger __col = idx%numPerLine;
-        CGRect bounds = CGRectMake(NHBoundaryOffset+(NH_ITEM_WIDTH+cap)*__col, NHBoundaryOffset*2+(NH_ITEM_HEIGHT+cap)*__row, NH_ITEM_WIDTH, NH_ITEM_HEIGHT);
-        if (dragable) {
-            UIImageView *imgBg = [[UIImageView alloc] initWithFrame:bounds];
-            imgBg.image = dragable?bgImg_v:nil;
-            [self.scrollView addSubview:imgBg];
-        }
-        
-        NHItemChannel *tmp = [[NHItemChannel alloc] initWithFrame:bounds];
-        tmp.font = titleFont;
-        tmp.titleColor = titleColor;
-        tmp.title = obj;
-        tmp.isExist = true;
-        tmp.delete.tag = idx;
-        tmp.bgImg.hidden = !dragable;
-        tmp.exclusiveTouch = true;
-        [tmp addTarget:self action:@selector(channelSelectedEvent:) forControlEvents:UIControlEventTouchUpInside];
-        [tmp.delete addTarget:self action:@selector(channelDeleteTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.scrollView addSubview:tmp];
-    }];
-    
-    CGSize contentSize = CGSizeMake(PBSCREEN_WIDTH, NHBoundaryOffset*2+(NH_ITEM_HEIGHT+cap)*rows);
-    self.scrollView.contentSize = contentSize;
+    //[self.subUpView reloadData:self.existSource];
 }
 
-- (BOOL)canDrag:(NSString * _Nonnull)til {
-    
-    return ![til isEqualToString:NHIndexTitle];
-}
-- (void)adjustItemForWidth:(CGFloat)width withCap:(CGFloat)cap toItemWidth:(CGFloat *)item {
-    
-}
-//点击频道
-- (void)channelSelectedEvent:(NHItemChannel *)tmp {
-    
-    NSString *tmp_title = tmp.title;
-    if ([tmp_title isEqualToString:self.selectedChannel]) {
-        return;
-    }
-    self.selectedChannel = [tmp_title copy];
-    
-    UIColor *titleColor_n = [UIColor lightGrayColor];
-    UIColor *titleColor_s = [UIColor redColor];
-    NSArray *subviews = [self.scrollView subviews];
+- (void)__initSetupScroll {
     weakify(self)
-    [subviews enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        strongify(self)
-        if ([obj isKindOfClass:[NHItemChannel class]]) {
-            NHItemChannel *tmp = (NHItemChannel *)obj;
-            if (tmp.isExist) {
-                //点击的是上边的item Event:切换频道
-                BOOL selected = [tmp.title isEqualToString:self.selectedChannel];
-                tmp.titleColor = selected?titleColor_s:titleColor_n;
-            }
-        }
-    }];
-}
-//点击小叉叉
-- (void)channelDeleteTouchEvent:(UIButton *)tmp {
-    
-    NSUInteger __tag = [tmp tag];
-    NSLog(@"你点击删除:%zd",__tag);
-}
-
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    return true;
+    CGRect bounds = CGRectMake(0, NHAbove_h+NHSubNavigationBarHeight, PBSCREEN_WIDTH, PBSCREEN_HEIGHT-NHAbove_h-NHSubNavigationBarHeight);
+    NHEditCNNScroller *scroll = [[NHEditCNNScroller alloc] initWithFrame:bounds];
+    scroll.exists = self.existSource;
+    scroll.others = self.otherSource;
+    //TODO:需要更改默认选中的title
+    [scroll resetSelectedCnnTitle:self.selectedCnn];
+    scroll.backgroundColor = NHWhiteColor;
+    [self.view addSubview:scroll];
+    self.scrollView = scroll;
+//    [scroll mas_makeConstraints:^(MASConstraintMaker *make) {
+//        strongify(self)
+//        make.top.mas_equalTo(self.navigationBar.mas_bottom).offset(NHSubNavigationBarHeight);
+//        make.left.bottom.right.equalTo(self.view).offset(0);
+//    }];
 }
 
 // setter method
@@ -358,26 +176,48 @@
     _otherSource = otherSource;
 }
 
-- (void)buildOtherChannels {
-    
-    //TODO:这里需要考虑iPad
-    NSInteger numPerLine = 4;
-    CGFloat cap = (PBSCREEN_WIDTH-NHBoundaryOffset*2-NH_ITEM_WIDTH*numPerLine)/(numPerLine-1);
-    NSInteger counts = self.otherSource.count;
-    if (counts == 0) {
-        return;
-    }
-    NSInteger rows = counts/numPerLine;
-    if (counts%numPerLine!=0) {
-        rows+=1;
-    }
-    UIFont *titleFont = [UIFont pb_deviceFontForTitle];
-}
-
 #pragma mark -- Block Event --
 
 - (void)handleChannelEditorSwitchEvent:(NHSwitchChannel)event {
     _switchBlock = [event copy];
 }
+
+//点击频道
+//- (void)channelSelectedEvent:(nhcnn *)tmp {
+//    
+//    if (self.dragEnable) {
+//        // 此时正显示删除按钮 所以不可以切换栏目
+//        return;
+//    }
+//    
+//    NSString *tmp_title = tmp.title;
+//    if ([tmp_title isEqualToString:self.selectedChannel]) {
+//        return;
+//    }
+//    self.selectedChannel = [tmp_title copy];
+//
+//    //excute switch block
+//    NSUInteger __tag = tmp.tag;
+//    if (self.switchBlock) {
+//        self.switchBlock(__tag,self.selectedChannel);
+//    }
+//
+//    UIColor *titleColor_n = [UIColor lightGrayColor];
+//    UIColor *titleColor_s = [UIColor redColor];
+//    NSArray *subviews = [self.scrollView subviews];
+//    weakify(self)
+//    [subviews enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//        strongify(self)
+//        if ([obj isKindOfClass:[NHItemChannel class]]) {
+//            NHItemChannel *tmp = (NHItemChannel *)obj;
+//            if (tmp.isExist) {
+//                //点击的是上边的item Event:切换频道
+//                BOOL selected = [tmp.title isEqualToString:self.selectedChannel];
+//                tmp.titleColor = selected?titleColor_s:titleColor_n;
+//            }
+//        }
+//    }];
+//}
 
 @end

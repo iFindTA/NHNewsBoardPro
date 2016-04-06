@@ -12,6 +12,7 @@ typedef void(^NHSwitchChannel)(NSUInteger index, NSString * _Nonnull channel);
 
 @interface NHEditChannelVCR : NHViewController
 
+@property (nonnull, nonatomic, copy) NSString *selectedCnn;
 @property (nonnull, nonatomic, strong) NSArray *existSource;
 @property (nullable, nonatomic, strong) NSArray *otherSource;
 

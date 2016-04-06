@@ -153,7 +153,7 @@
 }
 
 - (NSArray *)tempArray{
-    NSMutableArray *listTop = [[NSMutableArray alloc] initWithArray:@[@"推荐",@"热点",@"杭州财经报社",@"社会",@"娱乐",@"科技",@"汽车",@"体育",@"订阅",@"财经",@"军事",@"国际",@"正能量",@"段子",@"趣图",@"美女",@"健康",@"教育",@"特卖",@"彩票",@"辟谣"]];
+    NSMutableArray *listTop = [[NSMutableArray alloc] initWithArray:@[@"头条",@"热点",@"杭州财经报社团",@"社会",@"娱乐",@"科技",@"汽车",@"体育",@"订阅",@"财经",@"军事",@"国际",@"正能量",@"段子",@"趣图",@"美女",@"健康",@"教育",@"特卖",@"彩票",@"辟谣"]];
     return [listTop copy];
 }
 - (NSArray *)otherArray {
@@ -183,7 +183,7 @@
 - (void)subscriber:(NHSubscriber *)scriber didSelectIndex:(NSInteger)index{
     NSLog(@"did select index:%zd",index);
     //[_reuser setReuseSelectIndex:index];
-    [_pageScroller selectedIndex:index animated:true];
+    [_pageScroller selectedIndex:index animated:false];
 }
 
 - (void)didSelectArrowForSubscriber:(NHSubscriber *)scriber {
@@ -193,8 +193,13 @@
     //[SVProgressHUD showInfoWithStatus:@"Func{subscriber} To Be Continue!"];
     
     NHEditChannelVCR *editChannels = [[NHEditChannelVCR alloc] init];
-    editChannels.existSource = [self tempArray];
+    //TODO:需要传当前选中的频道
+    editChannels.selectedCnn = NHNewsForceUpdateChannel;
     editChannels.otherSource = [self otherArray];
+    editChannels.existSource = [self tempArray];
+    [editChannels handleChannelEditorSwitchEvent:^(NSUInteger index, NSString * _Nonnull channel) {
+        NSLog(@"切换栏目:%@",channel);
+    }];
     [self presentViewController:editChannels animated:true completion:^{
         
     }];
