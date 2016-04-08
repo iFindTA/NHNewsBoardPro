@@ -11,7 +11,7 @@
 /**
  *  @brief 尝试实现网易布局
  *  
- *  @attention: 本组件在同一时刻最多显示(预加载)6个页面
+ *  @attention: 本组件在同一时刻最多显示(预加载)6个页面(网易策略)
  *
  */
 @interface NHPreventScroller : UIScrollView

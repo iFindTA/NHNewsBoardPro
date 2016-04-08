@@ -8,6 +8,13 @@
 
 #import "NHPreventScroller.h"
 
+/**在同一时刻最多显示的page个数**/
+static const int NH_MAX_LOAD_PAGE_NUM               = 6;
+
+@interface NHPreventScroller ()
+
+@end
+
 @implementation NHPreventScroller
 
 - (id)initWithFrame:(CGRect)frame {
@@ -27,6 +34,8 @@
 }
 
 - (void)__initSetup {
+    //锁定滚动方向
+    self.directionalLockEnabled = true;
     
 }
 

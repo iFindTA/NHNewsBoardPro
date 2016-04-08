@@ -48,6 +48,11 @@
     }];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
+}
+
 - (void)setNews:(NHNews *)news {
     _news = news;
     [self getNewsInfo];
@@ -58,6 +63,7 @@
     if (_news) {
         [SVProgressHUD showWithStatus:@"Loading..."];
         NSString *url = PBFormat(@"nc/article/%@/full.html",self.news.docid);
+        [self.requestPaths addObject:url];
         //NSLog(@"content uri:%@",url);
         weakify(self)
         PBBACK(^{

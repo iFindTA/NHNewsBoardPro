@@ -11,11 +11,12 @@
 #import "NHCnnItem.h"
 
 #define NH_ANIMATE_DELAY   0.002
+#define NH_SCALE_FACTOR    1.09//放大因子
 
 @interface NHEditCNNScroller ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign) BOOL dragEnable;
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
+
 /** 长按手势作用域 **/
 @property (nonatomic, assign) CGPoint seperatePoint;
 @property (nonatomic, assign) CGSize itemSize;
@@ -23,7 +24,11 @@
 @property (nonatomic, assign) int numsPerLine;
 
 @property (nonatomic, copy) NSString *selectedCnn;
+//拖动状态下 记录当前选择的item
 @property (nonatomic, strong) NHCnnItem *selectedItem;
+@property (nonatomic, assign) NSUInteger movingIdx;
+//松开后的目的地
+@property (nonatomic, assign) CGRect destBounds;
 
 //@property (nonatomic, strong) NSMutableDictionary *itemKeySets;
 //@property (nonatomic, strong) NSMutableArray *itemPosits;
@@ -32,11 +37,14 @@
 /**touch began后记录**/
 @property (nonatomic, strong, nullable) NHCnnItem *preTouchItem;
 
-@property (nonatomic, copy) NHDragSortAble event;
+@property (nonatomic, nonnull, copy) NHDragSortAble dragEvent;
+@property (nonatomic, nonnull, copy) NHCnnSortEvent sortEvent;
+@property (nonatomic, nonnull, copy) NHCnnAddDeleteEvent editEvent;
 
 //item集合
 @property (nonatomic, strong, nullable) NSMutableArray *existItems,*otherItems;
 @property (nonatomic, strong) UIView *moreCnnView;
+@property (nonatomic, strong) NSMutableArray *existBgItems;
 
 @end
 
@@ -58,12 +66,6 @@
 }
 
 - (void)__initSetup {
-    
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressEvent:)];
-    longPress.minimumPressDuration = 1.f;
-    longPress.delegate = self;
-    //[self addGestureRecognizer:longPress];
-    self.longPress = longPress;
     
     //注册观察者
     [self addObserver:self forKeyPath:NH_OBSERVER_KEYPATH options:NSKeyValueObservingOptionNew context:nil];
@@ -108,6 +110,13 @@
     *size = tmp_size;*cap = tmp_cap;*num = numPerLine;
 }
 //创建UI
+- (UIImageView *)verturalBgForBounds:(CGRect)bounds {
+    UIImage *bgImg_v = [UIImage imageNamed:@"channel_compact_placeholder_inactive"];
+    CGRect tmpBounds = CGRectInset(bounds, 1, 1);
+    UIImageView *imgBg = [[UIImageView alloc] initWithFrame:tmpBounds];
+    imgBg.image = bgImg_v;
+    return imgBg;
+}
 //#define NH_ITEM_WIDTH     70
 //#define NH_ITEM_HEIGHT    30
 - (void)__buildUI {
@@ -134,12 +143,24 @@
         _existItems = nil;
     }
     _existItems = [NSMutableArray array];
+    //上方背景的存储
+    if (_existBgItems) {
+        [_existBgItems removeAllObjects];
+        _existBgItems = nil;
+    }
+    _existBgItems = [NSMutableArray array];
     //下方的存储
     if (_otherItems) {
         [_otherItems removeAllObjects];
         _otherItems = nil;
     }
     _otherItems = [NSMutableArray array];
+//    //下方背景的存储
+//    if (_moreBgItems) {
+//        [_moreBgItems removeAllObjects];
+//        _moreBgItems = nil;
+//    }
+//    _moreBgItems = [NSMutableArray array];
     
     self.itemSize = size;self.numsPerLine = numPerLine;self.itemCap = cap;
     __block CGRect bounds = (CGRect){.origin=CGPointZero,.size = size};
@@ -160,7 +181,8 @@
             CGRect tmpBounds = CGRectInset(bounds, 1, 1);
             UIImageView *imgBg = [[UIImageView alloc] initWithFrame:tmpBounds];
             imgBg.image = dragable?bgImg_v:nil;
-            [self addSubview:imgBg];
+            [self insertSubview:imgBg atIndex:0];
+            [self.existBgItems addObject:imgBg];
         }
         
         NHCnnItem *tmp = [[NHCnnItem alloc] initWithFrame:bounds];
@@ -173,7 +195,9 @@
         tmp.delBtn.tag = idx;
         tmp.bgImg.hidden = !dragable;
         tmp.exclusiveTouch = true;
-        //[tmp.delete addTarget:self action:@selector(channelDeleteTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
+        [tmp.delBtn addTarget:self action:@selector(channelDeleteTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
+        //[tmp.dragGesture addTarget:self action:@selector(existItemDragEvent:)];
+        //tmp.dragGesture.delegate = self;
         [self addSubview:tmp];
         [self.existItems addObject:tmp];
     }];
@@ -220,23 +244,28 @@
     [self.others enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         strongify(self)
         //NSLog(@"building---->%@...",obj);
-        UIColor *titleColor = [UIColor lightGrayColor];
+        //UIColor *titleColor = [UIColor lightGrayColor];
         NSInteger __row = idx/numPerLine;NSInteger __col = idx%numPerLine;
         CGPoint origin = CGPointMake(NHBoundaryOffset+(size.width+cap)*__col, cur_y+(size.height+cap)*__row);
         bounds.origin = origin;
         
-        CGRect tmpBounds = CGRectInset(bounds, 1, 1);
-        UIImageView *imgBg = [[UIImageView alloc] initWithFrame:tmpBounds];
-        imgBg.image = bgImg_v;
-        imgBg.tag = idx;
-        [self.moreCnnView addSubview:imgBg];
+        //UIImageView *imgBg = [self verturalBgForBounds:bounds];
+        //[self.moreCnnView addSubview:imgBg];
+        //[self.moreBgItems addObject:imgBg];
         
-        NHMoreItem *tmp = [[NHMoreItem alloc] initWithFrame:bounds];
+//        NHMoreItem *tmp = [[NHMoreItem alloc] initWithFrame:bounds];
+//        tmp.tag = idx;
+//        tmp.titleLabel.font = titleFont;
+//        [tmp setTitle:obj forState:UIControlStateNormal];
+//        [tmp setTitleColor:titleColor forState:UIControlStateNormal];
+//        [tmp addTarget:self action:@selector(moreitemTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.moreCnnView addSubview:tmp];
+//        [self.otherItems addObject:tmp];
+        
+        NHOtherCnnItem *tmp = [[NHOtherCnnItem alloc] initWithFrame:bounds];
         tmp.tag = idx;
-        tmp.titleLabel.font = titleFont;
-        [tmp setTitle:obj forState:UIControlStateNormal];
-        [tmp setTitleColor:titleColor forState:UIControlStateNormal];
-        [tmp addTarget:self action:@selector(moreitemTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
+        tmp.title = obj;
+        [tmp addTarget:self forAction:@selector(moreitemTouchEvent:)];
         [self.moreCnnView addSubview:tmp];
         [self.otherItems addObject:tmp];
     }];
@@ -250,7 +279,7 @@
 }
 
 //创建新栏目
-- (NHCnnItem *)m_newInstance:(CGRect)bounds _title:(NSString *)title _tag:(NSUInteger)tag {
+- (NHCnnItem *)m_newExistCnn:(CGRect)bounds _title:(NSString *)title _tag:(NSUInteger)tag {
     NHCnnItem *tmp = [[NHCnnItem alloc] initWithFrame:bounds];
     //tmp.backgroundColor = [UIColor pb_randomColor];
     tmp.tag = tag;
@@ -260,6 +289,16 @@
     tmp.isExist = true;
     tmp.delBtn.tag = tag;
     tmp.exclusiveTouch = true;
+    [tmp.delBtn addTarget:self action:@selector(channelDeleteTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
+    return tmp;
+}
+
+//创建新的待订阅栏目
+- (NHOtherCnnItem *)m_newOtherCnn:(CGRect)bounds _title:(NSString *)title _tag:(NSUInteger)tag {
+    NHOtherCnnItem *tmp = [[NHOtherCnnItem alloc] initWithFrame:bounds];
+    tmp.tag = tag;
+    tmp.title = title;
+    [tmp addTarget:self forAction:@selector(moreitemTouchEvent:)];
     return tmp;
 }
 
@@ -268,27 +307,30 @@
     NSUInteger counts = [self.exists count];
     return (counts%self.numsPerLine == 0);
 }
-
-//下部item点击事件
-- (void)moreitemTouchEvent:(NHMoreItem *)item {
+#pragma mark -- 添加栏目
+//下部item点击事件:添加栏目
+- (void)moreitemTouchEvent:(UIButton *)item {
     [self tmpEndReceiveTouchEvent];
     
     //是否下移down view
+    NSUInteger __exist_counts = [self.exists count];
     BOOL need_move = [self needMoveDownMoreView];
     
-    NSString *__title = item.titleLabel.text;
-    CGRect origin = item.frame;
+    NSUInteger __tag__ = item.tag;
+    NHOtherCnnItem *add_tmp = [self.otherItems objectAtIndex:__tag__];
+    NSString *__title = add_tmp.title;
+    CGRect origin = add_tmp.frame;
     CGRect bounds = [self convertRect:origin fromView:self.moreCnnView];
     //NSLog(@"origin:%@---convert:%@",NSStringFromCGRect(origin),NSStringFromCGRect(bounds));
     
     NSUInteger __tag = [self.exists count];
-    __block NHCnnItem *tmp = [self m_newInstance:bounds _title:__title _tag:__tag];
-    //先添加再隐藏
+    __block NHCnnItem *tmp = [self m_newExistCnn:bounds _title:__title _tag:__tag];
+    //先添加再隐藏 最后移除
     [self addSubview:tmp];
-    item.hidden = true;
+    [add_tmp hiddenTitle:true];
+    
     //最终目的地
     bounds = [self getDestinationBoundsForNew];
-    __tag = [item tag];
     weakify(self)
     PBMAINDelay(NH_ANIMATE_DELAY, ^{
         
@@ -312,13 +354,25 @@
             self.exists = [tmpArr copy];
             [self.existItems addObject:tmp];
             tmpArr = [NSMutableArray arrayWithArray:self.others];;
-            [tmpArr removeObjectAtIndex:__tag];
+            [tmpArr removeObjectAtIndex:__tag__];
             self.others = [tmpArr copy];
-            [self adjustMoreItemAfterAddNewChannel:__tag];
+            UIImageView *tmpBg = [self verturalBgForBounds:bounds];
+            [self insertSubview:tmpBg atIndex:0];
+            [self.existBgItems addObject:tmpBg];
+            [self adjustMoreItemAfterAddNewChannel:__tag__];
+            
+            [add_tmp removeFromSuperview];
+            if (finished) {
+                [self startReceiveTouchEvent];
+            }
         }];
     });
     
-    [self startReceiveTouchEvent];
+    //通知添加了栏目
+    if (_editEvent) {
+        NSLog(@"添加了栏目:%@",__title);
+        _editEvent(NHCnnEditTypeAdd,__exist_counts, __title);
+    }
 }
 
 //添加完毕新频道后 调整下方的moreview
@@ -333,27 +387,15 @@
     NSLog(@"__tag:%zd-----__count:%zd",__tag,tmpCounts);
     @synchronized (self.otherItems) {
         for (int i = __tag+1; i < tmpCounts; i++) {
-            NHMoreItem *tmp = [self.otherItems objectAtIndex:i];
+            NHOtherCnnItem *tmp = [self.otherItems objectAtIndex:i];
             tmp.tag = i-1;
-            NSLog(@"moving:%zd---title:%@",i,tmp.titleLabel.text);
+            //NSLog(@"moving:%zd---title:%@",i,tmp.titleLabel.text);
             CGRect tmpBounds = [self getDestinationBoundsForMoreIndex:i-1];
-            PBMAINDelay(NH_ANIMATE_DELAY, ^{
-                [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
-                    tmp.frame = tmpBounds;
-                }];
-            });
+            [self animateWithView:tmp destBounds:tmpBounds];
         }
         
         [self.otherItems removeObjectAtIndex:__tag];
     }
-    
-    NSArray *subviews = [self.moreCnnView subviews];
-    [subviews enumerateObjectsUsingBlock:^(UIView *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[UIImageView class]] && (obj.tag == tmpCounts-1)) {
-            [obj removeFromSuperview];
-            *stop = true;
-        }
-    }];
     
     NSUInteger counts = [self.otherItems count];
     NSUInteger rows = counts/self.numsPerLine;
@@ -361,7 +403,7 @@
         rows+=1;
     }
     
-    CGFloat down_height = NHSubNavigationBarHeight+NHBoundaryOffset*2+(self.itemSize.height+self.itemCap)*rows;
+    CGFloat down_height = [self getOtherCnnHeight];
     CGRect bounds = self.moreCnnView.frame;
     bounds.size.height = down_height;
     weakify(self)
@@ -388,10 +430,10 @@
 
 //统一动画
 - (void)animateWithView:(UIView * _Nonnull)tmp destBounds:(CGRect)bounds {
-    weakify(self)
+    //weakify(self)
     PBMAINDelay(NH_ANIMATE_DELAY, ^{
         [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
-            strongify(self)
+            //strongify(self)
             tmp.frame = bounds;
         }];
     });
@@ -407,7 +449,7 @@
     return bounds;
 }
 
-//更多栏目中 添加后 重新排序剩余item
+//更多栏目中 减少后 重新排序剩余item
 - (CGRect)getDestinationBoundsForMoreIndex:(NSUInteger)index {
     NSUInteger __idx = index;
     CGRect bounds = (CGRect){.origin=CGPointZero,.size = self.itemSize};
@@ -417,15 +459,20 @@
     return bounds;
 }
 
+//已订阅栏目中 删除后 重新排序剩余item
+- (CGRect)getDestinationBoundsForExistIndex:(NSUInteger)index {
+    NSUInteger __idx = index;
+    CGRect bounds = (CGRect){.origin=CGPointZero,.size = self.itemSize};
+    NSInteger __row = __idx/self.numsPerLine;NSInteger __col = __idx%self.numsPerLine;
+    CGPoint origin = CGPointMake(NHBoundaryOffset+(self.itemSize.width+self.itemCap)*__col, NHBoundaryOffset*2+(self.itemSize.height+self.itemCap)*__row);
+    bounds.origin = origin;
+    return bounds;
+}
+
 //更新分割点
 - (void)updateSeperatePoint {
-    NSInteger counts = self.exists.count;
-    NSInteger rows = counts/self.numsPerLine;
-    if (counts%self.numsPerLine!=0) {
-        rows+=1;
-    }
     //记录当前分割点
-    CGFloat tmp_point_y = NHBoundaryOffset*3+(self.itemSize.height+self.itemCap)*rows-self.itemCap;
+    CGFloat tmp_point_y = [self getExistCnnHeight];
     self.seperatePoint = CGPointMake(0, tmp_point_y);
 }
 
@@ -437,8 +484,219 @@
 - (void)tmpEndReceiveTouchEvent {
     self.userInteractionEnabled = false;
 }
+#pragma mark -- 删除栏目 -- 
 
-#pragma mark -- 与外部交互事件
+//当点击栏目的X按钮时 判断是否需要上移更多栏目view
+- (BOOL)needMoveUpMoreView {
+    NSUInteger counts = [self.exists count];
+    return (counts%self.numsPerLine == 1);
+}
+
+- (void)channelDeleteTouchEvent:(UIButton *)tmp {
+    
+    NSUInteger __exist_counts = [self.existItems count];
+    NSUInteger __tag = tmp.tag;
+    if (__exist_counts <= __tag) {
+        NSLog(@"delete channel occured error!");
+        return;
+    }
+    
+    //停止接收点击事件
+    [self tmpEndReceiveTouchEvent];
+    
+    BOOL need_move = [self needMoveUpMoreView];
+    NHCnnItem *tmp_cnn = [self.existItems objectAtIndex:__tag];
+    NSString *__title = [tmp_cnn text];
+    NSLog(@"取消订阅栏目:%@",__title);
+    
+    //渐隐消失
+    weakify(self)
+    PBMAINDelay(NH_ANIMATE_DELAY, ^{
+        [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
+            tmp_cnn.alpha = 0;
+        } completion:^(BOOL finished) {
+            [tmp_cnn removeFromSuperview];
+            
+            if (need_move) {
+                strongify(self)
+                CGRect _origin = self.moreCnnView.frame;
+                _origin.origin.y -= (self.itemSize.height+self.itemCap);
+                weakify(self)
+                [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
+                    strongify(self)
+                    self.moreCnnView.frame = _origin;
+                }];
+            }
+        }];
+    });
+    
+    [self adjustExistItems:__tag];
+    
+    //加入下部更多栏目
+    NSMutableArray *tmpArr = [NSMutableArray arrayWithArray:self.others];
+    [tmpArr insertObject:__title atIndex:0];
+    self.others = [tmpArr copy];
+    [self relayoutMoreCnnView];
+    
+    //通知取消订阅
+    if (_editEvent) {
+        _editEvent(NHCnnEditTypeDelete,__tag,__title);
+    }
+    //开始接收点击事件
+    [self startReceiveTouchEvent];
+}
+
+- (void)adjustExistItems:(NSUInteger)__tag {
+    
+    NSUInteger __exist_counts = [self.exists count];
+    
+    @synchronized (self.existItems) {
+        for (int i = __tag+1; i < __exist_counts; i++) {
+            NHCnnItem *tmp = [self.existItems objectAtIndex:i];
+            tmp.tag = i-1;
+            tmp.delBtn.tag = i-1;
+            CGRect bounds = [self getDestinationBoundsForExistIndex:i-1];
+            [self animateWithView:tmp destBounds:bounds];
+        }
+        
+        [self.existItems removeObjectAtIndex:__tag];
+    }
+    
+    //删除最后一个虚线框
+    UIImageView *tmpBg = [self.existBgItems lastObject];
+    [tmpBg removeFromSuperview];
+    [self.existBgItems removeLastObject];
+    
+    NSMutableArray *tmpArr = [NSMutableArray arrayWithArray:self.exists];
+    [tmpArr removeObjectAtIndex:__tag];
+    self.exists = [tmpArr copy];
+}
+
+- (void)relayoutMoreCnnView {
+    
+    CGFloat down_height = [self getOtherCnnHeight];
+    CGRect bounds = self.moreCnnView.frame;
+    bounds.size.height = down_height;
+    self.moreCnnView.frame = bounds;
+    
+    //新增栏目
+    NSUInteger __tag = 0;
+    NSString *title = [self.others firstObject];
+    bounds = [self getDestinationBoundsForMoreIndex:__tag];
+    NHOtherCnnItem *add_tmp = [self m_newOtherCnn:bounds _title:title _tag:__tag];
+    [self.moreCnnView addSubview:add_tmp];
+    NSUInteger __other_counts = [self.otherItems count];
+    @synchronized (self.otherItems) {
+        for (int i = __tag; i < __other_counts; i++) {
+            NHOtherCnnItem *tmp = [self.otherItems objectAtIndex:i];
+            tmp.tag = i+1;
+            //NSLog(@"moving:%zd---title:%@",i,tmp.titleLabel.text);
+            CGRect tmpBounds = [self getDestinationBoundsForMoreIndex:i+1];
+            [self animateWithView:tmp destBounds:tmpBounds];
+        }
+        
+        [self.otherItems insertObject:add_tmp atIndex:__tag];
+    }
+}
+
+- (void)existItemDragEvent:(UIPanGestureRecognizer *)gesture {
+    
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"exist item drag start...");
+    }else if (gesture.state == UIGestureRecognizerStateChanged){
+        NSLog(@"exist item drag change...");
+    }else if (gesture.state == UIGestureRecognizerStateEnded){
+        NSLog(@"exist item drag end...");
+    }
+}
+
+#pragma mark -- 排序栏目 --
+
+//实时检测当前point
+- (void)checkTouchPoint:(CGPoint)point {
+    
+    NSUInteger __tag = self.movingIdx;
+    @synchronized (self.existItems) {
+        weakify(self)
+        [self.existItems enumerateObjectsUsingBlock:^(NHCnnItem *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            strongify(self)
+            NSUInteger __tag__ = obj.tag;
+            CGRect bounds = [obj frame];
+            bounds = [self insetsBoundsForTouch:bounds];
+            if (CGRectContainsPoint(bounds, point)) {
+                if (__tag__ != __tag && __tag__ != 0) {
+                    //更新目的地
+                    PBMAIN(^{self.destBounds = obj.frame;});
+                    NSString *_title = obj.text;
+                    NSLog(@"将与%@交换位置:%zd...",_title,__tag__);
+                    [self animateSort:__tag destIndex:__tag__];
+                    *stop = true;
+                }
+            }
+        }];
+    }
+    
+    //scrollView size 较大时 需要滚动
+}
+
+- (void)animateSort:(NSUInteger)origin destIndex:(NSUInteger)destIdx {
+    
+    if (origin < destIdx) {
+        //开始时在前边 需要后移
+        @synchronized (self.existItems) {
+            for (int i = origin; i <= destIdx; i++) {
+                NHCnnItem *tmp = [self.existItems objectAtIndex:i];
+                NSUInteger __tag = i-1;
+                if (i == origin) {
+                    __tag = destIdx;
+                }
+                CGRect bounds = [self getDestinationBoundsForExistIndex:__tag];
+                tmp.tag = __tag;
+                tmp.delBtn.tag = __tag;
+                [self animateWithView:tmp destBounds:bounds];
+            }
+        }
+    }else{
+        //开始在后边 需要前移
+        @synchronized (self.existItems) {
+            for (int i = destIdx; i <= origin; i++) {
+                NHCnnItem *tmp = [self.existItems objectAtIndex:i];
+                NSUInteger __tag = i+1;
+                if (i == origin) {
+                    __tag = destIdx;
+                }
+                CGRect bounds = [self getDestinationBoundsForExistIndex:__tag];
+                tmp.tag = __tag;
+                tmp.delBtn.tag = __tag;
+                [self animateWithView:tmp destBounds:bounds];
+            }
+        }
+    }
+    
+    self.movingIdx = destIdx;
+    //self.selectedItem.tag = destIdx;
+    //self.selectedItem.delBtn.tag = destIdx;
+    //数组排序
+    NHCnnItem *tmp = [self.existItems objectAtIndex:origin];
+    //tmp.tag = destIdx;
+    //tmp.delBtn.tag = destIdx;
+    //tmp.frame = self.destBounds;
+    [self.existItems removeObjectAtIndex:origin];
+    [self.existItems insertObject:tmp atIndex:destIdx];
+    //栏目排序
+    NSMutableArray *tmpArr = [NSMutableArray arrayWithArray:self.exists];
+    NSString *tmp_title = [tmpArr objectAtIndex:origin];
+    [tmpArr removeObjectAtIndex:origin];
+    [tmpArr insertObject:tmp_title atIndex:destIdx];
+    self.exists = [tmpArr copy];
+    
+    NSLog(@"当前订阅栏目counts:%zd==%zd",self.exists.count,self.existItems.count);
+}
+
+#pragma mark -- 切换栏目 --
+//已在touch end事件里实现
+
+#pragma mark -- 长按触发排序、删除动作 --
 //子导航条上的排序删除按钮
 - (void)subNaviEventForSort:(BOOL)sort {
     
@@ -453,20 +711,100 @@
             [item showDelete:(self.dragEnable&&t_can)];
         }
     }];
+    
+    [self adjustInnerContentSize];
+    
+    //TODO:处于编辑状态时 字体均为灰色 结束排序时再选中对应的栏目
 }
 
+- (CGFloat)getExistCnnHeight {
+    NSUInteger __exist_counts = [self.exists count];
+    NSInteger rows = __exist_counts/self.numsPerLine;
+    if (__exist_counts%self.numsPerLine!=0) {
+        rows+=1;
+    }
+    CGFloat up_height = NHBoundaryOffset*3+(self.itemSize.height+self.itemCap)*rows-self.itemCap;
+    return up_height;
+}
+
+- (CGFloat)getOtherCnnHeight {
+    NSUInteger counts = [self.others count];
+    NSUInteger rows = counts/self.numsPerLine;
+    if (counts%self.numsPerLine!=0) {
+        rows+=1;
+    }
+    CGFloat down_height = NHSubNavigationBarHeight+NHBoundaryOffset*2+(self.itemSize.height+self.itemCap)*rows;
+    return down_height;
+}
+
+//调整self 的content size
+- (void)adjustInnerContentSize {
+    
+    CGFloat up_height = [self getExistCnnHeight];
+
+    CGFloat down_height = self.moreCnnView.hidden?0:CGRectGetHeight(self.moreCnnView.bounds);
+    //重置content size
+    CGSize contentSize = CGSizeMake(PBSCREEN_WIDTH, up_height+down_height);
+    weakify(self)
+    PBMAINDelay(NH_ANIMATE_DELAY, ^{
+        [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
+            strongify(self)
+            self.contentSize = contentSize;
+        }];
+    });
+    
+    //更新当前分割点
+    [self updateSeperatePoint];
+}
+
+#pragma mark -- 与外部交互事件
 - (void)handleLongPressTriggerEvent:(NHDragSortAble)event {
-    _event = [event copy];
+    _dragEvent = [event copy];
 }
 
+- (void)handleCnnSortEvent:(NHCnnSortEvent)event {
+    _sortEvent = [event copy];
+}
+
+- (void)handleCnnAddOrDeleteEvent:(NHCnnAddDeleteEvent)event {
+    _editEvent = [event copy];
+}
+
+#pragma mark -- Touch 事件 --
 - (void)afterIntervalInvokeLongPressState {
     //显示delete
     [self subNaviEventForSort:true];
     //通知子导航栏目同步状态
-    if (_event) {
-        _event(true);
+    if (_dragEvent) {
+        _dragEvent(true);
     }
     NSLog(@"long long long press!");
+    
+    //TODO:依当前的选择的preTouch为selectItem
+    if (_preTouchItem != nil && _preTouchItem.tag != 0) {
+        CGRect bounds = _preTouchItem.frame;
+        self.destBounds = bounds;
+        self.movingIdx = _preTouchItem.tag;
+        //创建一个新的cnn 然后隐藏真正的cnn
+        NHCnnItem *m_new = [self m_newExistCnn:bounds _title:_preTouchItem.text _tag:_preTouchItem.tag];
+        [m_new showDelete:true];
+        [self addSubview:m_new];
+        self.selectedItem = m_new;
+        _preTouchItem.hidden = true;
+        
+        NSLog(@"origin bounds:%@",NSStringFromCGRect(self.destBounds));
+        weakify(self)
+        PBMAINDelay(NH_ANIMATE_DELAY, ^{
+            [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
+                CGAffineTransform transform = CGAffineTransformScale(CGAffineTransformIdentity, NH_SCALE_FACTOR, NH_SCALE_FACTOR);
+                strongify(self)
+                UIFont *oldFont = [UIFont pb_deviceFontForTitle];
+                UIFont *m_font = [UIFont fontWithName:oldFont.fontName size:oldFont.pointSize*NH_SCALE_FACTOR];
+                self.selectedItem.font = m_font;
+                self.selectedItem.transform = transform;
+            }];
+        });
+    }
 }
 
 - (void)cancelInvokeLongPressState {
@@ -487,8 +825,31 @@
         self.preTouchItem = [self itemForPoint:m_point];
     }else{
         //此时在拖动排序情况下 放大效果
-        
         NHCnnItem *tmp = [self itemForPoint:m_point];
+        if (tmp != nil && tmp.tag != 0) {
+            CGRect bounds = tmp.frame;
+            self.destBounds = bounds;
+            self.movingIdx = tmp.tag;
+            //创建一个新的cnn 然后隐藏真正的cnn
+            NHCnnItem *m_new = [self m_newExistCnn:bounds _title:tmp.text _tag:tmp.tag];
+            [m_new showDelete:true];
+            [self addSubview:m_new];
+            self.selectedItem = m_new;
+            tmp.hidden = true;
+            
+            NSLog(@"origin bounds:%@",NSStringFromCGRect(self.destBounds));
+            weakify(self)
+            PBMAINDelay(NH_ANIMATE_DELAY, ^{
+                [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
+                    CGAffineTransform transform = CGAffineTransformScale(CGAffineTransformIdentity, NH_SCALE_FACTOR, NH_SCALE_FACTOR);
+                    strongify(self)
+                    UIFont *oldFont = [UIFont pb_deviceFontForTitle];
+                    UIFont *m_font = [UIFont fontWithName:oldFont.fontName size:oldFont.pointSize*NH_SCALE_FACTOR];
+                    self.selectedItem.font = m_font;
+                    self.selectedItem.transform = transform;
+                }];
+            });
+        }
     }
     
     //尝试实现长按手势:预选中频道&&非拖动频道&&上部的item
@@ -508,6 +869,14 @@
             [self cleanPreTouchItem];
         }
     }
+    
+    if (self.dragEnable  && self.selectedItem != nil) {
+        //自动滚动可视区域
+        CGPoint m_p = [self pointAtTouch:touches];
+        self.selectedItem.center = m_p;
+        PBBACK(^{[self checkTouchPoint:m_p];});
+    }
+    
     [self cancelInvokeLongPressState];
 }
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -521,7 +890,37 @@
         if (tmp != nil && _preTouchItem != nil && tmp.tag == _preTouchItem.tag) {
             //触发了单机 切换栏目
             NSLog(@"点击切换栏目:%@",tmp.text);
+            NSString * _tmp = tmp.text;
+            if (![_tmp isEqualToString:self.selectedCnn]) {
+                if (_editEvent) {
+                    _editEvent(NHCnnEditTypeSelect, tmp.tag, tmp.text);
+                }
+            }
         }
+    }else{
+        //拖动结束
+        if (self.selectedItem) {
+            NSLog(@"end end end:%@ ...",NSStringFromCGRect(self.destBounds));
+        }
+        weakify(self)
+        PBMAIN( ^{
+            [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
+                strongify(self)
+                UIFont *oldFont = [UIFont pb_deviceFontForTitle];
+                self.selectedItem.font = oldFont;
+                self.selectedItem.transform = CGAffineTransformIdentity;
+                self.selectedItem.frame = self.destBounds;
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
+                    strongify(self)
+                    NHCnnItem *m_old = [self.existItems objectAtIndex:self.movingIdx];
+                    m_old.hidden = false;
+                    if (finished) {
+                        [self cleanSelectItem];
+                    }
+                }];
+            }];
+        });
     }
     
     [self cleanPreTouchItem];
@@ -532,7 +931,7 @@
     [super touchesCancelled:touches withEvent:event];
     NSLog(@"touch cancelled");
     [self cleanPreTouchItem];
-    
+    [self cleanSelectItem];
     [self cancelInvokeLongPressState];
 }
 #pragma mark -- Util Methods --
@@ -545,6 +944,11 @@
 //touch cancel/move/end 后置空
 - (void)cleanPreTouchItem {
     _preTouchItem = nil;
+}
+
+- (void)cleanSelectItem {
+    [_selectedItem removeFromSuperview];
+    _selectedItem = nil;
 }
 
 //根据点击的point寻找item
@@ -574,33 +978,18 @@
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     CGPoint tmpP = [gestureRecognizer locationInView:self];
     
-    if ([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
-        if (tmpP.y < self.seperatePoint.y && !self.dragEnable) {
-            return true;
-        }
-        return false;
-    }else if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]){
-        if (self.dragEnable) {
-            
-        }
-    }
+//    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+//        if (tmpP.y < self.seperatePoint.y && !self.dragEnable) {
+//            return true;
+//        }
+//        return false;
+//    }else if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]){
+//        if (self.dragEnable) {
+//            
+//        }
+//    }
     
     return true;
-}
-
-- (void)longPressEvent:(UILongPressGestureRecognizer *)gesture {
-    
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"long began");
-        
-        //长按手势触发
-    }else if (gesture.state == UIGestureRecognizerStateChanged){
-        NSLog(@"long change");
-    }else if (gesture.state == UIGestureRecognizerStateEnded){
-        NSLog(@"long end");
-        
-        //[self dragSortAction];
-    }
 }
 
 @end

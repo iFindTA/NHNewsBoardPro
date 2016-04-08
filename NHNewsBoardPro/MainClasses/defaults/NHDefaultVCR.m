@@ -103,6 +103,12 @@
     //[self.navigationController setNavigationBarHidden:true animated:animated];
 }
 
+- (void)preloadSomeLaziest2DifficultCreate {
+    [super preloadSomeLaziest2DifficultCreate];
+    
+    [[[NHNewsDetailsVCR alloc] init] description];
+}
+
 //当程序唤醒时从此方法开始执行
 - (void)loadSubNaviChannels {
     

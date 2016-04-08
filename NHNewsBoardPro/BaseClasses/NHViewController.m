@@ -22,6 +22,7 @@ const NSString *kItemShare = @"toolBarActionShare";
 @property (nonatomic, strong) UILabel *statusBar, *line;
 @property (nonatomic, strong) UILabel *navigationBar;
 //@property (nullable, nonatomic, strong) UINavigationBar *navigationBar;
+@property (nonatomic, strong) NSMutableArray *requestPaths;
 
 @end
 
@@ -82,6 +83,18 @@ const NSString *kItemShare = @"toolBarActionShare";
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    [self performSelector:@selector(preloadSomeLaziest2DifficultCreate) withObject:nil afterDelay:2];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if (_requestPaths != nil) {
+        for (NSString *tmpPath in _requestPaths) {
+            [[NHAFEngine share] cancelRequestForpath:tmpPath];
+        }
+    }
 }
 
 /**
@@ -113,6 +126,13 @@ const NSString *kItemShare = @"toolBarActionShare";
         _navigationBar = statusBar;
     }
     return _navigationBar;
+}
+
+- (NSMutableArray *)requestPaths {
+    if (!_requestPaths) {
+        _requestPaths = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _requestPaths;
 }
 
 //- (UINavigationBar *)navigationBar {
@@ -242,6 +262,10 @@ const NSString *kItemShare = @"toolBarActionShare";
 - (void)toolBarActionComment {}
 - (void)toolBarActionFont {}
 - (void)toolBarActionShare {}
+
+#pragma mark -- prevent loads Actions --
+
+- (void)preloadSomeLaziest2DifficultCreate {};
 
 #pragma mark -- Generate empty view --
 

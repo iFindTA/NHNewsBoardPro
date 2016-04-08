@@ -31,6 +31,8 @@ typedef enum {
 @property (nonatomic, strong, readonly, nonnull) UILabel *navigationBar;
 //@property (nonatomic, strong, readonly, nonnull) UINavigationBar *navigationBar;
 
+@property (nonatomic, nullable, readonly, strong) NSMutableArray *requestPaths;
+
 /**
  *  @brief change the status and navigation darwn color
  *
@@ -108,6 +110,10 @@ typedef enum {
 - (void)toolBarActionFont NS_REQUIRES_SUPER;
 
 - (void)toolBarActionShare NS_REQUIRES_SUPER;
+
+#pragma mark -- prevent loads Actions --
+
+- (void)preloadSomeLaziest2DifficultCreate NS_REQUIRES_SUPER;
 
 @end
 
