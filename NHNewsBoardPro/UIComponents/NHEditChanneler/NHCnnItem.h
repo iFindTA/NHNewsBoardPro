@@ -23,3 +23,8 @@
 - (void)showDelete:(BOOL)show;
 
 @end
+
+
+@interface NHMoreItem : UIButton
+
+@end

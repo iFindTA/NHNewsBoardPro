@@ -159,6 +159,10 @@
     //TODO:需要更改默认选中的title
     [scroll resetSelectedCnnTitle:self.selectedCnn];
     scroll.backgroundColor = NHWhiteColor;
+    [scroll handleLongPressTriggerEvent:^(BOOL dragable) {
+        strongify(self)
+        [self dragSortAction];
+    }];
     [self.view addSubview:scroll];
     self.scrollView = scroll;
 //    [scroll mas_makeConstraints:^(MASConstraintMaker *make) {

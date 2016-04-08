@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^NHDragSortAble)(BOOL dragable);
+
 @interface NHEditCNNScroller : UIScrollView
 
 @property (nonatomic, nonnull, strong) NSArray *exists;
@@ -24,5 +26,12 @@
  *  @brief action:sort/delete/done
  */
 - (void)subNaviEventForSort:(BOOL)sort;
+
+/**
+ *  @brief 长按触发编辑动作
+ *
+ *  @param event block
+ */
+- (void)handleLongPressTriggerEvent:(NHDragSortAble _Nonnull)event;
 
 @end
