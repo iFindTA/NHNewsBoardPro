@@ -8,16 +8,15 @@
 
 #import "NHDefaultVCR.h"
 #import "NHSubscriber.h"
-#import "NHPageScroller.h"
 #import "NHPreventScroller.h"
 #import "NHNewsDetailsVCR.h"
 #import "NHEditChannelVCR.h"
 
-@interface NHDefaultVCR ()<NHSubscriberDataSource, NHSubscriberDelegate, NHPageScrollerDataSource, NHPageScrollerDelegate>
+@interface NHDefaultVCR ()<NHSubscriberDataSource, NHSubscriberDelegate,  NHPreventScrollerDelegate>
 
-@property (nonatomic, strong) NSArray *dataSource,*uriSource;
+@property (nonatomic, strong) NSArray *dataSource,*uriSource,*otherSource;
 @property (nonatomic, strong, nullable) NHSubscriber *scriber;
-@property (nonatomic, strong, nullable) NHPageScroller *pageScroller;
+//@property (nonatomic, strong, nullable) NHPageScroller *pageScroller;
 
 @property (nonatomic, strong, nullable) NHPreventScroller *preventScroller;
 
@@ -109,7 +108,9 @@
 - (void)preloadSomeLaziest2DifficultCreate {
     [super preloadSomeLaziest2DifficultCreate];
     
-    [[[NHNewsDetailsVCR alloc] init] description];
+    if (!self.isInitialized) {
+        [[[NHNewsDetailsVCR alloc] init] description];
+    }
 }
 
 //当程序唤醒时从此方法开始执行
@@ -126,6 +127,9 @@
     }];
     if (!_dataSource) {
         _dataSource = [tmp copy];
+    }
+    if (_otherSource) {
+        _otherSource = [NSArray array];
     }
     //NSLog(@"首页子导航栏:%@",_dataSource);
     
@@ -154,6 +158,7 @@
 //    _pageScroller = pageScroller;
     
     NHPreventScroller *prevent = [[NHPreventScroller alloc] initWithFrame:infoRect withCnns:self.dataSource];
+    prevent.preventDelegate = self;
     [self.view addSubview:prevent];
     self.preventScroller = prevent;
     
@@ -193,10 +198,10 @@
 //    return [listBottom copy];
 //}
 
-- (void)subscriber:(NHSubscriber *)scriber didSelectIndex:(NSInteger)index{
+- (void)subscriber:(NHSubscriber *)scriber didSelectCnn:(NSString * _Nonnull)cnn{
     NSLog(@"did select index:%zd",index);
     //[_reuser setReuseSelectIndex:index];
-    [_pageScroller selectedIndex:index animated:false];
+    [self.preventScroller preventScrollChange2Cnn:cnn];
 }
 
 - (void)didSelectArrowForSubscriber:(NHSubscriber *)scriber {
@@ -204,35 +209,82 @@
     
     NHEditChannelVCR *editChannels = [[NHEditChannelVCR alloc] init];
     //TODO:需要传当前选中的频道
-    editChannels.selectedCnn = [self.scriber getSelectedCnn];
+    editChannels.selectedCnn = self.scriber.selectedCnn;
     editChannels.existSource = [self sourceDataForSubscriber:self.scriber];
-    editChannels.otherSource = [NSArray array];
+    editChannels.otherSource = self.otherSource;
     //切换
     weakify(self)
-    [editChannels handleChannelEditorSwitchEvent:^(NSUInteger index, NSString * _Nonnull channel) {
+    [editChannels handleChannelEditorSwitchEvent:^(NSUInteger index, NSString * _Nonnull cnn) {
         strongify(self)
-        [self.scriber setSubscriberSelectIndex:index];
-        //TODO:重构scrollView
-        [self.pageScroller selectedIndex:index animated:false];
-        NSLog(@"切换栏目:%@",channel);
+        PBMAIN(^{[self.scriber subscriberSelectCnn:cnn];});
+        //重构scrollView
+        PBMAIN(^{[self.preventScroller preventScrollChange2Cnn:cnn];});
+        //每次切换后先预加载 然后强制did appear
+        PBMAIN(^{[self.preventScroller viewDidAppear];});
+        //NSLog(@"切换栏目:%@",channel);
     }];
     //增、删
     [editChannels handleChannelEditorEditEvent:^(BOOL add, NSUInteger idx, NSString * _Nonnull cnn) {
         strongify(self)
-        //TODO:操作数据源
-        [self.scriber scriberEdit:add idx:idx cnn:cnn];
-        //TODO:重构scrollView
+        //操作数据源
+        [self cnnAdd:add cnn:cnn];
+        
+        PBMAIN(^{[self.scriber scriberEdit:add idx:idx cnn:cnn];});
+        //重构scrollView
+        PBMAIN(^{[self.preventScroller preventScrollEdit:add idx:idx cnn:cnn];});
     }];
     //排序
     [editChannels handleChannelEditorSortEvent:^(NSUInteger originIdx, NSUInteger destIdx, NSString * _Nonnull cnn) {
         strongify(self)
-        [self.scriber scriberSort:originIdx destIdx:destIdx cnn:cnn];
-        //TODO:重构scrollView
+        //操作数据源
+        [self cnnSort:originIdx destIdx:destIdx cnn:cnn];
+        PBMAIN(^{[self.scriber scriberSort:originIdx destIdx:destIdx cnn:cnn];});
+        //重构scrollView
+        PBMAIN(^{[self.preventScroller preventScrollSort:originIdx destIdx:destIdx cnn:cnn];});
     }];
     [editChannels startBuildCnn];
     [self presentViewController:editChannels animated:true completion:^{
         
     }];
+}
+
+//栏目：增加、删除
+- (void)cnnAdd:(BOOL)add cnn:(NSString *)cnn {
+    
+    if (add) {
+        if ([self.otherSource containsObject:cnn]) {
+            NSMutableArray *tmpArr = [NSMutableArray arrayWithArray:self.otherSource];
+            [tmpArr removeObject:cnn];
+            self.otherSource = [tmpArr copy];
+        }
+        if (![self.dataSource containsObject:cnn]) {
+            NSMutableArray *tmpArr = [NSMutableArray arrayWithArray:self.dataSource];
+            [tmpArr addObject:cnn];
+            self.dataSource = [tmpArr copy];
+        }
+    }else{
+        if (![self.otherSource containsObject:cnn]) {
+            NSMutableArray *tmpArr = [NSMutableArray arrayWithArray:self.otherSource];
+            [tmpArr insertObject:cnn atIndex:0];
+            self.otherSource = [tmpArr copy];
+        }
+        if ([self.dataSource containsObject:cnn]) {
+            NSMutableArray *tmpArr = [NSMutableArray arrayWithArray:self.dataSource];
+            [tmpArr removeObject:cnn];
+            self.dataSource = [tmpArr copy];
+        }
+    }
+}
+
+//栏目：排序
+- (void)cnnSort:(NSUInteger)origin destIdx:(NSUInteger)destIdx cnn:(NSString *)cnn {
+    if ([self.dataSource containsObject:cnn]) {
+        NSMutableArray *tmpArr = [NSMutableArray arrayWithArray:self.dataSource];
+        [tmpArr removeObjectAtIndex:origin];
+        [tmpArr insertObject:cnn atIndex:destIdx];
+        NSLog(@"sort:%@",tmpArr);
+        self.dataSource = [tmpArr copy];
+    }
 }
 
 #pragma mark -- Navi top event --
@@ -249,20 +301,13 @@
     [SVProgressHUD showInfoWithStatus:@"Func{search} To Be Continue!"];
 }
 
-#pragma mark -- pageScroller --
+#pragma mark -- prevent scroller delegate --
 
-- (NSArray *)dataSourceForPageScroller:(NHPageScroller *)scroller {
-    //NSMutableArray *listTop = [[NSMutableArray alloc] initWithArray:@[@"推荐",@"热点",@"杭州财经报社",@"社会",@"娱乐",@"科技",@"汽车",@"体育",@"订阅",@"财经",@"军事",@"国际",@"正能量",@"段子",@"趣图",@"美女",@"健康",@"教育",@"特卖",@"彩票",@"辟谣"]];
-    NSMutableArray *tmp = [NSMutableArray arrayWithArray:self.dataSource];
-    return [tmp copy];
+- (void)preventScroller:(NHPreventScroller *)scroller didShowCnn:(NSString * _Nonnull)cnn {
+    [_scriber subscriberSelectCnn:cnn];
 }
 
-- (void)scroller:(NHPageScroller *)scroller didShowIndex:(NSInteger)index {
-    [_scriber setSubscriberSelectIndex:index];
-}
-
-- (void)scroller:(NHPageScroller *)scroller didSelectNews:(NHNews *)info {
-    
+- (void)preventScroller:(NHPreventScroller *)scroller didSelectNews:(NHNews *)info {
     NSLog(@"用户选择了新闻:%@",info.title);
     NHNewsDetailsVCR *newsDetailsVCR = [[NHNewsDetailsVCR alloc] init];
     newsDetailsVCR.news = info;
@@ -271,8 +316,7 @@
     [self.rootNaviVCR pushViewController:newsDetailsVCR animated:true];
 }
 
-- (void)scroller:(NHPageScroller *)scroller didSelectADs:(NSDictionary *)ad {
-    
+- (void)preventScroller:(NHPreventScroller *)scroller didSelectADs:(NSDictionary *)ad {
     NSLog(@"用户选择了广告:%@",[ad objectForKey:@"title"]);
     if ([ad pb_stringForKey:@"docid"]) {
         //选择的是新闻

@@ -24,6 +24,8 @@ const NSString *kItemShare = @"toolBarActionShare";
 //@property (nullable, nonatomic, strong) UINavigationBar *navigationBar;
 @property (nonatomic, strong) NSMutableArray *requestPaths;
 
+@property (nonatomic, assign) BOOL isInitialized;
+
 @end
 
 @implementation NHViewController
@@ -85,8 +87,10 @@ const NSString *kItemShare = @"toolBarActionShare";
     [self setNeedsStatusBarAppearanceUpdate];
     
     if ([self respondsToSelector:@selector(preloadSomeLaziest2DifficultCreate)]) {
-        [self performSelector:@selector(preloadSomeLaziest2DifficultCreate) withObject:nil afterDelay:2];
+        //[self performSelector:@selector(preloadSomeLaziest2DifficultCreate) withObject:nil afterDelay:2];
+        [self preloadSomeLaziest2DifficultCreate];
     }
+    self.isInitialized = true;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -24,14 +24,15 @@
 @interface NHSubscriber ()
 
 @property (nonatomic, assign) NHNaviStyle style;
-@property (nonatomic, strong) NSMutableArray *sourceData, *btnSets;
+@property (nonatomic, strong) NSMutableArray *cnnSets, *btnSets;
 @property (nonatomic, assign) BOOL expadding, outTrigger;
 @property (nonatomic, strong) UIView *flagView, *sortBar;
 @property (nonatomic, strong) CALayer *lineLayer;
 @property (nonatomic, assign) CGFloat maxWidth;
 @property (nonatomic, strong) UIScrollView *displayScroll;
-@property (nonatomic, assign) NSInteger selectIndex, preSelectIdx;
 @property (nonatomic, strong) UIButton *arrowBtn;
+
+@property (nonatomic, copy, nullable) NSString *selectedCnn;
 
 @end
 
@@ -51,47 +52,14 @@ static CGFloat kFlagHeight = 20;
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        
+        _style = NHNaviStyleBack;
     }
     return self;
 }
-#pragma mark -- 增、删、选中、排序
-- (void)setSubscriberSelectIndex:(NSInteger)index {
-    
-    NSAssert(_dataSource != nil, @"subcriber's datasource must not be nil !");
-    NSArray *exsitArr = [_dataSource sourceDataForSubscriber:self];
-    NSInteger counts = [exsitArr count];
-    if (index < 0 || index >= counts) {
-        return;
-    }
-    _outTrigger = true;
-    [self focusIndex:index];
-}
-
-- (void)scriberEdit:(BOOL)add idx:(NSUInteger)idx cnn:(NSString *)cnn {
-    self.preSelectIdx = self.selectIndex;
-    [self reloadData];
-    _outTrigger = true;
-    [self focusIndex:self.preSelectIdx];
-}
-
-- (void)scriberSort:(NSUInteger)originIdx destIdx:(NSUInteger)destIdx cnn:(NSString *)cnn {
-    self.preSelectIdx = self.selectIndex;
-    [self reloadData];
-    _outTrigger = true;
-    [self focusIndex:self.preSelectIdx];
-}
-
-//- (void)setBackgroundColor:(UIColor *)backgroundColor {
-//    [super setBackgroundColor:backgroundColor];
-//    self.displayScroll.backgroundColor = backgroundColor;
-//    self.arrowBtn.backgroundColor = backgroundColor;
-//}
 
 - (void)reloadData {
     
     _expadding = false;
-    _selectIndex = 0;
     if (_btnSets || [_btnSets count]) {
         [_btnSets removeAllObjects];
         _btnSets = nil;
@@ -120,8 +88,15 @@ static CGFloat kFlagHeight = 20;
     _outTrigger = false;
     __block CGSize selfSize = self.bounds.size;
     //CGSize superSize = [_superView bounds].size;
-    NSArray *exist_data = [_dataSource sourceDataForSubscriber:self];
+    NSArray *exist_data = [self.dataSource sourceDataForSubscriber:self];
     NSAssert(exist_data.count > 0, @"exsit data must one more thing !");
+    
+    //更新栏目集合
+    if (_cnnSets) {
+        [_cnnSets removeAllObjects];
+        _cnnSets = nil;
+    }
+    _cnnSets = [NSMutableArray arrayWithArray:exist_data];
     
     CGRect infoRect;
     
@@ -136,9 +111,8 @@ static CGFloat kFlagHeight = 20;
     }];
     
     __block CGFloat tmpWidthSum = kFlagHeight;
-    __block UIColor *btnColor_darwn = [self btnTitleColor];
-    __block UIColor *btnColor_night = UIColorFromRGB(0xD0D0D0);
-    __block UIColor *selectColor = _style == NHNaviStyleBack?[UIColor whiteColor]:[UIColor redColor];
+    UIColor *btnColor_darwn = [self btnTitleColor];
+    UIColor *btnColor_night = UIColorFromRGB(0xD0D0D0);
     //weakify(self)
     [exist_data enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL *stop) {
         strongify(self)
@@ -157,12 +131,7 @@ static CGFloat kFlagHeight = 20;
                 [tmpBtn setNormalTitleColor:btnColor_darwn];
                 [tmpBtn setNightTitleColor:btnColor_night];
             }];
-            if (idx == _selectIndex) {
-                [tmpBtn setTitleColor:selectColor forState:UIControlStateNormal];
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_displayScroll addSubview:tmpBtn];
-            });
+            [_displayScroll addSubview:tmpBtn];
             [_btnSets addObject:tmpBtn];
             tmpWidthSum += (itemSize.width + kItemDistance);
         }
@@ -183,6 +152,10 @@ static CGFloat kFlagHeight = 20;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(darwnWillComing) name:DKNightVersionDawnComingNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nightWillComing) name:DKNightVersionNightFallingNotification object:nil];
+    
+    if (!_selectedCnn) {
+        [self focusOnCnn:NHNewsForceUpdateChannel];
+    }
 }
 
 - (void)darwnWillComing {
@@ -207,48 +180,59 @@ static CGFloat kFlagHeight = 20;
     if (btn_tag < 0 || btn_tag >= [_btnSets count]) {
         return;
     }
-    if (btn_tag != _selectIndex) {
-        _selectIndex = btn_tag;
-        ///modify btn's title color
-        [self updateBtnItemsTitleColor];
-        ///re move the flag view
-        [self updateFlagViewFor:btn];
-        ///notify the delegate
-        if (_delegate && [_delegate respondsToSelector:@selector(subscriber:didSelectIndex:)]) {
-            [_delegate subscriber:self didSelectIndex:_selectIndex];
-        }
+    NSString *__tmp_cnn = btn.titleLabel.text;
+    if ([__tmp_cnn isEqualToString:self.selectedCnn]) {
+        return;
+    }
+    self.selectedCnn = [__tmp_cnn copy];
+    ///re move the flag view
+    [self updateFlagViewFor:btn];
+    ///modify btn's title color
+    [self updateBtnItemsTitleColor];
+    ///notify the delegate
+    if (_delegate && [_delegate respondsToSelector:@selector(subscriber:didSelectCnn:)] && !_outTrigger) {
+        [_delegate subscriber:self didSelectCnn:__tmp_cnn];
     }
 }
 
-- (void)focusIndex:(NSInteger)index {
+- (void)focusOnCnn:(NSString *)cnn {
+    
     UIButton *dst_btn;
-    for (UIButton *tmp in _btnSets) {
-        if (index == tmp.tag) {
-            dst_btn = tmp;
-            break;
+    @synchronized (self.btnSets) {
+        for (UIButton *tmp in self.btnSets) {
+            if ([cnn isEqualToString:tmp.titleLabel.text]) {
+                dst_btn = tmp;
+                break;
+            }
         }
     }
-    if (index != _selectIndex) {
-        _selectIndex = index;
-        ///modify btn's title color
-        [self updateBtnItemsTitleColor];
-        ///re move the flag view
+    if ([cnn isEqualToString:self.selectedCnn]) {
         [self updateFlagViewFor:dst_btn];
-        ///notify the delegate
-        if (_delegate && [_delegate respondsToSelector:@selector(subscriber:didSelectIndex:)] && !_outTrigger) {
-            [_delegate subscriber:self didSelectIndex:_selectIndex];
-        }
-        _outTrigger = false;
+        [self updateBtnItemsTitleColor];
+        return;
     }
+    self.selectedCnn = [cnn copy];
+    ///re move the flag view
+    [self updateFlagViewFor:dst_btn];
+    ///modify btn's title color
+    [self updateBtnItemsTitleColor];
+    ///notify the delegate
+    if (_delegate && [_delegate respondsToSelector:@selector(subscriber:didSelectCnn:)] && !_outTrigger) {
+        [_delegate subscriber:self didSelectCnn:cnn];
+    }
+    _outTrigger = false;
 }
 
-- (NSString *)getSelectedCnn {
-    NSString *tmp = [[self sourceData] objectAtIndex:_selectIndex];
-    return [tmp copy];
-}
+#pragma mark -- setter getter for selected cnn
 
-- (NSArray *)getSourceData {
-    return [self sourceData];
+- (void)setSelectedCnn:(NSString *)selectedCnn {
+    @synchronized (self.cnnSets) {
+        if (![self.cnnSets containsObject:selectedCnn]||selectedCnn==nil) {
+            NSLog(@"subscriber set selelcted cnn occured error!");
+            return;
+        }
+    }
+    _selectedCnn = selectedCnn;
 }
 
 - (void)updateBtnItemsTitleColor {
@@ -259,7 +243,9 @@ static CGFloat kFlagHeight = 20;
     UIColor *color_s = _style == NHNaviStyleBack?[UIColor whiteColor]:[UIColor redColor];
     @synchronized(_btnSets){
         for (UIButton *tmp in _btnSets) {
-            [tmp setTitleColor:tmp.tag == _selectIndex?color_s:color_n forState:UIControlStateNormal];
+            BOOL selected = [tmp.titleLabel.text isEqualToString:self.selectedCnn];
+            //NSLog(@"selected:------%d",selected);
+            [tmp setTitleColor:selected?color_s:color_n forState:UIControlStateNormal];
         }
     }
 }
@@ -356,10 +342,6 @@ static CGFloat kFlagHeight = 20;
     }];
 }
 
-- (NSArray *)sourceData{
-    return [_dataSource sourceDataForSubscriber:self];
-}
-
 #pragma mark -- UTIL --
 
 -(CGSize)calculateSizeWithFont:(NSInteger)Font Text:(NSString *)Text{
@@ -369,6 +351,43 @@ static CGFloat kFlagHeight = 20;
                                     attributes:attr
                                        context:nil];
     return bounds.size;
+}
+
+#pragma mark -- 增、删、选中、排序
+
+- (void)subscriberSelectCnn:(NSString *)cnn {
+    
+    NSAssert([self.cnnSets containsObject:cnn], @"subcriber's cnn not exist!");
+    if ([cnn isEqualToString:self.selectedCnn]) {
+        return;
+    }
+    NSArray *exsitArr = [_dataSource sourceDataForSubscriber:self];
+    NSInteger index = [exsitArr indexOfObject:cnn];
+    NSInteger counts = [exsitArr count];
+    if (index < 0 || index >= counts) {
+        return;
+    }
+    _outTrigger = true;
+    [self focusOnCnn:cnn];
+}
+
+- (void)scriberEdit:(BOOL)add idx:(NSUInteger)idx cnn:(NSString *)cnn {
+    
+    [self reloadData];
+    _outTrigger = true;
+    //要注意删除操作时 如果删除的是当前选中的栏目 则默认选中第一个
+    if ([cnn isEqualToString:self.selectedCnn] && !add) {
+        [self focusOnCnn:NHNewsForceUpdateChannel];
+        return;
+    }
+    [self focusOnCnn:self.selectedCnn];
+}
+
+- (void)scriberSort:(NSUInteger)originIdx destIdx:(NSUInteger)destIdx cnn:(NSString *)cnn {
+    
+    [self reloadData];
+    _outTrigger = true;
+    [self focusOnCnn:self.selectedCnn];
 }
 
 @end

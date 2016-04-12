@@ -26,6 +26,15 @@
 - (nullable id)getInfo;
 - (NSArray * _Nullable)getInfos;
 
+#pragma mark -- 操作栏目订阅 --
+
+- (NSArray * _Nullable)getExistCnns;
+- (NSArray * _Nullable)getOtherCnns;
+- (BOOL)saveExistCnns:(NSArray * _Nonnull)cnns;
+- (BOOL)saveOtherCnns:(NSArray * _Nonnull)cnns;
+- (BOOL)scribeCnn:(NSString * _Nonnull)cnn;
+- (BOOL)unscribeCnn:(NSString * _Nonnull)cnn;
+
 #pragma mark -- 操作news --
 //真对新闻各个频道只保存第一页数据
 - (BOOL)clearNewsForChannel:(NSString * _Nonnull)channel;

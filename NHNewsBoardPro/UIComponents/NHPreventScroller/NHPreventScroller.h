@@ -14,7 +14,11 @@
  *  @attention: 本组件在同一时刻最多显示(预加载)6个页面(网易策略)
  *
  */
+@class NHNews;
+@protocol NHPreventScrollerDelegate;
 @interface NHPreventScroller : UIScrollView
+
+@property (nonatomic, assign) _Nullable id<NHPreventScrollerDelegate> preventDelegate;
 
 /**
  *  @brief 初始化 方法
@@ -26,13 +30,19 @@
  */
 - (id _Nonnull)initWithFrame:(CGRect)frame withCnns:(NSArray * _Nonnull)cnns;
 
+#pragma mark -- 频道编辑完毕 可调取方法刷新当前页面
+/**
+ *  @brief 强制刷新
+ */
+- (void)viewDidAppear;
+
 #pragma mark -- 栏目编辑事件
 /**
  *  @brief 切换栏目
  *
  *  @param idx 序号
  */
-- (void)preventScrollChange2Index:(NSUInteger)idx;
+- (void)preventScrollChange2Cnn:(NSString * _Nonnull)cnn;
 
 /**
  *  @brief 增、删栏目
@@ -52,4 +62,11 @@
  */
 - (void)preventScrollSort:(NSUInteger)originIdx destIdx:(NSUInteger)destIdx cnn:(NSString * _Nonnull)cnn;
 
+@end
+
+@protocol NHPreventScrollerDelegate <NSObject>
+@optional
+- (void)preventScroller:(NHPreventScroller * _Nonnull)scroller didShowCnn:(NSString * _Nonnull)cnn;
+- (void)preventScroller:(NHPreventScroller * _Nonnull)scroller didSelectNews:(NHNews * _Nonnull)info;
+- (void)preventScroller:(NHPreventScroller * _Nonnull)scroller didSelectADs:(NSDictionary * _Nonnull)ad;
 @end

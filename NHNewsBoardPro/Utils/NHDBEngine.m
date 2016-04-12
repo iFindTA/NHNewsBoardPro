@@ -211,7 +211,7 @@ static NHDBEngine *instance = nil;
     
     __block BOOL ret = false;
     
-    if ([news pb_isEmpty]) {
+    if (PBIsEmpty(news)) {
         return ret;
     }
     NSDateFormatter *formatter = [self dateFormatter];

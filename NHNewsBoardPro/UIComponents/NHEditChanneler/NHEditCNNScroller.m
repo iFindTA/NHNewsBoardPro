@@ -168,7 +168,7 @@
         strongify(self)
         BOOL dragable = [self canDrag:obj];
         BOOL selected = [self isSelected:obj];
-        NSLog(@"building---->%@...",obj);
+        //NSLog(@"building---->%@...",obj);
         UIColor *titleColor = selected?[UIColor redColor]:[UIColor lightGrayColor];
         NSInteger __row = idx/numPerLine;NSInteger __col = idx%numPerLine;
         CGPoint origin = CGPointMake(NHBoundaryOffset+(size.width+cap)*__col, NHBoundaryOffset*2+(size.height+cap)*__row);
@@ -529,6 +529,11 @@
     self.others = [tmpArr copy];
     [self relayoutMoreCnnView];
     
+    //TODO:如果删除的是当前选中的cnn 则默认选中第一个
+    if ([__title isEqualToString:self.selectedCnn]) {
+        self.selectedCnn = [NHNewsForceUpdateChannel copy];
+    }
+    
     //通知取消订阅
     if (_editEvent) {
         _editEvent(NHCnnEditTypeDelete,__tag,__title);
@@ -631,7 +636,8 @@
             bounds = [self insetsBoundsForTouch:bounds];
             if (CGRectContainsPoint(bounds, point)) {
                 if (__tag__ != __tag && __tag__ != 0) {
-                    NSString *_title = obj.title;
+                    //NSString *_title = obj.title;
+                    NSString *_title = self.selectedItem.title;
                     //NSLog(@"将与%@交换位置:%zd...",_title,__tag__);
                     //通知事件block
                     if (_sortEvent) {
@@ -857,7 +863,7 @@
     if (_dragEvent) {
         _dragEvent(true);
     }
-    NSLog(@"long long long press!");
+    //NSLog(@"long long long press!");
     
     //依当前的选择的preTouch为selectItem
     if (_preTouchItem != nil && _preTouchItem.tag != 0) {
@@ -871,7 +877,7 @@
         self.selectedItem = m_new;
         _preTouchItem.hidden = true;
         
-        NSLog(@"origin bounds:%@",NSStringFromCGRect(self.destBounds));
+        //NSLog(@"origin bounds:%@",NSStringFromCGRect(self.destBounds));
         weakify(self)
         PBMAINDelay(NH_ANIMATE_DELAY, ^{
             [UIView animateWithDuration:PBANIMATE_DURATION animations:^{

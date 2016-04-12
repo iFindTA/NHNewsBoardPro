@@ -75,6 +75,10 @@
     }];
     
     //self.selectedChannel = PBFormat(@"%@",NHIndexTitle);
+    [self addColorChangedBlock:^{
+        subNavi.normalBackgroundColor = NHWhiteColor;
+        subNavi.nightBackgroundColor = NHNightBgColor;
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -167,6 +171,12 @@
     }];
     [self.view addSubview:scroll];
     self.scrollView = scroll;
+    
+    [self addColorChangedBlock:^{
+        strongify(self)
+        self.scrollView.normalBackgroundColor = NHWhiteColor;
+        self.scrollView.nightBackgroundColor = NHNightBgColor;
+    }];
 }
 
 #pragma mark -- Block Event --

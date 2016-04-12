@@ -35,7 +35,7 @@ PODS:
   - FXBlurView (1.6.4)
   - Masonry (0.6.4)
   - MJRefresh (3.1.0)
-  - PBToolKits (0.3.98)
+  - PBToolKits (0.3.99)
   - Reachability (3.2)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
@@ -55,7 +55,7 @@ DEPENDENCIES:
   - FXBlurView (~> 1.6.4)
   - Masonry (~> 0.6.3)
   - MJRefresh (~> 3.1.0)
-  - PBToolKits (~> 0.3.98)
+  - PBToolKits (~> 0.3.99)
   - Reachability (~> 3.2)
   - SDWebImage (~> 3.7.3)
   - SSKeychain (~> 1.2.3)
@@ -68,13 +68,13 @@ SPEC CHECKSUMS:
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
-  PBToolKits: 58ab11e4aa9b1b8b9b828e9accd5c34d4127ffa2
+  PBToolKits: 95fe715c7f422467024d9dc1b85d53ff8706086e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SQLCipher: d490d2effe735895d2204d25a154b1e722278421
   SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
 
-PODFILE CHECKSUM: 7d27d73c6da250eba07b66a52266140123805c5a
+PODFILE CHECKSUM: 4d8dcf647b4162dc2636287ccdf7ad361f672cbe
 
 COCOAPODS: 1.0.0.beta.6

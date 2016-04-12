@@ -2,7 +2,70 @@
 news board Architecture for ios(objc) some like neteasy!
 
 ##### 前言
-先看看demo效果：
+support：iOS7.0+，如果觉得对你有所帮助请点个赞！
+##### Version2.0先看看demo效果：
+
+![image](https://raw.githubusercontent.com/iFindTA/screenshots/master/neteasy_g0.gif)
+
+#####版本2.0 看点总结：
+```
+1>.完全自定义NHPreventScrollview（模仿网易的NTESNBPreventScrollingScrollView类自己简易实现逻辑，同一时刻显示6个page）
+2>.隐藏导航条类似网易布局导航
+3>.栏目订阅、取消订阅、拖动排序（非基于手势）同步呈现
+4>.黑夜、白天阅读模式怎么优雅地切换（包括在不修改MJRefresh源码情况下简易设置支持阅读模式切换）
+5>.为什么滚动重用机制弃用UICollectionView实现方式（1.0版本方式）
+6>.其他未提及到的小知识点可在demo中查看
+```
+
+#####UI结构：
+
+![image](https://raw.githubusercontent.com/iFindTA/screenshots/master/neteasy_3.png)
+
+#####重要看点简介：
+1.NHViewController
+```
+该类继承于UIViewController，是视图控制器的基类，实现了一些诸如初始化导航条、注册导航按钮、预加载复杂类、统一页面布局等功能
+```
+2.NHPreventScroller
+```
+主视图中最重要的类之一，完全自定义模仿网易的NTESNBPreventScrollingScrollView来管理不同页面的切换，特性有：支持增加、取消订阅栏目、排序栏目位置、同一时刻最多显示6个页面，具体实现见demo代码
+```
+3.NHEditChannelVCR
+```
+该类实现了频道编辑功能：订阅、取消订阅、拖动排序等功能，具体见代码
+```
+4.NHWinAnimatorVCR
+```
+优雅的切换白天、黑夜阅读模式
+```
+5.为什么弃用UICollectionView实现方式
+```
+＊在栏目编辑状态下，拖动排序交换对应page不方便
+＊使用到了CollectionView的willDisplay方法，该方法仅在iOS8.0+有效
+＊最多只能支持2个重用page在同一时刻，不满足需求
+＊其他未使用原因
+```
+6.在不修改MJRefresh源码情况下设置黑夜白天模式切换
+```
+很简单，keyPath for value！
+```
+
+#####未完待续点：
+```
+＊详情页的CSS＋JS布局实现
+＊排序后的栏目顺序缓存到数据库（相对简单读者可自行尝试）
+＊接收通知
+＊广告启动图的加入
+＊更好的适配夜间模式
+＊其他作者能有能力添加的项
+```
+######Feedback: nanhujiaju@gmail.com
+###### 持续集成...
+
+* * *
+
+
+##### Version1.0先看看demo效果：
 
 ![image](https://raw.githubusercontent.com/iFindTA/screenshots/master/neteasy_0.png)
 

@@ -10,8 +10,8 @@
 
 @interface NHPreventPager ()
 
-//@property (nonatomic, assign) NHPreventState state;
-@property (nonatomic, strong) UIView *placeHolder;
+@property (nonatomic, strong, nullable) NSDate *showDate;
+@property (nonatomic, assign) NHPreventState state;
 @property (nonatomic, copy, readwrite) NSString *cnn;
 
 @end
@@ -45,7 +45,7 @@
 
 - (void)__initSetup {
     
-    self.state = NHPreventStateLowPower;
+    self.state = NHPreventStateNone;
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -59,7 +59,6 @@
     CGContextSetFillColorWithColor(ctx, [UIColor lightGrayColor].CGColor);
     CGContextFillRect(ctx, rect);
     [info drawInRect:infoRect withAttributes:attrs];
-    //[info drawAtPoint:<#(CGPoint)#> withAttributes:<#(nullable NSDictionary<NSString *,id> *)#>]
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -69,38 +68,26 @@
     }
 }
 
-#pragma mark -- Lazy load methods
-
-- (NSMutableArray *)dataSources {
-    if (!_dataSources) {
-        _dataSources = [NSMutableArray arrayWithCapacity:0];
-    }
-    return _dataSources;
-}
-
-- (UITableView *)table {
-    if (!_table) {
-        _table = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _table.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    }
-    return _table;
-}
-
 #pragma mark -- 父类方法
 
-- (void)preventLoad {}
+- (void)preventLoad {
+    self.state = NHPreventStatePreLoaded;
+}
 
-- (void)viewWillAppear {}
+- (void)viewWillAppear {
+    self.state = NHPreventStateWillShow;
+}
 
-- (void)viewDidAppear {}
+- (void)viewDidAppear {
+    
+    self.showDate = [NSDate date];
+    
+    self.state = NHPreventStateShowing;
+}
 
 - (void)reset2LowwerPowerState {
-    if (_dataSources) {
-        [_dataSources removeAllObjects];
-        _dataSources = nil;
-    }
-    [self.table reloadData];
-    self.table.hidden = true;
+    self.showDate = nil;
+    self.state = NHPreventStateLowPower;
 }
 
 @end

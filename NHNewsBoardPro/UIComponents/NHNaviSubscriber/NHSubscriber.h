@@ -17,12 +17,10 @@ typedef enum {
 @protocol NHSubscriberDataSource;
 @interface NHSubscriber : UIView
 
-@property (nonatomic, assign) id<NHSubscriberDelegate> delegate;
-@property (nonatomic, assign) id<NHSubscriberDataSource> dataSource;
+@property (nonatomic, assign) _Nonnull id<NHSubscriberDelegate> delegate;
+@property (nonatomic, assign) _Nonnull id<NHSubscriberDataSource> dataSource;
 
-@property (nonatomic, readonly, copy, getter=getSelectedCnn) NSString *selectedCnn;
-
-@property (nonatomic, strong, readonly, getter = getSourceData) NSArray *sourceData;
+@property (nonatomic, readonly, copy) NSString * _Nonnull selectedCnn;
 
 /**
  *	@brief	init method
@@ -32,14 +30,14 @@ typedef enum {
  *
  *	@return	the instance
  */
-- (id)initWithFrame:(CGRect)frame forStyle:(NHNaviStyle)style;
+- (_Nonnull id)initWithFrame:(CGRect)frame forStyle:(NHNaviStyle)style;
 
 /**
  *	@brief	select index
  *
  *	@param 	index 	the dest index
  */
-- (void)setSubscriberSelectIndex:(NSInteger)index;
+//- (void)setSubscriberSelectIndex:(NSInteger)index;
 
 /**
  *	@brief	must call this function after init method and set the datasource
@@ -47,6 +45,13 @@ typedef enum {
 - (void)reloadData;
 
 #pragma mark -- 栏目编辑事件
+
+/**
+ *  @brief 选中 栏目
+ *
+ *  @param cnn 栏目名称
+ */
+- (void)subscriberSelectCnn:(NSString * _Nonnull)cnn;
 
 /**
  *  @brief 增、删栏目
@@ -78,7 +83,7 @@ typedef enum {
 
 @protocol NHSubscriberDelegate <NSObject>
 
-- (void)subscriber:(NHSubscriber * _Nonnull)scriber didSelectIndex:(NSInteger)index;
+- (void)subscriber:(NHSubscriber * _Nonnull)scriber didSelectCnn:(NSString * _Nonnull)cnn;
 - (void)didSelectArrowForSubscriber:(NHSubscriber * _Nonnull)scriber;
 
 @end

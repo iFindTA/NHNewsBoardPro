@@ -259,7 +259,7 @@
 
 + (NSString *)pb_buildVersion {
     NSDictionary *bundleInfo = [[NSBundle mainBundle] infoDictionary];
-    return [bundleInfo pb_stringForKey:@"CFBundleVersion"];
+    return [bundleInfo pb_stringForKey:(NSString *)kCFBundleVersionKey];
 }
 
 + (NSString *)pb_releaseVersion {
@@ -269,7 +269,7 @@
 
 + (NSString *)pb_displayName {
     NSDictionary *bundleInfo = [[NSBundle mainBundle] infoDictionary];
-    return [bundleInfo pb_stringForKey:@"CFBundleDisplay"];
+    return [bundleInfo pb_stringForKey:(NSString *)kCFBundleNameKey];
 }
 
 @end

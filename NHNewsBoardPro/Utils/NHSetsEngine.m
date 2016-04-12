@@ -77,7 +77,7 @@ static NHSetsEngine *instance = nil;
     dispatch_once(&onceToken, ^{
         formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-        NSTimeZone* localzone = [NSTimeZone localTimeZone];
+        //NSTimeZone* localzone = [NSTimeZone localTimeZone];
         NSTimeZone* GTMzone = [NSTimeZone timeZoneForSecondsFromGMT:0];
         formatter.timeZone = GTMzone;
     });

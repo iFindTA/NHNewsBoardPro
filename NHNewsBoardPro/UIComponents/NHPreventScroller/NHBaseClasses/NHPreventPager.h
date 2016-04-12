@@ -10,11 +10,11 @@
 
 typedef enum {
     NHPreventStateNone              =  1 << 0,
-    NHPreventStateLoading           =  1 << 1,
-    NHPreventStatePreLoaded         =  1 << 2,
-    NHPreventStatePreLoadFailed     =  1 << 3,
-    NHPreventStateLowPower          =  1 << 4,
-    NHPreventStateShowing           =  1 << 5
+    NHPreventStatePreLoaded         =  1 << 1,
+    NHPreventStateWaitForShow       =  1 << 2,
+    NHPreventStateWillShow          =  1 << 3,
+    NHPreventStateShowing           =  1 << 4,
+    NHPreventStateLowPower          =  1 << 5
 }NHPreventState;
 
 @interface NHPreventPager : UIView
@@ -32,15 +32,12 @@ typedef enum {
 /**
  *  @brief 最后显示日期
  */
-@property (nonatomic, strong) NSDate * _Nonnull showDate;
+@property (nonatomic, strong, nullable, readonly) NSDate * showDate;
 
 /**
  *  @brief 当前状态
  */
-@property (nonatomic, assign) NHPreventState state;
-
-@property (nonatomic, strong, nullable) NSMutableArray *dataSources;
-@property (nonatomic, strong, nullable) UITableView *table;
+@property (nonatomic, assign, readonly) NHPreventState state;
 
 - (id _Nonnull)initWithFrame:(CGRect)frame withCnn:(NSString * _Nonnull)cnn;
 

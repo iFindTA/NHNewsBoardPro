@@ -34,6 +34,11 @@ typedef enum {
 @property (nonatomic, nullable, readonly, strong) NSMutableArray *requestPaths;
 
 /**
+ *  @brief wethear view is inited
+ */
+@property (nonatomic, assign, readonly) BOOL isInitialized;
+
+/**
  *  @brief change the status and navigation darwn color
  *
  *  @param color darwn's color

@@ -10,12 +10,11 @@
 #import "NHDefaultVCR.h"
 #import "NHDiscoveryVCR.h"
 #import "NHPersonalVCR.h"
-#import "NHTestVCR.h"
 #import "SloppySwiper.h"
 #import "NHSetsEngine.h"
 @interface AppDelegate ()
 
-@property (nonatomic, strong) SloppySwiper *defaultSloppy, *faxianSloppy, *mineSloppy, *testSloppy, *globalSloppy;
+@property (nonatomic, strong) SloppySwiper *defaultSloppy, *faxianSloppy, *mineSloppy, *globalSloppy;
 
 @end
 
@@ -89,13 +88,7 @@
     //    mineNavi.delegate = mineSloppy;
     //    _mineSloppy = mineSloppy;
     
-    NHTestVCR *test = [[NHTestVCR alloc] init];
-    UINavigationController *testNavi = [[UINavigationController alloc] initWithRootViewController:test];
-    SloppySwiper *testSloppy = [[SloppySwiper alloc] initWithNavigationController:testNavi];
-    testNavi.delegate = testSloppy;
-    _testSloppy = testSloppy;
-    
-    NSArray *viewControllers = [NSArray arrayWithObjects:index, faxian, mine, testNavi, nil];
+    NSArray *viewControllers = [NSArray arrayWithObjects:index, faxian, mine, nil];
     UITabBarController *tabBarVCR = [[UITabBarController alloc] init];
     tabBarVCR.view.backgroundColor = NHWhiteColor;
     tabBarVCR.tabBar.normalBarTintColor = NHDarwnBgColor;

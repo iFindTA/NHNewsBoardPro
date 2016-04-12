@@ -8,6 +8,12 @@ shakeenable TEXT DEFAULT 1,
 soundname TEXT DEFAULT 'in.caf',
 PRIMARY KEY (userid)
 )|
+CREATE TABLE IF NOT EXISTS t_cnns (
+title TEXT DEFAULT NULL,
+scribed TEXT DEFAULT NULL,
+hot TEXT DEFAULT NULL,
+PRIMARY KEY (title)
+)|
 CREATE TABLE IF NOT EXISTS t_news_titles (
 id TEXT NULL,
 boardid TEXT DEFAULT NULL,

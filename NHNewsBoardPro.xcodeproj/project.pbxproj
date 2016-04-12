@@ -28,7 +28,6 @@
 		608D47AC1CAE19290028CA7F /* SSWAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47421CAE19290028CA7F /* SSWAnimator.m */; };
 		608D47AD1CAE19290028CA7F /* SSWDirectionalPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47441CAE19290028CA7F /* SSWDirectionalPanGestureRecognizer.m */; };
 		608D47AE1CAE19290028CA7F /* NHDefaultVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47481CAE19290028CA7F /* NHDefaultVCR.m */; };
-		608D47B01CAE19290028CA7F /* NHEditChannelVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D474D1CAE19290028CA7F /* NHEditChannelVCR.m */; };
 		608D47B11CAE19290028CA7F /* NHNewsDetailsVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47501CAE19290028CA7F /* NHNewsDetailsVCR.m */; };
 		608D47B21CAE19290028CA7F /* NHDiscoveryVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47531CAE19290028CA7F /* NHDiscoveryVCR.m */; };
 		608D47B31CAE19290028CA7F /* NHPresentVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47561CAE19290028CA7F /* NHPresentVCR.m */; };
@@ -37,9 +36,6 @@
 		608D47B61CAE19290028CA7F /* NHInfomationVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47611CAE19290028CA7F /* NHInfomationVCR.m */; };
 		608D47B71CAE19290028CA7F /* NHRecordVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47641CAE19290028CA7F /* NHRecordVCR.m */; };
 		608D47B81CAE19290028CA7F /* NHSettingsVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47671CAE19290028CA7F /* NHSettingsVCR.m */; };
-		608D47B91CAE19290028CA7F /* NHTestVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D476A1CAE19290028CA7F /* NHTestVCR.m */; };
-		608D47BA1CAE19290028CA7F /* NHPager.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D476D1CAE19290028CA7F /* NHPager.m */; };
-		608D47BB1CAE19290028CA7F /* NHRootScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D476F1CAE19290028CA7F /* NHRootScroll.m */; };
 		608D47BC1CAE19290028CA7F /* NHModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47721CAE19290028CA7F /* NHModels.m */; };
 		608D47BD1CAE19290028CA7F /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 608D47761CAE19290028CA7F /* Arrow.png */; };
 		608D47BE1CAE19290028CA7F /* NHSubscriber.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47781CAE19290028CA7F /* NHSubscriber.m */; };
@@ -85,6 +81,7 @@
 		6094E84F1CB7451E0036DBB7 /* NHPreventScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 6094E84E1CB7451E0036DBB7 /* NHPreventScroller.m */; };
 		60951B2E1CB4F91200E0D0C8 /* NHCnnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 60951B2D1CB4F91200E0D0C8 /* NHCnnItem.m */; };
 		60951B311CB4F92E00E0D0C8 /* NHEditCNNScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 60951B301CB4F92E00E0D0C8 /* NHEditCNNScroller.m */; };
+		60A73BB61CBCFA9F00363204 /* NHEditChannelVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A73BB51CBCFA9F00363204 /* NHEditChannelVCR.m */; };
 		60C1137B1CBB8E470065A3F7 /* NHPreventPager.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C1137A1CBB8E470065A3F7 /* NHPreventPager.m */; };
 		60C1137F1CBB98660065A3F7 /* NHPreventCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C1137E1CBB98660065A3F7 /* NHPreventCustomer.m */; };
 		CC68AFED80A72D8D1ACE1420 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1568B4AAC0B432DD9FC506 /* libPods.a */; };
@@ -152,8 +149,6 @@
 		608D47441CAE19290028CA7F /* SSWDirectionalPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSWDirectionalPanGestureRecognizer.m; sourceTree = "<group>"; };
 		608D47471CAE19290028CA7F /* NHDefaultVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHDefaultVCR.h; sourceTree = "<group>"; };
 		608D47481CAE19290028CA7F /* NHDefaultVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHDefaultVCR.m; sourceTree = "<group>"; };
-		608D474C1CAE19290028CA7F /* NHEditChannelVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHEditChannelVCR.h; sourceTree = "<group>"; };
-		608D474D1CAE19290028CA7F /* NHEditChannelVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHEditChannelVCR.m; sourceTree = "<group>"; };
 		608D474F1CAE19290028CA7F /* NHNewsDetailsVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHNewsDetailsVCR.h; sourceTree = "<group>"; };
 		608D47501CAE19290028CA7F /* NHNewsDetailsVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHNewsDetailsVCR.m; sourceTree = "<group>"; };
 		608D47521CAE19290028CA7F /* NHDiscoveryVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHDiscoveryVCR.h; sourceTree = "<group>"; };
@@ -170,12 +165,6 @@
 		608D47641CAE19290028CA7F /* NHRecordVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHRecordVCR.m; sourceTree = "<group>"; };
 		608D47661CAE19290028CA7F /* NHSettingsVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHSettingsVCR.h; sourceTree = "<group>"; };
 		608D47671CAE19290028CA7F /* NHSettingsVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHSettingsVCR.m; sourceTree = "<group>"; };
-		608D47691CAE19290028CA7F /* NHTestVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHTestVCR.h; sourceTree = "<group>"; };
-		608D476A1CAE19290028CA7F /* NHTestVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHTestVCR.m; sourceTree = "<group>"; };
-		608D476C1CAE19290028CA7F /* NHPager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPager.h; sourceTree = "<group>"; };
-		608D476D1CAE19290028CA7F /* NHPager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPager.m; sourceTree = "<group>"; };
-		608D476E1CAE19290028CA7F /* NHRootScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHRootScroll.h; sourceTree = "<group>"; };
-		608D476F1CAE19290028CA7F /* NHRootScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHRootScroll.m; sourceTree = "<group>"; };
 		608D47711CAE19290028CA7F /* NHModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHModels.h; sourceTree = "<group>"; };
 		608D47721CAE19290028CA7F /* NHModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHModels.m; sourceTree = "<group>"; };
 		608D47761CAE19290028CA7F /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow.png; sourceTree = "<group>"; };
@@ -241,6 +230,8 @@
 		60951B2D1CB4F91200E0D0C8 /* NHCnnItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHCnnItem.m; sourceTree = "<group>"; };
 		60951B2F1CB4F92E00E0D0C8 /* NHEditCNNScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHEditCNNScroller.h; sourceTree = "<group>"; };
 		60951B301CB4F92E00E0D0C8 /* NHEditCNNScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHEditCNNScroller.m; sourceTree = "<group>"; };
+		60A73BB41CBCFA9F00363204 /* NHEditChannelVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHEditChannelVCR.h; sourceTree = "<group>"; };
+		60A73BB51CBCFA9F00363204 /* NHEditChannelVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHEditChannelVCR.m; sourceTree = "<group>"; };
 		60C113761CBB7F7B0065A3F7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		60C113771CBB7F7B0065A3F7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		60C113791CBB8E470065A3F7 /* NHPreventPager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPreventPager.h; sourceTree = "<group>"; };
@@ -437,7 +428,6 @@
 				608D47461CAE19290028CA7F /* defaults */,
 				608D47511CAE19290028CA7F /* dsicovery */,
 				608D47581CAE19290028CA7F /* personals */,
-				608D47681CAE19290028CA7F /* tests */,
 			);
 			path = MainClasses;
 			sourceTree = "<group>";
@@ -457,8 +447,6 @@
 			children = (
 				608D474F1CAE19290028CA7F /* NHNewsDetailsVCR.h */,
 				608D47501CAE19290028CA7F /* NHNewsDetailsVCR.m */,
-				608D474C1CAE19290028CA7F /* NHEditChannelVCR.h */,
-				608D474D1CAE19290028CA7F /* NHEditChannelVCR.m */,
 			);
 			path = subClasses;
 			sourceTree = "<group>";
@@ -537,27 +525,6 @@
 				608D47671CAE19290028CA7F /* NHSettingsVCR.m */,
 			);
 			path = settings;
-			sourceTree = "<group>";
-		};
-		608D47681CAE19290028CA7F /* tests */ = {
-			isa = PBXGroup;
-			children = (
-				608D47691CAE19290028CA7F /* NHTestVCR.h */,
-				608D476A1CAE19290028CA7F /* NHTestVCR.m */,
-				608D476B1CAE19290028CA7F /* subClasses */,
-			);
-			path = tests;
-			sourceTree = "<group>";
-		};
-		608D476B1CAE19290028CA7F /* subClasses */ = {
-			isa = PBXGroup;
-			children = (
-				608D476C1CAE19290028CA7F /* NHPager.h */,
-				608D476D1CAE19290028CA7F /* NHPager.m */,
-				608D476E1CAE19290028CA7F /* NHRootScroll.h */,
-				608D476F1CAE19290028CA7F /* NHRootScroll.m */,
-			);
-			path = subClasses;
 			sourceTree = "<group>";
 		};
 		608D47701CAE19290028CA7F /* Models */ = {
@@ -795,6 +762,8 @@
 				60951B2D1CB4F91200E0D0C8 /* NHCnnItem.m */,
 				60951B2F1CB4F92E00E0D0C8 /* NHEditCNNScroller.h */,
 				60951B301CB4F92E00E0D0C8 /* NHEditCNNScroller.m */,
+				60A73BB41CBCFA9F00363204 /* NHEditChannelVCR.h */,
+				60A73BB51CBCFA9F00363204 /* NHEditChannelVCR.m */,
 			);
 			path = NHEditChanneler;
 			sourceTree = "<group>";
@@ -1040,11 +1009,9 @@
 				608D47A51CAE19290028CA7F /* NHScrollView.m in Sources */,
 				608D46FB1CAE15E90028CA7F /* ViewController.m in Sources */,
 				608D47C61CAE19290028CA7F /* NHADsImgCell.m in Sources */,
-				608D47BA1CAE19290028CA7F /* NHPager.m in Sources */,
 				608D47C91CAE19290028CA7F /* NHAFEngine.m in Sources */,
 				608D47A81CAE19290028CA7F /* NHViewController.m in Sources */,
 				608D47B11CAE19290028CA7F /* NHNewsDetailsVCR.m in Sources */,
-				608D47B91CAE19290028CA7F /* NHTestVCR.m in Sources */,
 				608D47AD1CAE19290028CA7F /* SSWDirectionalPanGestureRecognizer.m in Sources */,
 				608D47BF1CAE19290028CA7F /* NHPage.m in Sources */,
 				608D47CB1CAE19290028CA7F /* NHSetsEngine.m in Sources */,
@@ -1053,7 +1020,6 @@
 				608D47A91CAE19290028CA7F /* Jastor.m in Sources */,
 				608D47BC1CAE19290028CA7F /* NHModels.m in Sources */,
 				608D47B61CAE19290028CA7F /* NHInfomationVCR.m in Sources */,
-				608D47B01CAE19290028CA7F /* NHEditChannelVCR.m in Sources */,
 				608D46F81CAE15E90028CA7F /* AppDelegate.m in Sources */,
 				608D47B81CAE19290028CA7F /* NHSettingsVCR.m in Sources */,
 				60951B311CB4F92E00E0D0C8 /* NHEditCNNScroller.m in Sources */,
@@ -1068,11 +1034,11 @@
 				608D47C11CAE19290028CA7F /* NHPageScroller.m in Sources */,
 				60951B2E1CB4F91200E0D0C8 /* NHCnnItem.m in Sources */,
 				608D47BE1CAE19290028CA7F /* NHSubscriber.m in Sources */,
+				60A73BB61CBCFA9F00363204 /* NHEditChannelVCR.m in Sources */,
 				608D47AE1CAE19290028CA7F /* NHDefaultVCR.m in Sources */,
 				608D47C51CAE19290028CA7F /* NHReView.m in Sources */,
 				608D46F51CAE15E90028CA7F /* main.m in Sources */,
 				60C1137B1CBB8E470065A3F7 /* NHPreventPager.m in Sources */,
-				608D47BB1CAE19290028CA7F /* NHRootScroll.m in Sources */,
 				608D47A61CAE19290028CA7F /* NHTableView.m in Sources */,
 				608D47AB1CAE19290028CA7F /* SloppySwiper.m in Sources */,
 				608D47B51CAE19290028CA7F /* NHCollectionVCR.m in Sources */,
@@ -1173,7 +1139,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1212,7 +1178,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1228,7 +1194,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$PROJECT_DIR/NHNewsBoardPro/NHNewsBoardPro-Prefix.pch";
 				INFOPLIST_FILE = NHNewsBoardPro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1247,7 +1213,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$PROJECT_DIR/NHNewsBoardPro/NHNewsBoardPro-Prefix.pch";
 				INFOPLIST_FILE = NHNewsBoardPro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
