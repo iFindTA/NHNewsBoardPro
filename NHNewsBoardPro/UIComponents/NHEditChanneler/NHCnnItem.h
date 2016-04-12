@@ -8,13 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NHCnnItem : UILabel<NSCopying>
+@interface NHCnnItem : UIView
 
-@property (nonatomic, strong, nullable) UIButton *delBtn;
-@property (nonatomic, strong, nullable) UIImageView *bgImg;
-//@property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
-//@property (nonatomic, strong) UIPanGestureRecognizer *dragGesture;
-
+@property (nonatomic, copy) NSString * _Nonnull title;
+@property (nonatomic, strong) UIColor * _Nonnull titleColor;
+@property (nonatomic, strong) UIFont * _Nonnull font;
 @property (nonatomic, assign) BOOL isExist;
 
 /**
@@ -24,10 +22,20 @@
  */
 - (void)showDelete:(BOOL)show;
 
-@end
+/**
+ *  @brief wethear hidden bg image
+ *
+ *  @param hidden enable
+ */
+- (void)hiddenBgImg:(BOOL)hidden;
 
-
-@interface NHMoreItem : UIButton
+/**
+ *  @brief 添加删除按钮事件
+ *
+ *  @param target
+ *  @param action
+ */
+- (void)addTarget:(id _Nullable)target forAction:(SEL _Nullable)action;
 
 @end
 

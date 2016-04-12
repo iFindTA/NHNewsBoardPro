@@ -13,7 +13,7 @@
 #define NH_ANIMATE_DELAY   0.002
 #define NH_SCALE_FACTOR    1.09//放大因子
 
-@interface NHEditCNNScroller ()<UIGestureRecognizerDelegate>
+@interface NHEditCNNScroller ()
 
 @property (nonatomic, assign) BOOL dragEnable;
 
@@ -30,16 +30,13 @@
 //松开后的目的地
 @property (nonatomic, assign) CGRect destBounds;
 
-//@property (nonatomic, strong) NSMutableDictionary *itemKeySets;
-//@property (nonatomic, strong) NSMutableArray *itemPosits;
-
 //非拖动下 单机状态记录
 /**touch began后记录**/
 @property (nonatomic, strong, nullable) NHCnnItem *preTouchItem;
 
 @property (nonatomic, nonnull, copy) NHDragSortAble dragEvent;
 @property (nonatomic, nonnull, copy) NHCnnSortEvent sortEvent;
-@property (nonatomic, nonnull, copy) NHCnnAddDeleteEvent editEvent;
+@property (nonatomic, nonnull, copy) NHCnnEditEvent editEvent;
 
 //item集合
 @property (nonatomic, strong, nullable) NSMutableArray *existItems,*otherItems;
@@ -73,7 +70,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:NH_OBSERVER_KEYPATH]) {
-        NSLog(@"keyPath value changed!");
+        //NSLog(@"keyPath value changed!");
         BOOL m_new = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
         //self.longPress.enabled = !m_new;
         
@@ -171,7 +168,7 @@
         strongify(self)
         BOOL dragable = [self canDrag:obj];
         BOOL selected = [self isSelected:obj];
-        //NSLog(@"building---->%@...",obj);
+        NSLog(@"building---->%@...",obj);
         UIColor *titleColor = selected?[UIColor redColor]:[UIColor lightGrayColor];
         NSInteger __row = idx/numPerLine;NSInteger __col = idx%numPerLine;
         CGPoint origin = CGPointMake(NHBoundaryOffset+(size.width+cap)*__col, NHBoundaryOffset*2+(size.height+cap)*__row);
@@ -188,17 +185,14 @@
         NHCnnItem *tmp = [[NHCnnItem alloc] initWithFrame:bounds];
         //tmp.backgroundColor = [UIColor pb_randomColor];
         tmp.tag = idx;
-        tmp.font = titleFont;
-        tmp.textColor = titleColor;
-        tmp.text = obj;
+        tmp.title = obj;
         tmp.isExist = true;
-        tmp.delBtn.tag = idx;
-        tmp.bgImg.hidden = !dragable;
+        tmp.titleColor = titleColor;
         tmp.exclusiveTouch = true;
-        [tmp.delBtn addTarget:self action:@selector(channelDeleteTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
-        //[tmp.dragGesture addTarget:self action:@selector(existItemDragEvent:)];
-        //tmp.dragGesture.delegate = self;
-        [self addSubview:tmp];
+        [tmp hiddenBgImg:!dragable];
+        //[tmp.delBtn addTarget:self action:@selector(channelDeleteTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
+        [tmp addTarget:self forAction:@selector(channelDeleteTouchEvent:)];
+        [self insertSubview:tmp atIndex:10];
         [self.existItems addObject:tmp];
     }];
     
@@ -270,8 +264,6 @@
         [self.otherItems addObject:tmp];
     }];
     
-    
-    
     tmp_point_y += down_height;
     //重置content size
     CGSize contentSize = CGSizeMake(PBSCREEN_WIDTH, tmp_point_y);
@@ -283,13 +275,12 @@
     NHCnnItem *tmp = [[NHCnnItem alloc] initWithFrame:bounds];
     //tmp.backgroundColor = [UIColor pb_randomColor];
     tmp.tag = tag;
-    tmp.font = [UIFont pb_deviceFontForTitle];
-    tmp.textColor = [UIColor lightGrayColor];
-    tmp.text = title;
+    tmp.title = title;
     tmp.isExist = true;
-    tmp.delBtn.tag = tag;
+    tmp.titleColor = [UIColor lightGrayColor];
     tmp.exclusiveTouch = true;
-    [tmp.delBtn addTarget:self action:@selector(channelDeleteTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
+    //[tmp.delBtn addTarget:self action:@selector(channelDeleteTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
+    [tmp addTarget:self forAction:@selector(channelDeleteTouchEvent:)];
     return tmp;
 }
 
@@ -370,7 +361,7 @@
     
     //通知添加了栏目
     if (_editEvent) {
-        NSLog(@"添加了栏目:%@",__title);
+        //NSLog(@"添加了栏目:%@",__title);
         _editEvent(NHCnnEditTypeAdd,__exist_counts, __title);
     }
 }
@@ -506,7 +497,7 @@
     
     BOOL need_move = [self needMoveUpMoreView];
     NHCnnItem *tmp_cnn = [self.existItems objectAtIndex:__tag];
-    NSString *__title = [tmp_cnn text];
+    NSString *__title = [tmp_cnn title];
     NSLog(@"取消订阅栏目:%@",__title);
     
     //渐隐消失
@@ -554,7 +545,7 @@
         for (int i = __tag+1; i < __exist_counts; i++) {
             NHCnnItem *tmp = [self.existItems objectAtIndex:i];
             tmp.tag = i-1;
-            tmp.delBtn.tag = i-1;
+            //tmp.delBtn.tag = i-1;
             CGRect bounds = [self getDestinationBoundsForExistIndex:i-1];
             [self animateWithView:tmp destBounds:bounds];
         }
@@ -597,6 +588,20 @@
         
         [self.otherItems insertObject:add_tmp atIndex:__tag];
     }
+    
+    CGFloat cont_h = bounds.origin.y+down_height;
+    //重置content size
+    CGSize contentSize = CGSizeMake(PBSCREEN_WIDTH, cont_h);
+    weakify(self)
+    PBMAINDelay(NH_ANIMATE_DELAY, ^{
+        [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
+            strongify(self)
+            self.contentSize = contentSize;
+        }];
+    });
+    
+    //更新当前分割点
+    [self updateSeperatePoint];
 }
 
 - (void)existItemDragEvent:(UIPanGestureRecognizer *)gesture {
@@ -611,7 +616,8 @@
 }
 
 #pragma mark -- 排序栏目 --
-
+#define NH_AUTO_SCROLL_OFFSET   10
+#define NH_AUTO_SCROLL_STEP     2
 //实时检测当前point
 - (void)checkTouchPoint:(CGPoint)point {
     
@@ -625,10 +631,14 @@
             bounds = [self insetsBoundsForTouch:bounds];
             if (CGRectContainsPoint(bounds, point)) {
                 if (__tag__ != __tag && __tag__ != 0) {
+                    NSString *_title = obj.title;
+                    //NSLog(@"将与%@交换位置:%zd...",_title,__tag__);
+                    //通知事件block
+                    if (_sortEvent) {
+                        _sortEvent(__tag, __tag__, _title);
+                    }
                     //更新目的地
-                    PBMAIN(^{self.destBounds = obj.frame;});
-                    NSString *_title = obj.text;
-                    NSLog(@"将与%@交换位置:%zd...",_title,__tag__);
+                    self.destBounds = obj.frame;
                     [self animateSort:__tag destIndex:__tag__];
                     *stop = true;
                 }
@@ -636,7 +646,50 @@
         }];
     }
     
-    //scrollView size 较大时 需要滚动
+    [self autoCheckIfNeedScroll:point];
+}
+//scrollView size 较大时 需要滚动
+- (void)autoCheckIfNeedScroll:(CGPoint)point {
+    CGFloat __tmp_con_height = [self getExistCnnHeight];
+    CGFloat __tmp_fra_height = CGRectGetHeight(self.bounds);
+    
+    if (!self.dragEnable && __tmp_con_height <= __tmp_fra_height) {
+        return;
+    }
+    CGPoint offset = self.contentOffset;
+    //NSLog(@"pan===%f---%@&%f&%f",offset.y+point.y,NSStringFromCGSize(contentSize),__tmp_con_height,__tmp_fra_height);
+    int abs_offset = fabs(__tmp_fra_height-point.y);
+    if (abs_offset < NH_AUTO_SCROLL_OFFSET) {
+        //should move uping
+        if (offset.y+__tmp_fra_height >= __tmp_con_height) {
+            return;
+        }
+        //offset.y += NH_AUTO_SCROLL_STEP;
+        //一步到位
+        offset.y = __tmp_con_height-__tmp_fra_height;
+        weakify(self)
+        PBMAINDelay(NH_ANIMATE_DELAY, ^{
+            strongify(self)
+            [self setContentOffset:offset animated:true];
+            //[self autoCheckIfNeedScroll:point];
+        });
+    }else{
+        abs_offset = fabs(point.y-offset.y);
+        if (abs_offset < NH_AUTO_SCROLL_OFFSET) {
+            if (offset.y <= 0) {
+                return;
+            }
+            //offset.y -= NH_AUTO_SCROLL_STEP;
+            //一步到位
+            offset = CGPointZero;
+            weakify(self)
+            PBMAINDelay(NH_ANIMATE_DELAY, ^{
+                strongify(self)
+                [self setContentOffset:offset animated:true];
+                //[self autoCheckIfNeedScroll:point];
+            });
+        }
+    }
 }
 
 - (void)animateSort:(NSUInteger)origin destIndex:(NSUInteger)destIdx {
@@ -652,7 +705,7 @@
                 }
                 CGRect bounds = [self getDestinationBoundsForExistIndex:__tag];
                 tmp.tag = __tag;
-                tmp.delBtn.tag = __tag;
+                //tmp.delBtn.tag = __tag;
                 [self animateWithView:tmp destBounds:bounds];
             }
         }
@@ -667,7 +720,7 @@
                 }
                 CGRect bounds = [self getDestinationBoundsForExistIndex:__tag];
                 tmp.tag = __tag;
-                tmp.delBtn.tag = __tag;
+                //tmp.delBtn.tag = __tag;
                 [self animateWithView:tmp destBounds:bounds];
             }
         }
@@ -707,14 +760,40 @@
         strongify(self)
         if ([obj isKindOfClass:[NHCnnItem class]]) {
             NHCnnItem *item = (NHCnnItem *)obj;
-            BOOL t_can = [self canDrag:item.text];
+            BOOL t_can = [self canDrag:item.title];
             [item showDelete:(self.dragEnable&&t_can)];
         }
     }];
     
     [self adjustInnerContentSize];
     
-    //TODO:处于编辑状态时 字体均为灰色 结束排序时再选中对应的栏目
+    //处于编辑状态时 字体均为灰色 结束排序时再选中对应的栏目
+    [self updateSubscribedCnnsTitleColor];
+}
+
+//更新当前选中的栏目标题
+- (void)updateCurrentSelectCnn:(NSString * _Nonnull)_title {
+    
+    if (_selectedCnn != nil) {
+        _selectedCnn = nil;
+    }
+    _selectedCnn = [_title copy];
+    [self updateSubscribedCnnsTitleColor];
+}
+
+//更新已订阅栏目标题的颜色
+- (void)updateSubscribedCnnsTitleColor {
+    
+    @synchronized (self.existItems) {
+        for (NHCnnItem *tmp in self.existItems) {
+            BOOL selected = [self isSelected:tmp.title];
+            selected &= !self.dragEnable;
+            //NSLog(@"building---->%@...",obj);
+            UIColor *titleColor = selected?[UIColor redColor]:[UIColor lightGrayColor];
+            tmp.titleColor = titleColor;
+        }
+    }
+    
 }
 
 - (CGFloat)getExistCnnHeight {
@@ -766,7 +845,7 @@
     _sortEvent = [event copy];
 }
 
-- (void)handleCnnAddOrDeleteEvent:(NHCnnAddDeleteEvent)event {
+- (void)handleCnnEditEvent:(NHCnnEditEvent)event {
     _editEvent = [event copy];
 }
 
@@ -780,13 +859,13 @@
     }
     NSLog(@"long long long press!");
     
-    //TODO:依当前的选择的preTouch为selectItem
+    //依当前的选择的preTouch为selectItem
     if (_preTouchItem != nil && _preTouchItem.tag != 0) {
         CGRect bounds = _preTouchItem.frame;
         self.destBounds = bounds;
         self.movingIdx = _preTouchItem.tag;
         //创建一个新的cnn 然后隐藏真正的cnn
-        NHCnnItem *m_new = [self m_newExistCnn:bounds _title:_preTouchItem.text _tag:_preTouchItem.tag];
+        NHCnnItem *m_new = [self m_newExistCnn:bounds _title:_preTouchItem.title _tag:_preTouchItem.tag];
         [m_new showDelete:true];
         [self addSubview:m_new];
         self.selectedItem = m_new;
@@ -813,11 +892,11 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    NSLog(@"touch began");
+    //NSLog(@"touch began");
     
     CGPoint m_point = [self pointAtTouch:touches];
     if (m_point.y > self.seperatePoint.y) {
-        NSLog(@"touch 越界...");
+        //NSLog(@"touch 越界...");
         return;
     }
     //在非排序条件下 才有切换栏目可能
@@ -831,13 +910,13 @@
             self.destBounds = bounds;
             self.movingIdx = tmp.tag;
             //创建一个新的cnn 然后隐藏真正的cnn
-            NHCnnItem *m_new = [self m_newExistCnn:bounds _title:tmp.text _tag:tmp.tag];
+            NHCnnItem *m_new = [self m_newExistCnn:bounds _title:tmp.title _tag:tmp.tag];
             [m_new showDelete:true];
             [self addSubview:m_new];
             self.selectedItem = m_new;
             tmp.hidden = true;
             
-            NSLog(@"origin bounds:%@",NSStringFromCGRect(self.destBounds));
+            //NSLog(@"origin bounds:%@",NSStringFromCGRect(self.destBounds));
             weakify(self)
             PBMAINDelay(NH_ANIMATE_DELAY, ^{
                 [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
@@ -849,6 +928,8 @@
                     self.selectedItem.transform = transform;
                 }];
             });
+            
+            [self updateScrollPanGestureState];
         }
     }
     
@@ -859,10 +940,10 @@
 }
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
-    NSLog(@"touch moved");
+    //NSLog(@"touch moved");
     //如果有预选的item
+    CGPoint m_point = [self pointAtTouch:touches];
     if (self.preTouchItem != nil) {
-        CGPoint m_point = [self pointAtTouch:touches];
         CGRect bounds = self.preTouchItem.frame;
         bounds = [self insetsBoundsForTouch:bounds];
         if (!CGRectContainsPoint(bounds, m_point)) {
@@ -872,16 +953,15 @@
     
     if (self.dragEnable  && self.selectedItem != nil) {
         //自动滚动可视区域
-        CGPoint m_p = [self pointAtTouch:touches];
-        self.selectedItem.center = m_p;
-        PBBACK(^{[self checkTouchPoint:m_p];});
+        self.selectedItem.center = m_point;
+        PBBACK(^{[self checkTouchPoint:m_point];});
     }
     
     [self cancelInvokeLongPressState];
 }
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    NSLog(@"touch end");
+    //NSLog(@"touch end");
     
     if (!self.dragEnable) {
         //在非拖动排序的情况下响应
@@ -889,38 +969,17 @@
         NHCnnItem *tmp = [self itemForPoint:m_point];
         if (tmp != nil && _preTouchItem != nil && tmp.tag == _preTouchItem.tag) {
             //触发了单机 切换栏目
-            NSLog(@"点击切换栏目:%@",tmp.text);
-            NSString * _tmp = tmp.text;
+            //NSLog(@"点击切换栏目:%@",tmp.text);
+            NSString * _tmp = tmp.title;
             if (![_tmp isEqualToString:self.selectedCnn]) {
+                [self updateCurrentSelectCnn:[_tmp copy]];
                 if (_editEvent) {
-                    _editEvent(NHCnnEditTypeSelect, tmp.tag, tmp.text);
+                    _editEvent(NHCnnEditTypeSelect, tmp.tag, [_tmp copy]);
                 }
             }
         }
     }else{
-        //拖动结束
-        if (self.selectedItem) {
-            NSLog(@"end end end:%@ ...",NSStringFromCGRect(self.destBounds));
-        }
-        weakify(self)
-        PBMAIN( ^{
-            [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
-                strongify(self)
-                UIFont *oldFont = [UIFont pb_deviceFontForTitle];
-                self.selectedItem.font = oldFont;
-                self.selectedItem.transform = CGAffineTransformIdentity;
-                self.selectedItem.frame = self.destBounds;
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
-                    strongify(self)
-                    NHCnnItem *m_old = [self.existItems objectAtIndex:self.movingIdx];
-                    m_old.hidden = false;
-                    if (finished) {
-                        [self cleanSelectItem];
-                    }
-                }];
-            }];
-        });
+        [self resetCurrentSelectedItemWhenTouchRelease];
     }
     
     [self cleanPreTouchItem];
@@ -929,11 +988,61 @@
 }
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesCancelled:touches withEvent:event];
-    NSLog(@"touch cancelled");
+    //NSLog(@"touch cancelled");
+    if (self.dragEnable) {
+        [self resetCurrentSelectedItemWhenTouchRelease];
+    }
+    
     [self cleanPreTouchItem];
+    
     [self cleanSelectItem];
+    
     [self cancelInvokeLongPressState];
 }
+
+//TODO:当处于拖动状态时 size如果大于frame 则可能会冲突
+//方案1:当状态切换到排序时 如果此时选中item则禁用/启用panGesture end则启用
+- (void)updateScrollPanGestureState {
+    
+    if (self.dragEnable && (self.selectedItem != nil)) {
+        CGFloat __tmp_con_height = [self getExistCnnHeight];
+        CGFloat __tmp_fra_height = CGRectGetHeight(self.bounds);
+        BOOL __enable = (__tmp_fra_height < __tmp_con_height) ;
+        self.panGestureRecognizer.enabled = !__enable;
+        //NSLog(@"panGesture enabled:%zd",__enable);
+    }else{
+        self.panGestureRecognizer.enabled = true;
+    }
+}
+
+//重置当前拖动的item when:end/cancel
+- (void)resetCurrentSelectedItemWhenTouchRelease {
+    //拖动结束
+    //        if (self.selectedItem) {
+    //            NSLog(@"end end end:%@ ...",NSStringFromCGRect(self.destBounds));
+    //        }
+    weakify(self)
+    PBMAIN( ^{
+        [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
+            strongify(self)
+            UIFont *oldFont = [UIFont pb_deviceFontForTitle];
+            self.selectedItem.font = oldFont;
+            self.selectedItem.transform = CGAffineTransformIdentity;
+            self.selectedItem.frame = self.destBounds;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
+                strongify(self)
+                NHCnnItem *m_old = [self.existItems objectAtIndex:self.movingIdx];
+                m_old.hidden = false;
+                if (finished) {
+                    [self cleanSelectItem];
+                    [self updateScrollPanGestureState];
+                }
+            }];
+        }];
+    });
+}
+
 #pragma mark -- Util Methods --
 - (CGRect)insetsBoundsForTouch:(CGRect)bounds {
     return CGRectInset(bounds, NHBoundaryOffset, NHBoundaryOffset*0.5);

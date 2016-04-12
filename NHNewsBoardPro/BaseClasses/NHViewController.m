@@ -84,7 +84,9 @@ const NSString *kItemShare = @"toolBarActionShare";
     [super viewDidAppear:animated];
     [self setNeedsStatusBarAppearanceUpdate];
     
-    [self performSelector:@selector(preloadSomeLaziest2DifficultCreate) withObject:nil afterDelay:2];
+    if ([self respondsToSelector:@selector(preloadSomeLaziest2DifficultCreate)]) {
+        [self performSelector:@selector(preloadSomeLaziest2DifficultCreate) withObject:nil afterDelay:2];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

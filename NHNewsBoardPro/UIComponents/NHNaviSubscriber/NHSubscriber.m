@@ -30,7 +30,7 @@
 @property (nonatomic, strong) CALayer *lineLayer;
 @property (nonatomic, assign) CGFloat maxWidth;
 @property (nonatomic, strong) UIScrollView *displayScroll;
-@property (nonatomic, assign) NSInteger selectIndex;
+@property (nonatomic, assign) NSInteger selectIndex, preSelectIdx;
 @property (nonatomic, strong) UIButton *arrowBtn;
 
 @end
@@ -55,7 +55,7 @@ static CGFloat kFlagHeight = 20;
     }
     return self;
 }
-
+#pragma mark -- 增、删、选中、排序
 - (void)setSubscriberSelectIndex:(NSInteger)index {
     
     NSAssert(_dataSource != nil, @"subcriber's datasource must not be nil !");
@@ -66,6 +66,20 @@ static CGFloat kFlagHeight = 20;
     }
     _outTrigger = true;
     [self focusIndex:index];
+}
+
+- (void)scriberEdit:(BOOL)add idx:(NSUInteger)idx cnn:(NSString *)cnn {
+    self.preSelectIdx = self.selectIndex;
+    [self reloadData];
+    _outTrigger = true;
+    [self focusIndex:self.preSelectIdx];
+}
+
+- (void)scriberSort:(NSUInteger)originIdx destIdx:(NSUInteger)destIdx cnn:(NSString *)cnn {
+    self.preSelectIdx = self.selectIndex;
+    [self reloadData];
+    _outTrigger = true;
+    [self focusIndex:self.preSelectIdx];
 }
 
 //- (void)setBackgroundColor:(UIColor *)backgroundColor {
@@ -226,6 +240,15 @@ static CGFloat kFlagHeight = 20;
         }
         _outTrigger = false;
     }
+}
+
+- (NSString *)getSelectedCnn {
+    NSString *tmp = [[self sourceData] objectAtIndex:_selectIndex];
+    return [tmp copy];
+}
+
+- (NSArray *)getSourceData {
+    return [self sourceData];
 }
 
 - (void)updateBtnItemsTitleColor {

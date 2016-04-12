@@ -31,7 +31,7 @@ typedef enum {
  *  @param index 编辑的位置
  *  @param cnn   编辑的栏目名称
  */
-typedef void(^NHCnnAddDeleteEvent)(NHCnnEditType type, NSUInteger index, NSString * _Nonnull cnn);
+typedef void(^NHCnnEditEvent)(NHCnnEditType type, NSUInteger index, NSString * _Nonnull cnn);
 
 /**
  *  @brief 排序 block
@@ -74,11 +74,11 @@ typedef void(^NHCnnSortEvent)(NSUInteger originIdx, NSUInteger destIdx, NSString
 - (void)handleLongPressTriggerEvent:(NHDragSortAble _Nonnull)event;
 
 /**
- *  @brief 栏目 增加、删除动作
+ *  @brief 编辑栏目：增加、删除、选中动作
  *
  *  @param event block
  */
-- (void)handleCnnAddOrDeleteEvent:(NHCnnAddDeleteEvent _Nonnull)event;
+- (void)handleCnnEditEvent:(NHCnnEditEvent _Nonnull)event;
 
 /**
  *  @brief 栏目排序动作

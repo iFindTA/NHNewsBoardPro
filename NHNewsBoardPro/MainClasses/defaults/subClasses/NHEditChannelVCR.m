@@ -18,8 +18,8 @@
 
 @property (nonatomic, copy) NSString *selectedChannel;
 @property (nonatomic, copy) NHSwitchChannel switchBlock;
-
-//@property (nonatomic, strong) NHEditExistView *subUpView;
+@property (nonatomic, copy) NHEditChannel editBlock;
+@property (nonatomic, copy) NHSortChannel sortBlock;
 
 @end
 
@@ -75,36 +75,12 @@
     }];
     
     //self.selectedChannel = PBFormat(@"%@",NHIndexTitle);
-    
-    
-    
-//    NHEditExistView *sub = [[NHEditExistView alloc] initWithFrame:CGRectZero];
-//    sub.backgroundColor = NHWhiteColor;
-//    [self.view addSubview:sub];
-//    self.subUpView = sub;
-//    [sub mas_makeConstraints:^(MASConstraintMaker *make) {
-//        strongify(self)
-//        make.top.mas_equalTo(subNavi.mas_bottom).offset(0);
-//        make.left.bottom.right.equalTo(self.view).offset(0);
-//    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //[self buildExistChannels];
-    
-    //[self buildOtherChannels];
 }
-
-//- (UIScrollView *)scrollView {
-//    if (!_scrollView) {
-//        UIScrollView *scroll = [[UIScrollView alloc] init];
-//        scroll.backgroundColor = NHWhiteColor;
-//
-//    }
-//    return _scrollView;
-//}
 
 - (void)navigationBarActionClose {
     [super navigationBarActionClose];
@@ -120,8 +96,6 @@
     [self updateSortDragBtnTitle];
     
     [self.scrollView subNaviEventForSort:self.dragEnable];
-    
-    
 }
 
 - (BOOL)canDrag:(NSString * _Nonnull)til {
@@ -136,18 +110,26 @@
     self.changeFlag.text = title;
 }
 
-// setter method
-- (void)setExistSource:(NSArray *)existSource {
-    if (_existSource) {
-        _existSource = nil;
-    }
-    _existSource = existSource;
-    
+//// setter method
+//- (void)setExistSource:(NSArray *)existSource {
+//    if (_existSource) {
+//        _existSource = nil;
+//    }
+//    _existSource = existSource;
+//    
+//    [self __initSetupScroll];
+//}
+//
+//// setter method
+//- (void)setOtherSource:(NSArray *)otherSource {
+//    if (_otherSource) {
+//        _otherSource = nil;
+//    }
+//    _otherSource = otherSource;
+//}
+
+- (void)startBuildCnn {
     [self __initSetupScroll];
-    
-    //[self buildExistChannels];
-    
-    //[self.subUpView reloadData:self.existSource];
 }
 
 - (void)__initSetupScroll {
@@ -159,25 +141,32 @@
     //TODO:需要更改默认选中的title
     [scroll resetSelectedCnnTitle:self.selectedCnn];
     scroll.backgroundColor = NHWhiteColor;
+    //长按手势触发
     [scroll handleLongPressTriggerEvent:^(BOOL dragable) {
         strongify(self)
         [self dragSortAction];
     }];
+    //增加、删除、选中
+    [scroll handleCnnEditEvent:^(NHCnnEditType type, NSUInteger index, NSString * _Nonnull cnn) {
+        if (type == NHCnnEditTypeSelect) {
+            if (_switchBlock) {
+                _switchBlock(index, cnn);
+            }
+        }else if ((NHCnnEditTypeDelete == type)||(NHCnnEditTypeAdd == type)){
+            BOOL add = NHCnnEditTypeAdd == type;
+            if (_editBlock) {
+                _editBlock(add, index, cnn);
+            }
+        }
+    }];
+    //排序
+    [scroll handleCnnSortEvent:^(NSUInteger originIdx, NSUInteger destIdx, NSString * _Nonnull cnn) {
+        if (_sortBlock) {
+            _sortBlock(originIdx, destIdx, cnn);
+        }
+    }];
     [self.view addSubview:scroll];
     self.scrollView = scroll;
-//    [scroll mas_makeConstraints:^(MASConstraintMaker *make) {
-//        strongify(self)
-//        make.top.mas_equalTo(self.navigationBar.mas_bottom).offset(NHSubNavigationBarHeight);
-//        make.left.bottom.right.equalTo(self.view).offset(0);
-//    }];
-}
-
-// setter method
-- (void)setOtherSource:(NSArray *)otherSource {
-    if (_otherSource) {
-        _otherSource = nil;
-    }
-    _otherSource = otherSource;
 }
 
 #pragma mark -- Block Event --
@@ -186,42 +175,12 @@
     _switchBlock = [event copy];
 }
 
-//点击频道
-//- (void)channelSelectedEvent:(nhcnn *)tmp {
-//    
-//    if (self.dragEnable) {
-//        // 此时正显示删除按钮 所以不可以切换栏目
-//        return;
-//    }
-//    
-//    NSString *tmp_title = tmp.title;
-//    if ([tmp_title isEqualToString:self.selectedChannel]) {
-//        return;
-//    }
-//    self.selectedChannel = [tmp_title copy];
-//
-//    //excute switch block
-//    NSUInteger __tag = tmp.tag;
-//    if (self.switchBlock) {
-//        self.switchBlock(__tag,self.selectedChannel);
-//    }
-//
-//    UIColor *titleColor_n = [UIColor lightGrayColor];
-//    UIColor *titleColor_s = [UIColor redColor];
-//    NSArray *subviews = [self.scrollView subviews];
-//    weakify(self)
-//    [subviews enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//        strongify(self)
-//        if ([obj isKindOfClass:[NHItemChannel class]]) {
-//            NHItemChannel *tmp = (NHItemChannel *)obj;
-//            if (tmp.isExist) {
-//                //点击的是上边的item Event:切换频道
-//                BOOL selected = [tmp.title isEqualToString:self.selectedChannel];
-//                tmp.titleColor = selected?titleColor_s:titleColor_n;
-//            }
-//        }
-//    }];
-//}
+- (void)handleChannelEditorEditEvent:(NHEditChannel)event {
+    _editBlock = [event copy];
+}
+
+- (void)handleChannelEditorSortEvent:(NHSortChannel)event {
+    _sortBlock = [event copy];
+}
 
 @end

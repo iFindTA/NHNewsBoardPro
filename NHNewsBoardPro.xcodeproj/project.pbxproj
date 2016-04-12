@@ -85,6 +85,8 @@
 		6094E84F1CB7451E0036DBB7 /* NHPreventScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 6094E84E1CB7451E0036DBB7 /* NHPreventScroller.m */; };
 		60951B2E1CB4F91200E0D0C8 /* NHCnnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 60951B2D1CB4F91200E0D0C8 /* NHCnnItem.m */; };
 		60951B311CB4F92E00E0D0C8 /* NHEditCNNScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 60951B301CB4F92E00E0D0C8 /* NHEditCNNScroller.m */; };
+		60C1137B1CBB8E470065A3F7 /* NHPreventPager.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C1137A1CBB8E470065A3F7 /* NHPreventPager.m */; };
+		60C1137F1CBB98660065A3F7 /* NHPreventCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C1137E1CBB98660065A3F7 /* NHPreventCustomer.m */; };
 		CC68AFED80A72D8D1ACE1420 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1568B4AAC0B432DD9FC506 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -239,6 +241,12 @@
 		60951B2D1CB4F91200E0D0C8 /* NHCnnItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHCnnItem.m; sourceTree = "<group>"; };
 		60951B2F1CB4F92E00E0D0C8 /* NHEditCNNScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHEditCNNScroller.h; sourceTree = "<group>"; };
 		60951B301CB4F92E00E0D0C8 /* NHEditCNNScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHEditCNNScroller.m; sourceTree = "<group>"; };
+		60C113761CBB7F7B0065A3F7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		60C113771CBB7F7B0065A3F7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		60C113791CBB8E470065A3F7 /* NHPreventPager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPreventPager.h; sourceTree = "<group>"; };
+		60C1137A1CBB8E470065A3F7 /* NHPreventPager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPreventPager.m; sourceTree = "<group>"; };
+		60C1137D1CBB98660065A3F7 /* NHPreventCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPreventCustomer.h; sourceTree = "<group>"; };
+		60C1137E1CBB98660065A3F7 /* NHPreventCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPreventCustomer.m; sourceTree = "<group>"; };
 		A9DF2819578742449773E59A /* Pods-NHNewsBoardPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NHNewsBoardPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-NHNewsBoardPro/Pods-NHNewsBoardPro.release.xcconfig"; sourceTree = "<group>"; };
 		B8B49CC975B355BC86614444 /* Pods-NHNewsBoardPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NHNewsBoardPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NHNewsBoardPro/Pods-NHNewsBoardPro.debug.xcconfig"; sourceTree = "<group>"; };
 		CE4F8439D430D5F417F6C334 /* libPods-NHNewsBoardPro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NHNewsBoardPro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -772,6 +780,8 @@
 		6094E84C1CB744F50036DBB7 /* NHPreventScroller */ = {
 			isa = PBXGroup;
 			children = (
+				60C1137C1CBB98310065A3F7 /* NHCustomClasses */,
+				60C113781CBB8E160065A3F7 /* NHBaseClasses */,
 				6094E84D1CB7451E0036DBB7 /* NHPreventScroller.h */,
 				6094E84E1CB7451E0036DBB7 /* NHPreventScroller.m */,
 			);
@@ -787,6 +797,24 @@
 				60951B301CB4F92E00E0D0C8 /* NHEditCNNScroller.m */,
 			);
 			path = NHEditChanneler;
+			sourceTree = "<group>";
+		};
+		60C113781CBB8E160065A3F7 /* NHBaseClasses */ = {
+			isa = PBXGroup;
+			children = (
+				60C113791CBB8E470065A3F7 /* NHPreventPager.h */,
+				60C1137A1CBB8E470065A3F7 /* NHPreventPager.m */,
+			);
+			path = NHBaseClasses;
+			sourceTree = "<group>";
+		};
+		60C1137C1CBB98310065A3F7 /* NHCustomClasses */ = {
+			isa = PBXGroup;
+			children = (
+				60C1137D1CBB98660065A3F7 /* NHPreventCustomer.h */,
+				60C1137E1CBB98660065A3F7 /* NHPreventCustomer.m */,
+			);
+			path = NHCustomClasses;
 			sourceTree = "<group>";
 		};
 		CDFDEC726D5092B429C0BC53 /* Pods */ = {
@@ -1030,6 +1058,7 @@
 				608D47B81CAE19290028CA7F /* NHSettingsVCR.m in Sources */,
 				60951B311CB4F92E00E0D0C8 /* NHEditCNNScroller.m in Sources */,
 				608D47C01CAE19290028CA7F /* NHPageReuser.m in Sources */,
+				60C1137F1CBB98660065A3F7 /* NHPreventCustomer.m in Sources */,
 				608D47AC1CAE19290028CA7F /* SSWAnimator.m in Sources */,
 				608D47C71CAE19290028CA7F /* NHWinAnimateVCR.m in Sources */,
 				608D47B31CAE19290028CA7F /* NHPresentVCR.m in Sources */,
@@ -1042,6 +1071,7 @@
 				608D47AE1CAE19290028CA7F /* NHDefaultVCR.m in Sources */,
 				608D47C51CAE19290028CA7F /* NHReView.m in Sources */,
 				608D46F51CAE15E90028CA7F /* main.m in Sources */,
+				60C1137B1CBB8E470065A3F7 /* NHPreventPager.m in Sources */,
 				608D47BB1CAE19290028CA7F /* NHRootScroll.m in Sources */,
 				608D47A61CAE19290028CA7F /* NHTableView.m in Sources */,
 				608D47AB1CAE19290028CA7F /* SloppySwiper.m in Sources */,
@@ -1089,6 +1119,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				608D46FD1CAE15E90028CA7F /* Base */,
+				60C113761CBB7F7B0065A3F7 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1097,6 +1128,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				608D47021CAE15E90028CA7F /* Base */,
+				60C113771CBB7F7B0065A3F7 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

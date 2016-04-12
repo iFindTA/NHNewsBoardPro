@@ -9,6 +9,7 @@
 #import "NHDefaultVCR.h"
 #import "NHSubscriber.h"
 #import "NHPageScroller.h"
+#import "NHPreventScroller.h"
 #import "NHNewsDetailsVCR.h"
 #import "NHEditChannelVCR.h"
 
@@ -17,6 +18,8 @@
 @property (nonatomic, strong) NSArray *dataSource,*uriSource;
 @property (nonatomic, strong, nullable) NHSubscriber *scriber;
 @property (nonatomic, strong, nullable) NHPageScroller *pageScroller;
+
+@property (nonatomic, strong, nullable) NHPreventScroller *preventScroller;
 
 @end
 
@@ -144,11 +147,15 @@
     infoRect.origin.y += subNaviHeight;
     CGFloat tmpYAxis = infoRect.origin.y + NHDown_h;
     infoRect.size = CGSizeMake(PBSCREEN_WIDTH, PBSCREEN_HEIGHT - tmpYAxis);
-    NHPageScroller *pageScroller = [[NHPageScroller alloc] initWithFrame:infoRect];
-    pageScroller.dataSource = self;
-    pageScroller.delegate = self;
-    [self.view addSubview:pageScroller];
-    _pageScroller = pageScroller;
+//    NHPageScroller *pageScroller = [[NHPageScroller alloc] initWithFrame:infoRect];
+//    pageScroller.dataSource = self;
+//    pageScroller.delegate = self;
+//    [self.view addSubview:pageScroller];
+//    _pageScroller = pageScroller;
+    
+    NHPreventScroller *prevent = [[NHPreventScroller alloc] initWithFrame:infoRect withCnns:self.dataSource];
+    [self.view addSubview:prevent];
+    self.preventScroller = prevent;
     
     weakify(self);
     [self addColorChangedBlock:^{
@@ -159,11 +166,11 @@
 }
 
 - (NSArray *)tempArray{
-    NSMutableArray *listTop = [[NSMutableArray alloc] initWithArray:@[@"头条",@"热点",@"杭州财经报社团",@"社会",@"娱乐",@"科技",@"汽车",@"体育",@"订阅",@"财经",@"军事",@"国际",@"正能量",@"段子",@"趣图",@"美女",@"健康",@"教育",@"特卖",@"彩票",@"辟谣"]];
+    NSMutableArray *listTop = [[NSMutableArray alloc] initWithArray:@[@"头条",@"热点",@"杭州财经报社团",@"社会",@"娱乐",@"科技",@"汽车",@"体育",@"订阅",@"财经",@"军事",@"国际",@"正能量",@"段子",@"趣图",@"美女",@"健康",@"教育",@"特卖",@"彩票",@"辟谣",@"电影",@"数码",@"时尚",@"奇葩",@"游戏",@"旅游",@"育儿",@"减肥",@"养生",@"美食",@"政务",@"历史",@"探索",@"故事",@"美文",@"情感",@"语录",@"美图",@"房产",@"家居",@"搞笑",@"星座",@"文化",@"毕业生",@"视频",@"生态五",@"难得醉",@"物理学",@"卡诗",@"中国梦",@"婴儿床",@"装修"]];
     return [listTop copy];
 }
 - (NSArray *)otherArray {
-    NSMutableArray *listBottom = [[NSMutableArray alloc] initWithArray:@[@"电影",@"数码",@"时尚",@"奇葩",@"游戏",@"旅游",@"育儿",@"减肥",@"养生",@"美食",@"政务",@"历史",@"探索",@"故事",@"美文",@"情感",@"语录",@"美图",@"房产",@"家居",@"搞笑",@"星座",@"文化",@"毕业生",@"视频"]];
+    NSMutableArray *listBottom = [[NSMutableArray alloc] initWithArray:@[]];
     return [listBottom copy];
 }
 //
@@ -195,17 +202,34 @@
 - (void)didSelectArrowForSubscriber:(NHSubscriber *)scriber {
     //NSLog(@"did select scriber's arrow");
     
-    //TODO:实现频道编辑
-    //[SVProgressHUD showInfoWithStatus:@"Func{subscriber} To Be Continue!"];
-    
     NHEditChannelVCR *editChannels = [[NHEditChannelVCR alloc] init];
     //TODO:需要传当前选中的频道
-    editChannels.selectedCnn = NHNewsForceUpdateChannel;
-    editChannels.otherSource = [self otherArray];
-    editChannels.existSource = [self tempArray];
+    editChannels.selectedCnn = [self.scriber getSelectedCnn];
+    editChannels.existSource = [self sourceDataForSubscriber:self.scriber];
+    editChannels.otherSource = [NSArray array];
+    //切换
+    weakify(self)
     [editChannels handleChannelEditorSwitchEvent:^(NSUInteger index, NSString * _Nonnull channel) {
+        strongify(self)
+        [self.scriber setSubscriberSelectIndex:index];
+        //TODO:重构scrollView
+        [self.pageScroller selectedIndex:index animated:false];
         NSLog(@"切换栏目:%@",channel);
     }];
+    //增、删
+    [editChannels handleChannelEditorEditEvent:^(BOOL add, NSUInteger idx, NSString * _Nonnull cnn) {
+        strongify(self)
+        //TODO:操作数据源
+        [self.scriber scriberEdit:add idx:idx cnn:cnn];
+        //TODO:重构scrollView
+    }];
+    //排序
+    [editChannels handleChannelEditorSortEvent:^(NSUInteger originIdx, NSUInteger destIdx, NSString * _Nonnull cnn) {
+        strongify(self)
+        [self.scriber scriberSort:originIdx destIdx:destIdx cnn:cnn];
+        //TODO:重构scrollView
+    }];
+    [editChannels startBuildCnn];
     [self presentViewController:editChannels animated:true completion:^{
         
     }];

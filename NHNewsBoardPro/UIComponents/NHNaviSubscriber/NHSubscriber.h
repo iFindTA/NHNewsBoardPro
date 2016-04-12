@@ -20,6 +20,8 @@ typedef enum {
 @property (nonatomic, assign) id<NHSubscriberDelegate> delegate;
 @property (nonatomic, assign) id<NHSubscriberDataSource> dataSource;
 
+@property (nonatomic, readonly, copy, getter=getSelectedCnn) NSString *selectedCnn;
+
 @property (nonatomic, strong, readonly, getter = getSourceData) NSArray *sourceData;
 
 /**
@@ -44,19 +46,39 @@ typedef enum {
  */
 - (void)reloadData;
 
+#pragma mark -- 栏目编辑事件
+
+/**
+ *  @brief 增、删栏目
+ *
+ *  @param add 是否是增加 否为删除
+ *  @param idx 序号
+ *  @param cnn 栏目名称
+ */
+- (void)scriberEdit:(BOOL)add idx:(NSUInteger)idx cnn:(NSString * _Nonnull)cnn;
+
+/**
+ *  @brief 排序栏目
+ *
+ *  @param originIdx 原始序号
+ *  @param destIdx   目标序号
+ *  @param cnn       栏目名称
+ */
+- (void)scriberSort:(NSUInteger)originIdx destIdx:(NSUInteger)destIdx cnn:(NSString * _Nonnull)cnn;
+
 @end
 
 @protocol NHSubscriberDataSource <NSObject>
 
 @required
 
-- (NSArray *)sourceDataForSubscriber:(NHSubscriber *)scriber;
+- (NSArray * _Nullable)sourceDataForSubscriber:(NHSubscriber * _Nonnull)scriber;
 
 @end
 
 @protocol NHSubscriberDelegate <NSObject>
 
-- (void)subscriber:(NHSubscriber *)scriber didSelectIndex:(NSInteger)index;
-- (void)didSelectArrowForSubscriber:(NHSubscriber *)scriber;
+- (void)subscriber:(NHSubscriber * _Nonnull)scriber didSelectIndex:(NSInteger)index;
+- (void)didSelectArrowForSubscriber:(NHSubscriber * _Nonnull)scriber;
 
 @end

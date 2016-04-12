@@ -9,12 +9,19 @@
 #import "NHCnnItem.h"
 #import "NHConstaints.h"
 
+@interface NHCnnItem ()
+
+@property (nonatomic, strong, nullable) UILabel *titleLabel;
+@property (nonatomic, strong, nullable) UIButton *delBtn;
+@property (nonatomic, strong, nullable) UIImageView *bgImg;
+
+@end
+
 @implementation NHCnnItem
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.userInteractionEnabled = true;
         [self __initSetup];
     }
     return self;
@@ -23,38 +30,36 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.userInteractionEnabled = true;
         [self __initSetup];
     }
     return self;
 }
 
 - (void)__initSetup {
-    //    CGBCornerColor corner = {8,0xF5F5F5};
-    //    CGBWidthColor border = {1,0xC8C8C8};
-    //    [self pb_addRound:corner withBorder:border];
+//    CGBCornerColor corner = {8,0xF5F5F5};
+//    CGBWidthColor border = {1,0xC8C8C8};
+//    [self pb_addRound:corner withBorder:border];
     
-//    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] init];
-//    [self addGestureRecognizer:panGesture];
-//    panGesture.enabled = false;
-//    self.dragGesture = panGesture;
-    
-    self.layer.anchorPoint = CGPointMake(0.5, 0.5);
     weakify(self)
     UIImage *border = [UIImage imageNamed:@"channel_grid_circle"];
-    //CGFloat offset = NHBoundaryOffset*0.5;
     UIImageView *bg = [[UIImageView alloc] initWithImage:border];
-    [self addSubview:bg];
+    [self insertSubview:bg atIndex:0];
     self.bgImg = bg;
     [bg mas_makeConstraints:^(MASConstraintMaker *make) {
         strongify(self)
         make.edges.equalTo(self)/*.insets(UIEdgeInsetsMake(-offset, -offset*2, -offset, -offset*2))*/;
     }];
+    UILabel *label = [[UILabel alloc] init];
     UIFont *font = [UIFont pb_deviceFontForTitle];
-    self.font = font;
-    self.adjustsFontSizeToFitWidth = true;
-    self.backgroundColor = [UIColor clearColor];
-    self.textAlignment = NSTextAlignmentCenter;
+    label.font = font;
+    label.adjustsFontSizeToFitWidth = true;
+    label.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:label];
+    self.titleLabel = label;
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        strongify(self)
+        make.edges.equalTo(self).insets(UIEdgeInsetsMake(NHBoundaryOffset*0.5, NHBoundaryOffset, NHBoundaryOffset*0.5, NHBoundaryOffset));
+    }];
     
     UIImage *mark = [UIImage imageNamed:@"sub_navi_edit_delete"];
     UIButton *tmp = [[UIButton alloc] init];
@@ -82,57 +87,37 @@
     return true;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-    NHCnnItem *tmp = [[self class] allocWithZone:zone];
-    return tmp;
+- (void)setTitle:(NSString *)title {
+    _title = title;
+    self.titleLabel.text = title;
+}
+
+- (void)setTitleColor:(UIColor *)titleColor {
+    _titleColor = titleColor;
+    self.titleLabel.textColor = titleColor;
+}
+
+- (void)setTag:(NSInteger)tag {
+    [super setTag:tag];
+    self.delBtn.tag = tag;
+}
+
+- (void)setFont:(UIFont *)font {
+    _font = font;
+    self.titleLabel.font = font;
+}
+
+- (void)hiddenBgImg:(BOOL)hidden {
+    self.bgImg.hidden = hidden;
+}
+
+- (void)addTarget:(id)target forAction:(SEL)action {
+    [self.delBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 }
 
 @end
 
-@implementation NHMoreItem
-
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.userInteractionEnabled = true;
-        [self __initSetup];
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        self.userInteractionEnabled = true;
-        [self __initSetup];
-    }
-    return self;
-}
-
-+ (id)buttonWithType:(UIButtonType)buttonType {
-    NHMoreItem *tmp = [super buttonWithType:buttonType];
-    [tmp __initSetup];
-    return tmp;
-}
-
-- (void)__initSetup {
-    
-    UIImage *border = [UIImage imageNamed:@"channel_grid_circle"];
-    
-    [self setBackgroundImage:border forState:UIControlStateNormal];
-    [self setBackgroundImage:nil forState:UIControlStateSelected];
-//    weakify(self)
-//    //CGFloat offset = NHBoundaryOffset*0.5;
-//    UIImageView *bg = [[UIImageView alloc] initWithImage:border];
-//    [self addSubview:bg];
-//    [bg mas_makeConstraints:^(MASConstraintMaker *make) {
-//        strongify(self)
-//        make.edges.equalTo(self)/*.insets(UIEdgeInsetsMake(-offset, -offset*2, -offset, -offset*2))*/;
-//    }];
-}
-
-@end
-
+#pragma mark -- 更多待订阅栏目item
 @interface NHOtherCnnItem ()
 
 @property (nonatomic, strong) UIButton *btn;

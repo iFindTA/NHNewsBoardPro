@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NHNewsBoardPro/MainClasses/defaults/subClasses/NHEditChannelVCR.m"
-            timestampString = "481627232.543036"
+            timestampString = "482048898.451276"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "-dragSortAction"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NHNewsBoardPro/UIComponents/NHEditChanneler/NHEditCNNScroller.m"
-            timestampString = "481799018.845121"
+            timestampString = "482048898.451276"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "-__buildUI"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NHNewsBoardPro/UIComponents/NHEditChanneler/NHEditCNNScroller.m"
-            timestampString = "481802889.070406"
+            timestampString = "482053486.448164"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "824"
-            endingLineNumber = "824"
+            startingLineNumber = "903"
+            endingLineNumber = "903"
             landmarkName = "-touchesBegan:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NHNewsBoardPro/UIComponents/NHEditChanneler/NHEditCNNScroller.m"
-            timestampString = "481799018.845121"
+            timestampString = "482053486.448164"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
             landmarkName = "-adjustMoreItemAfterAddNewChannel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NHNewsBoardPro/UIComponents/NHEditChanneler/NHEditCNNScroller.m"
-            timestampString = "481799018.845121"
+            timestampString = "482053486.448164"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "497"
-            endingLineNumber = "497"
+            startingLineNumber = "488"
+            endingLineNumber = "488"
             landmarkName = "-channelDeleteTouchEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NHNewsBoardPro/UIComponents/NHEditChanneler/NHEditCNNScroller.m"
-            timestampString = "481802889.070406"
+            timestampString = "482053486.448164"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "745"
-            endingLineNumber = "745"
+            startingLineNumber = "824"
+            endingLineNumber = "824"
             landmarkName = "-adjustInnerContentSize"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NHNewsBoardPro/UIComponents/NHEditChanneler/NHEditCNNScroller.m"
-            timestampString = "481802889.070406"
+            timestampString = "482053486.448164"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "704"
-            endingLineNumber = "704"
+            startingLineNumber = "757"
+            endingLineNumber = "757"
             landmarkName = "-subNaviEventForSort:"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NHNewsBoardPro/UIComponents/NHEditChanneler/NHEditCNNScroller.m"
-            timestampString = "481799018.845121"
+            timestampString = "482053486.448164"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "626"
-            endingLineNumber = "626"
+            startingLineNumber = "632"
+            endingLineNumber = "632"
             landmarkName = "-checkTouchPoint:"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,12 +170,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NHNewsBoardPro/UIComponents/NHEditChanneler/NHEditCNNScroller.m"
-            timestampString = "481802889.070406"
+            timestampString = "482053486.448164"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "841"
-            endingLineNumber = "841"
+            startingLineNumber = "920"
+            endingLineNumber = "920"
             landmarkName = "-touchesBegan:withEvent:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHNewsBoardPro/UIComponents/NHEditChanneler/NHEditCNNScroller.m"
+            timestampString = "482053486.448164"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "676"
+            endingLineNumber = "676"
+            landmarkName = "-autoCheckIfNeedScroll:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHNewsBoardPro/MainClasses/defaults/subClasses/NHEditChannelVCR.m"
+            timestampString = "482049162.461431"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "-__initSetupScroll"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHNewsBoardPro/MainClasses/defaults/NHDefaultVCR.m"
+            timestampString = "482058687.695174"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "-didSelectArrowForSubscriber:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHNewsBoardPro/UIComponents/NHNaviSubscriber/NHSubscriber.m"
+            timestampString = "482053486.448164"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "-getSelectedCnn"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHNewsBoardPro/UIComponents/NHPreventScroller/NHBaseClasses/NHPreventPager.m"
+            timestampString = "482058858.817549"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "-drawRect:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHNewsBoardPro/UIComponents/NHPreventScroller/NHBaseClasses/NHPreventPager.m"
+            timestampString = "482058992.159896"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "-touchesEnded:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
