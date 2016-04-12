@@ -2,14 +2,14 @@
 news board Architecture for ios(objc) some like neteasy!
 
 ##### 前言
-support：iOS7.0+，如果觉得对你有所帮助请点个赞！
+support：iOS7.0+，如果觉得对你有所帮助请给个星星 star！
 ##### Version2.0先看看demo效果：
 
-![image](https://raw.githubusercontent.com/iFindTA/screenshots/master/neteasy_g0.gif)
+![gif](https://raw.githubusercontent.com/iFindTA/screenshots/master/neteasy_g0.gif)
 
 #####版本2.0 看点总结：
 ```
-1>.完全自定义NHPreventScrollview（模仿网易的NTESNBPreventScrollingScrollView类自己简易实现逻辑，同一时刻显示6个page）
+1>.完全自定义NHPreventScrollview（模仿网易的NTESNBPreventScrollingScrollView类自己简易实现逻辑，同一时刻最多显示6个page）
 2>.隐藏导航条类似网易布局导航
 3>.栏目订阅、取消订阅、拖动排序（非基于手势）同步呈现
 4>.黑夜、白天阅读模式怎么优雅地切换（包括在不修改MJRefresh源码情况下简易设置支持阅读模式切换）
