@@ -1,8 +1,8 @@
 //
-//  NHNewsTitleCell.h
-//  NHNaviSwipeBackPro
+//  NHNewsCell.h
+//  NHNewsBoardPro
 //
-//  Created by hu jiaju on 16/3/26.
+//  Created by hu jiaju on 16/4/13.
 //  Copyright © 2016年 hu jiaju. All rights reserved.
 //
 
@@ -11,8 +11,7 @@
 
 typedef void(^adEvent)(NSDictionary * _Nonnull info);
 
-@interface NHNewsTitleCell : UITableViewCell
-
+@interface NHNewsCell : UITableViewCell
 
 + (CGFloat)heightForSource:(NHNews * _Nonnull)news;
 

@@ -15,6 +15,7 @@
 		600024A11CBE1F6900EE1577 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 600024A01CBE1F6900EE1577 /* Foundation.framework */; };
 		600024A31CBE1F7200EE1577 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 600024A21CBE1F7200EE1577 /* ImageIO.framework */; };
 		600024A51CBE1F8100EE1577 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 600024A41CBE1F8100EE1577 /* UIKit.framework */; };
+		6007184D1CBE377F00A5F34E /* NHNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6007184C1CBE377F00A5F34E /* NHNewsCell.m */; };
 		608D46F51CAE15E90028CA7F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46F41CAE15E90028CA7F /* main.m */; };
 		608D46F81CAE15E90028CA7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46F71CAE15E90028CA7F /* AppDelegate.m */; };
 		608D46FB1CAE15E90028CA7F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46FA1CAE15E90028CA7F /* ViewController.m */; };
@@ -48,9 +49,6 @@
 		608D47BE1CAE19290028CA7F /* NHSubscriber.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47781CAE19290028CA7F /* NHSubscriber.m */; };
 		608D47BF1CAE19290028CA7F /* NHPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D477C1CAE19290028CA7F /* NHPage.m */; };
 		608D47C01CAE19290028CA7F /* NHPageReuser.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D477E1CAE19290028CA7F /* NHPageReuser.m */; };
-		608D47C11CAE19290028CA7F /* NHPageScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47811CAE19290028CA7F /* NHPageScroller.m */; };
-		608D47C21CAE19290028CA7F /* NHNewsTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47841CAE19290028CA7F /* NHNewsTitleCell.m */; };
-		608D47C31CAE19290028CA7F /* NHPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47861CAE19290028CA7F /* NHPageCell.m */; };
 		608D47C41CAE19290028CA7F /* NHReCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D47891CAE19290028CA7F /* NHReCell.m */; };
 		608D47C51CAE19290028CA7F /* NHReView.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D478B1CAE19290028CA7F /* NHReView.m */; };
 		608D47C61CAE19290028CA7F /* NHADsImgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D478E1CAE19290028CA7F /* NHADsImgCell.m */; };
@@ -115,6 +113,8 @@
 		600024A01CBE1F6900EE1577 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		600024A21CBE1F7200EE1577 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		600024A41CBE1F8100EE1577 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6007184B1CBE377F00A5F34E /* NHNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHNewsCell.h; sourceTree = "<group>"; };
+		6007184C1CBE377F00A5F34E /* NHNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHNewsCell.m; sourceTree = "<group>"; };
 		608D46F01CAE15E80028CA7F /* NHNewsBoardPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHNewsBoardPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		608D46F41CAE15E90028CA7F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		608D46F61CAE15E90028CA7F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -183,12 +183,6 @@
 		608D477C1CAE19290028CA7F /* NHPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPage.m; sourceTree = "<group>"; };
 		608D477D1CAE19290028CA7F /* NHPageReuser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPageReuser.h; sourceTree = "<group>"; };
 		608D477E1CAE19290028CA7F /* NHPageReuser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPageReuser.m; sourceTree = "<group>"; };
-		608D47801CAE19290028CA7F /* NHPageScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPageScroller.h; sourceTree = "<group>"; };
-		608D47811CAE19290028CA7F /* NHPageScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPageScroller.m; sourceTree = "<group>"; };
-		608D47831CAE19290028CA7F /* NHNewsTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHNewsTitleCell.h; sourceTree = "<group>"; };
-		608D47841CAE19290028CA7F /* NHNewsTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHNewsTitleCell.m; sourceTree = "<group>"; };
-		608D47851CAE19290028CA7F /* NHPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPageCell.h; sourceTree = "<group>"; };
-		608D47861CAE19290028CA7F /* NHPageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHPageCell.m; sourceTree = "<group>"; };
 		608D47881CAE19290028CA7F /* NHReCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHReCell.h; sourceTree = "<group>"; };
 		608D47891CAE19290028CA7F /* NHReCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHReCell.m; sourceTree = "<group>"; };
 		608D478A1CAE19290028CA7F /* NHReView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHReView.h; sourceTree = "<group>"; };
@@ -555,21 +549,12 @@
 			children = (
 				6094E84C1CB744F50036DBB7 /* NHPreventScroller */,
 				60951B2B1CB4F82200E0D0C8 /* NHEditChanneler */,
-				608D47741CAE19290028CA7F /* NHImageView */,
 				608D47751CAE19290028CA7F /* NHNaviSubscriber */,
 				608D47791CAE19290028CA7F /* NHPageReuser */,
-				608D477F1CAE19290028CA7F /* NHPageScroller */,
 				608D47871CAE19290028CA7F /* NHReuseScroller */,
 				608D478F1CAE19290028CA7F /* NHWindowAnimator */,
 			);
 			path = UIComponents;
-			sourceTree = "<group>";
-		};
-		608D47741CAE19290028CA7F /* NHImageView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NHImageView;
 			sourceTree = "<group>";
 		};
 		608D47751CAE19290028CA7F /* NHNaviSubscriber */ = {
@@ -585,41 +570,12 @@
 		608D47791CAE19290028CA7F /* NHPageReuser */ = {
 			isa = PBXGroup;
 			children = (
-				608D477A1CAE19290028CA7F /* NHImageView */,
 				608D477B1CAE19290028CA7F /* NHPage.h */,
 				608D477C1CAE19290028CA7F /* NHPage.m */,
 				608D477D1CAE19290028CA7F /* NHPageReuser.h */,
 				608D477E1CAE19290028CA7F /* NHPageReuser.m */,
 			);
 			path = NHPageReuser;
-			sourceTree = "<group>";
-		};
-		608D477A1CAE19290028CA7F /* NHImageView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NHImageView;
-			sourceTree = "<group>";
-		};
-		608D477F1CAE19290028CA7F /* NHPageScroller */ = {
-			isa = PBXGroup;
-			children = (
-				608D47801CAE19290028CA7F /* NHPageScroller.h */,
-				608D47811CAE19290028CA7F /* NHPageScroller.m */,
-				608D47821CAE19290028CA7F /* subComponents */,
-			);
-			path = NHPageScroller;
-			sourceTree = "<group>";
-		};
-		608D47821CAE19290028CA7F /* subComponents */ = {
-			isa = PBXGroup;
-			children = (
-				608D47831CAE19290028CA7F /* NHNewsTitleCell.h */,
-				608D47841CAE19290028CA7F /* NHNewsTitleCell.m */,
-				608D47851CAE19290028CA7F /* NHPageCell.h */,
-				608D47861CAE19290028CA7F /* NHPageCell.m */,
-			);
-			path = subComponents;
 			sourceTree = "<group>";
 		};
 		608D47871CAE19290028CA7F /* NHReuseScroller */ = {
@@ -772,6 +728,8 @@
 			children = (
 				60C1137D1CBB98660065A3F7 /* NHPreventCustomer.h */,
 				60C1137E1CBB98660065A3F7 /* NHPreventCustomer.m */,
+				6007184B1CBE377F00A5F34E /* NHNewsCell.h */,
+				6007184C1CBE377F00A5F34E /* NHNewsCell.m */,
 			);
 			path = NHCustomClasses;
 			sourceTree = "<group>";
@@ -990,11 +948,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				608D47A31CAE19290028CA7F /* NHImageView.m in Sources */,
-				608D47C31CAE19290028CA7F /* NHPageCell.m in Sources */,
 				608D47C41CAE19290028CA7F /* NHReCell.m in Sources */,
-				608D47C21CAE19290028CA7F /* NHNewsTitleCell.m in Sources */,
 				608D47B41CAE19290028CA7F /* NHPersonalVCR.m in Sources */,
 				608D47A51CAE19290028CA7F /* NHScrollView.m in Sources */,
+				6007184D1CBE377F00A5F34E /* NHNewsCell.m in Sources */,
 				608D46FB1CAE15E90028CA7F /* ViewController.m in Sources */,
 				608D47C61CAE19290028CA7F /* NHADsImgCell.m in Sources */,
 				608D47C91CAE19290028CA7F /* NHAFEngine.m in Sources */,
@@ -1019,7 +976,6 @@
 				608D47A71CAE19290028CA7F /* NHView.m in Sources */,
 				608D47A41CAE19290028CA7F /* NHLabel.m in Sources */,
 				608D47CA1CAE19290028CA7F /* NHDBEngine.m in Sources */,
-				608D47C11CAE19290028CA7F /* NHPageScroller.m in Sources */,
 				60951B2E1CB4F91200E0D0C8 /* NHCnnItem.m in Sources */,
 				608D47BE1CAE19290028CA7F /* NHSubscriber.m in Sources */,
 				60A73BB61CBCFA9F00363204 /* NHEditChannelVCR.m in Sources */,

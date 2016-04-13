@@ -7,7 +7,7 @@
 //
 
 #import "NHPreventCustomer.h"
-#import "NHNewsTitleCell.h"
+#import "NHNewsCell.h"
 #import <MJRefresh.h>
 
 @interface NHPreventCustomer ()<UITableViewDataSource, UITableViewDelegate>
@@ -42,7 +42,7 @@
 - (UITableView *)table {
     if (!_table) {
         _table = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
-        _table.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _table.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _table;
 }
@@ -143,7 +143,7 @@
     if (page == 1) {
         url_str = PBFormat(@"/nc/article/%@/0-20.html",tmpPath);
     }else {
-        url_str = PBFormat(@"/nc/article/%@/%ld-20.html",tmpPath,(self.dataSources.count - self.dataSources.count%10));
+        url_str = PBFormat(@"/nc/article/%@/%zd-20.html",tmpPath,(self.dataSources.count - self.dataSources.count%10));
     }
     
     //请求数据
@@ -261,7 +261,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     int __row = (int)[indexPath row];
     NHNews *tmp = [self.dataSources objectAtIndex:__row];
-    CGFloat __row_height = [NHNewsTitleCell heightForSource:tmp];
+    CGFloat __row_height = [NHNewsCell heightForSource:tmp];
     if ((__row%20 == 0) && (__row != 0)) {
         __row_height = 80.f;
     }
@@ -272,10 +272,10 @@
     
     int __row = (int)[indexPath row];
     NHNews *tmp = [self.dataSources objectAtIndex:__row];
-    NSString *identifier = [NHNewsTitleCell identifierForSource:tmp];
-    NHNewsTitleCell *cell = (NHNewsTitleCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+    NSString *identifier = [NHNewsCell identifierForSource:tmp];
+    NHNewsCell *cell = (NHNewsCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[NHNewsTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[NHNewsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     [cell dealWithAds:^(NSDictionary * _Nonnull info) {
         if (_adsBlock) {

@@ -1,16 +1,16 @@
 //
-//  NHNewsTitleCell.m
-//  NHNaviSwipeBackPro
+//  NHNewsCell.m
+//  NHNewsBoardPro
 //
-//  Created by hu jiaju on 16/3/26.
+//  Created by hu jiaju on 16/4/13.
 //  Copyright © 2016年 hu jiaju. All rights reserved.
 //
 
-#import "NHNewsTitleCell.h"
+#import "NHNewsCell.h"
 #import "NHReView.h"
 #import "NHADsImgCell.h"
 
-@interface NHNewsTitleCell ()<NHReViewDataSource,NHReViewDelegate>
+@interface NHNewsCell ()<NHReViewDataSource,NHReViewDelegate>
 
 @property (nonatomic, strong, nullable) NHNews *sourceNews;
 
@@ -22,11 +22,13 @@
 @property (nullable, nonatomic, strong) UILabel *imgNTitle;
 @property (nullable, nonatomic, strong) UILabel *bImgNTitle,*bImgNSubTitle;
 
+@property (nullable, nonatomic, strong) UILabel *seperateLine;
+
 @property (nonatomic, copy) adEvent adTouchEvent;
 
 @end
 
-@implementation NHNewsTitleCell
+@implementation NHNewsCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -43,7 +45,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -102,12 +104,12 @@
     [self.contentView addSubview:label];
     self.newsReply = label;
     weakify(self)
-//    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-//        strongify(self)
-//        make.bottom.equalTo(self.contentView).offset(-offset);
-//        make.right.equalTo(self.contentView).offset(-offset);
-//        make.height.equalTo(@(reply_font.pointSize));
-//    }];
+    //    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        strongify(self)
+    //        make.bottom.equalTo(self.contentView).offset(-offset);
+    //        make.right.equalTo(self.contentView).offset(-offset);
+    //        make.height.equalTo(@(reply_font.pointSize));
+    //    }];
     //bubble
     UIImage *bubble = [UIImage imageNamed:@"news_reply_bubble"];
     bubble = [bubble resizableImageWithCapInsets:UIEdgeInsetsMake(4, 8, 2, 10) resizingMode:UIImageResizingModeStretch];
@@ -124,6 +126,7 @@
     label = [[UILabel alloc] init];
     label.backgroundColor = [UIColor lightGrayColor];
     [self.contentView addSubview:label];
+    self.seperateLine = label;
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.contentView).offset(0);
         make.bottom.equalTo(self.contentView).offset(-1);
@@ -250,7 +253,7 @@
         make.width.mas_equalTo(_imgNewsIcon2.mas_width);
         make.right.mas_equalTo(self.contentView.mas_right).offset(-offset);
     }];
-
+    
 }
 
 //单张大图片cell
@@ -315,10 +318,10 @@
     tmp.delegate = self;
     [self.contentView addSubview:tmp];
     self.adsView = tmp;
-//    [tmp mas_makeConstraints:^(MASConstraintMaker *make) {
-//        strongify(self)
-//        make.edges.mas_equalTo(self.contentView).offset(0);
-//    }];
+    //    [tmp mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        strongify(self)
+    //        make.edges.mas_equalTo(self.contentView).offset(0);
+    //    }];
 }
 
 - (void)configureForSource:(NHNews * _Nonnull)news {
@@ -358,10 +361,10 @@
                 BOOL hidden = (obj == self.adsView);
                 [obj setHidden:!hidden];
             }];
-//            [self.adsView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                strongify(self)
-//                make.edges.mas_equalTo(self.contentView).offset(0);
-//            }];
+            //            [self.adsView mas_makeConstraints:^(MASConstraintMaker *make) {
+            //                strongify(self)
+            //                make.edges.mas_equalTo(self.contentView).offset(0);
+            //            }];
         }else if(self.sourceNews.imgType.boolValue) {
             //显示大图
             //图片
@@ -416,6 +419,9 @@
                 make.height.equalTo(@(reply_height));
             }];
         }
+        
+        //是否隐藏分割线
+        self.seperateLine.hidden = self.sourceNews.hasAD;
     }
 }
 
