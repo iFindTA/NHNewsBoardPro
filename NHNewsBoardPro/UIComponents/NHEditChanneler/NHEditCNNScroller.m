@@ -671,7 +671,8 @@
             return;
         }
         //offset.y += NH_AUTO_SCROLL_STEP;
-        //一步到位
+        //TODO:在此可以开启新的RunLoop每次移动一像素
+        //此处为方便一步到位
         offset.y = __tmp_con_height-__tmp_fra_height;
         weakify(self)
         PBMAINDelay(NH_ANIMATE_DELAY, ^{
@@ -686,7 +687,8 @@
                 return;
             }
             //offset.y -= NH_AUTO_SCROLL_STEP;
-            //一步到位
+            //TODO:在此可以开启新的RunLoop每次移动一像素
+            //此处为方便一步到位
             offset = CGPointZero;
             weakify(self)
             PBMAINDelay(NH_ANIMATE_DELAY, ^{
