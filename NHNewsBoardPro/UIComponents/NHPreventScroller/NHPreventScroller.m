@@ -336,7 +336,7 @@ static const int NH_MAX_LOAD_PAGE_NUM               = 6;
     CGPoint __offset = CGPointMake(size.width*idx, 0);
     [self setContentOffset:__offset animated:false];
     NHPreventCustomer *__tmp_page = [self currentPager];
-    [__tmp_page preventLoad];
+    [__tmp_page viewDidAppear];
     
     //缓存策略
     [self updatePreloadAroundSelectedIdx];

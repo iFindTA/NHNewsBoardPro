@@ -270,6 +270,11 @@ static CGFloat kFlagHeight = 20;
         }else{
             offsetPt = CGPointZero;
         }
+        
+        //当content size < bounds.size.width 不偏移
+        if (self.displayScroll.contentSize.width < selfSize.width) {
+            offsetPt = CGPointZero;
+        }
         [UIView animateWithDuration:kAnimationDuration animations:^{
             _lineLayer.frame = layerFrame;
             _flagView.frame = flagBounds;

@@ -16,7 +16,7 @@
  *
  *	@return	instance
  */
-+ (NHAFEngine *)share;
++ (NHAFEngine * _Nonnull)share;
 
 
 /**
@@ -24,10 +24,10 @@
  *
  *	@param 	path 	the request's path
  */
-- (void)cancelRequestForpath:(NSString *)path;
+- (void)cancelRequestForpath:(NSString * _Nonnull)path;
 
 
-- (void)POST:(NSString *)path parameters:(id)parameters vcr:(UIViewController *)vcr success:(void (^)(NSURLSessionDataTask *task, id responseObj))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+- (void)POST:(NSString * _Nonnull)path parameters:(id)parameters vcr:(UIViewController *)vcr success:(void (^)(NSURLSessionDataTask *task, id responseObj))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
 - (void)POST:(NSString *)path parameters:(id)parameters vcr:(UIViewController *)vcr view:(UIView *)view success:(void (^)(NSURLSessionDataTask *task, id responseObj))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 

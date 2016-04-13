@@ -199,7 +199,7 @@
 //}
 
 - (void)subscriber:(NHSubscriber *)scriber didSelectCnn:(NSString * _Nonnull)cnn{
-    NSLog(@"did select index:%zd",index);
+    NSLog(@"did select cnn:%zd",cnn);
     //[_reuser setReuseSelectIndex:index];
     [self.preventScroller preventScrollChange2Cnn:cnn];
 }

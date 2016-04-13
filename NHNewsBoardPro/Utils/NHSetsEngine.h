@@ -11,9 +11,9 @@
 @class NHUser;
 @interface NHSetsEngine : NSObject
 
-+ (NHSetsEngine *)share;
++ (NHSetsEngine * _Nonnull)share;
 
-@property (nonatomic, strong) NHUser *user;
+@property (nonatomic, strong) NHUser * _Nullable user;
 
 /**
  *  @brief config project for init load
@@ -35,7 +35,13 @@
 - (BOOL)whetherLogin;
 
 //TODO:临时解决方案
-- (NSDictionary *)getInfoForChannel:(nonnull NSString *)channel;
+- (NSDictionary * _Nonnull)getInfoForChannel:(nonnull NSString *)channel;
+
+/**
+ *  @brief 单例化日期格式器
+ *
+ *  @return 日期格式器实例
+ */
 - (NSDateFormatter * _Nonnull)dateFormatter;
 
 @end

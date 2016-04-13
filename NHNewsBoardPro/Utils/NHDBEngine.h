@@ -27,7 +27,7 @@
 - (NSArray * _Nullable)getInfos;
 
 #pragma mark -- 操作栏目订阅 --
-
+//TODO:编辑栏目操作的实现
 - (NSArray * _Nullable)getExistCnns;
 - (NSArray * _Nullable)getOtherCnns;
 - (BOOL)saveExistCnns:(NSArray * _Nonnull)cnns;

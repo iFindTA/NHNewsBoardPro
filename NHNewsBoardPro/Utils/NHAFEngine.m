@@ -7,7 +7,6 @@
 //
 
 #import "NHAFEngine.h"
-#import "NHSSLCImpPro.h"
 #import <Reachability.h>
 #import <SVProgressHUD.h>
 
@@ -109,18 +108,19 @@ static NSString *domain  = @"www.baidu.com";
 
 #pragma mark - transfer the encript data with SSL:AESA
 -(NSDictionary *)encriptParams:(NSDictionary *)params{
-    NSMutableDictionary *t_params = [NSMutableDictionary dictionaryWithDictionary:params];
-    if (!t_params || t_params == nil) {
-        return t_params;
-    }
-    NSString *aes_encript_key = NHSSLUtil->aesGenerateKey();
-    NSData *params_hex = [NSJSONSerialization dataWithJSONObject:t_params options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:nil];
-    NSString *params_str = [[NSString alloc] initWithData:params_hex encoding:NSUTF8StringEncoding];
-    NSString *t_cipher_data = NHSSLUtil->aesEncrypt(params_str,aes_encript_key);
-    NSString *t_cipher_key = NHSSLUtil->rsaEncrypt(aes_encript_key);
-    [t_params setObject:t_cipher_data forKey:@"cipherdata"];
-    [t_params setObject:t_cipher_key forKey:@"cipherkey"];
-    return t_params;
+//    NSMutableDictionary *t_params = [NSMutableDictionary dictionaryWithDictionary:params];
+//    if (!t_params || t_params == nil) {
+//        return t_params;
+//    }
+//    NSString *aes_encript_key = NHSSLUtil->aesGenerateKey();
+//    NSData *params_hex = [NSJSONSerialization dataWithJSONObject:t_params options:NSJSONReadingMutableContainers|NSJSONReadingAllowFragments error:nil];
+//    NSString *params_str = [[NSString alloc] initWithData:params_hex encoding:NSUTF8StringEncoding];
+//    NSString *t_cipher_data = NHSSLUtil->aesEncrypt(params_str,aes_encript_key);
+//    NSString *t_cipher_key = NHSSLUtil->rsaEncrypt(aes_encript_key);
+//    [t_params setObject:t_cipher_data forKey:@"cipherdata"];
+//    [t_params setObject:t_cipher_key forKey:@"cipherkey"];
+//    return t_params;
+    return params;
 }
 
 - (BOOL)shouldEncryptForPath:(NSString *)path{
