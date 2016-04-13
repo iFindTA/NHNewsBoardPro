@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		56076CD02B837BD49E817193 /* libPods-NHNewsBoardPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F8439D430D5F417F6C334 /* libPods-NHNewsBoardPro.a */; };
 		608D46F51CAE15E90028CA7F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46F41CAE15E90028CA7F /* main.m */; };
 		608D46F81CAE15E90028CA7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46F71CAE15E90028CA7F /* AppDelegate.m */; };
 		608D46FB1CAE15E90028CA7F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46FA1CAE15E90028CA7F /* ViewController.m */; };
@@ -82,9 +81,10 @@
 		60951B2E1CB4F91200E0D0C8 /* NHCnnItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 60951B2D1CB4F91200E0D0C8 /* NHCnnItem.m */; };
 		60951B311CB4F92E00E0D0C8 /* NHEditCNNScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 60951B301CB4F92E00E0D0C8 /* NHEditCNNScroller.m */; };
 		60A73BB61CBCFA9F00363204 /* NHEditChannelVCR.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A73BB51CBCFA9F00363204 /* NHEditChannelVCR.m */; };
+		60AD3BBF1CBDEFE500BC02C3 /* libPods-NHNewsBoardPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4F8439D430D5F417F6C334 /* libPods-NHNewsBoardPro.a */; };
+		60AD3BC11CBDF0AA00BC02C3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60AD3BC01CBDF0AA00BC02C3 /* QuartzCore.framework */; };
 		60C1137B1CBB8E470065A3F7 /* NHPreventPager.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C1137A1CBB8E470065A3F7 /* NHPreventPager.m */; };
 		60C1137F1CBB98660065A3F7 /* NHPreventCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C1137E1CBB98660065A3F7 /* NHPreventCustomer.m */; };
-		CC68AFED80A72D8D1ACE1420 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1568B4AAC0B432DD9FC506 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,7 +105,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3C1568B4AAC0B432DD9FC506 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		608D46F01CAE15E80028CA7F /* NHNewsBoardPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHNewsBoardPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		608D46F41CAE15E90028CA7F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		608D46F61CAE15E90028CA7F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -232,6 +231,7 @@
 		60951B301CB4F92E00E0D0C8 /* NHEditCNNScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHEditCNNScroller.m; sourceTree = "<group>"; };
 		60A73BB41CBCFA9F00363204 /* NHEditChannelVCR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHEditChannelVCR.h; sourceTree = "<group>"; };
 		60A73BB51CBCFA9F00363204 /* NHEditChannelVCR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHEditChannelVCR.m; sourceTree = "<group>"; };
+		60AD3BC01CBDF0AA00BC02C3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		60C113761CBB7F7B0065A3F7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		60C113771CBB7F7B0065A3F7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		60C113791CBB8E470065A3F7 /* NHPreventPager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHPreventPager.h; sourceTree = "<group>"; };
@@ -248,9 +248,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60AD3BC11CBDF0AA00BC02C3 /* QuartzCore.framework in Frameworks */,
 				608D47CE1CAE19290028CA7F /* libssl.a in Frameworks */,
-				CC68AFED80A72D8D1ACE1420 /* libPods.a in Frameworks */,
-				56076CD02B837BD49E817193 /* libPods-NHNewsBoardPro.a in Frameworks */,
+				60AD3BBF1CBDEFE500BC02C3 /* libPods-NHNewsBoardPro.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +274,7 @@
 		417CCFA8A1A635C331E98EC9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3C1568B4AAC0B432DD9FC506 /* libPods.a */,
+				60AD3BC01CBDF0AA00BC02C3 /* QuartzCore.framework */,
 				CE4F8439D430D5F417F6C334 /* libPods-NHNewsBoardPro.a */,
 			);
 			name = Frameworks;
@@ -1191,6 +1191,7 @@
 			baseConfigurationReference = B8B49CC975B355BC86614444 /* Pods-NHNewsBoardPro.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$PROJECT_DIR/NHNewsBoardPro/NHNewsBoardPro-Prefix.pch";
 				INFOPLIST_FILE = NHNewsBoardPro/Info.plist;
@@ -1200,6 +1201,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/NHNewsBoardPro/Utils/Security",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = PullBear.NHNewsBoardPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1210,6 +1212,7 @@
 			baseConfigurationReference = A9DF2819578742449773E59A /* Pods-NHNewsBoardPro.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$PROJECT_DIR/NHNewsBoardPro/NHNewsBoardPro-Prefix.pch";
 				INFOPLIST_FILE = NHNewsBoardPro/Info.plist;
@@ -1219,6 +1222,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/NHNewsBoardPro/Utils/Security",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = PullBear.NHNewsBoardPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
