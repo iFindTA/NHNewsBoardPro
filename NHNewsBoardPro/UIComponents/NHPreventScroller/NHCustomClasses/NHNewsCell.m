@@ -83,6 +83,10 @@
 #define NH_NEWS_TITLE_FONT  ([UIFont pb_deviceFontForTitle])
 - (void)__initSetup {
     
+    //简单优化策略 离屏渲染 不适用于动态变化的cell
+    self.contentView.layer.shouldRasterize = true;
+    self.contentView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
     [self configureNewsCell];
     
     [self configureImgNewsCell];

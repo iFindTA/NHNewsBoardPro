@@ -27,8 +27,8 @@
 - (void)cancelRequestForpath:(NSString * _Nonnull)path;
 
 
-- (void)POST:(NSString * _Nonnull)path parameters:(id)parameters vcr:(UIViewController *)vcr success:(void (^)(NSURLSessionDataTask *task, id responseObj))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+- (void)POST:(NSString * _Nonnull)path parameters:(id _Nullable)parameters vcr:(UIViewController * _Nullable)vcr success:(void (^)(NSURLSessionDataTask *task, id responseObj))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
-- (void)POST:(NSString *)path parameters:(id)parameters vcr:(UIViewController *)vcr view:(UIView *)view success:(void (^)(NSURLSessionDataTask *task, id responseObj))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+- (void)POST:(NSString * _Nonnull)path parameters:(id _Nullable)parameters vcr:(UIViewController * _Nullable)vcr view:(UIView *_Nullable)view success:(void (^)(NSURLSessionDataTask *task, id responseObj))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
 
 @end

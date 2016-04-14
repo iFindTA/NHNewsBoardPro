@@ -7,6 +7,7 @@
 //
 
 #import "NHPreventPager.h"
+#import "NHBaseKits.h"
 
 @interface NHPreventPager ()
 

@@ -208,7 +208,7 @@
     //NSLog(@"did select scriber's arrow");
     
     NHEditChannelVCR *editChannels = [[NHEditChannelVCR alloc] init];
-    //TODO:需要传当前选中的频道
+    //当前选中的频道
     editChannels.selectedCnn = self.scriber.selectedCnn;
     editChannels.existSource = [self sourceDataForSubscriber:self.scriber];
     editChannels.otherSource = self.otherSource;

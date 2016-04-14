@@ -12,7 +12,7 @@
 #define MAS_SHORTHAND
 #import "Masonry.h"
 #define MAS_SHORTHAND_GLOBALS
-#import <PBToolKits/PBToolKits.h>
+#import <PBKits.h>
 #import <DKNightVersion/DKNightVersion.h>
 
 #endif /* NHNewsBoardPro_Prefix_pch */

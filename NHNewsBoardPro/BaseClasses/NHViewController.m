@@ -125,10 +125,10 @@ const NSString *kItemShare = @"toolBarActionShare";
 - (UILabel *)navigationBar {
     if (!_navigationBar) {
         UILabel *statusBar = [[UILabel alloc] init];
+        statusBar.userInteractionEnabled = true;
         statusBar.font = [UIFont pb_navigationTitle];
         statusBar.textAlignment = NSTextAlignmentCenter;
         statusBar.textColor = NHWhiteColor;
-        statusBar.userInteractionEnabled = true;
         _navigationBar = statusBar;
     }
     return _navigationBar;

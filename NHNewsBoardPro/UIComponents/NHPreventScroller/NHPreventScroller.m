@@ -9,6 +9,7 @@
 #import "NHPreventScroller.h"
 #import "NHPreventCustomer.h"
 #import "NHConstaints.h"
+#import "NHBaseKits.h"
 
 /**在同一时刻最多显示的page个数**/
 static const int NH_MAX_LOAD_PAGE_NUM               = 6;

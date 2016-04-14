@@ -16,6 +16,7 @@
 		600024A31CBE1F7200EE1577 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 600024A21CBE1F7200EE1577 /* ImageIO.framework */; };
 		600024A51CBE1F8100EE1577 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 600024A41CBE1F8100EE1577 /* UIKit.framework */; };
 		6007184D1CBE377F00A5F34E /* NHNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6007184C1CBE377F00A5F34E /* NHNewsCell.m */; };
+		6062962D1CBF611C009FFFD8 /* libPods-NHNewsBoardPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6062962C1CBF611C009FFFD8 /* libPods-NHNewsBoardPro.a */; };
 		608D46F51CAE15E90028CA7F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46F41CAE15E90028CA7F /* main.m */; };
 		608D46F81CAE15E90028CA7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46F71CAE15E90028CA7F /* AppDelegate.m */; };
 		608D46FB1CAE15E90028CA7F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 608D46FA1CAE15E90028CA7F /* ViewController.m */; };
@@ -85,6 +86,7 @@
 		60AD3BC11CBDF0AA00BC02C3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60AD3BC01CBDF0AA00BC02C3 /* QuartzCore.framework */; };
 		60C1137B1CBB8E470065A3F7 /* NHPreventPager.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C1137A1CBB8E470065A3F7 /* NHPreventPager.m */; };
 		60C1137F1CBB98660065A3F7 /* NHPreventCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C1137E1CBB98660065A3F7 /* NHPreventCustomer.m */; };
+		D8830721E06E6B674F5EBA58 /* libPods-NHNewsBoardPro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 158BF6BCDE5B9A418220606C /* libPods-NHNewsBoardPro.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		158BF6BCDE5B9A418220606C /* libPods-NHNewsBoardPro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NHNewsBoardPro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		600024961CBE1F4100EE1577 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		600024981CBE1F4800EE1577 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		6000249A1CBE1F4C00EE1577 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -115,6 +118,7 @@
 		600024A41CBE1F8100EE1577 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6007184B1CBE377F00A5F34E /* NHNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHNewsCell.h; sourceTree = "<group>"; };
 		6007184C1CBE377F00A5F34E /* NHNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHNewsCell.m; sourceTree = "<group>"; };
+		6062962C1CBF611C009FFFD8 /* libPods-NHNewsBoardPro.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-NHNewsBoardPro.a"; path = "Pods/../build/Release-iphoneos/libPods-NHNewsBoardPro.a"; sourceTree = "<group>"; };
 		608D46F01CAE15E80028CA7F /* NHNewsBoardPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHNewsBoardPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		608D46F41CAE15E90028CA7F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		608D46F61CAE15E90028CA7F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6062962D1CBF611C009FFFD8 /* libPods-NHNewsBoardPro.a in Frameworks */,
 				600024A51CBE1F8100EE1577 /* UIKit.framework in Frameworks */,
 				600024A31CBE1F7200EE1577 /* ImageIO.framework in Frameworks */,
 				600024A11CBE1F6900EE1577 /* Foundation.framework in Frameworks */,
@@ -252,6 +257,7 @@
 				600024991CBE1F4800EE1577 /* CoreImage.framework in Frameworks */,
 				600024971CBE1F4100EE1577 /* CoreGraphics.framework in Frameworks */,
 				60AD3BC11CBDF0AA00BC02C3 /* QuartzCore.framework in Frameworks */,
+				D8830721E06E6B674F5EBA58 /* libPods-NHNewsBoardPro.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +281,7 @@
 		417CCFA8A1A635C331E98EC9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6062962C1CBF611C009FFFD8 /* libPods-NHNewsBoardPro.a */,
 				6000249C1CBE1F5400EE1577 /* libsqlite3.tbd */,
 				600024A41CBE1F8100EE1577 /* UIKit.framework */,
 				600024A21CBE1F7200EE1577 /* ImageIO.framework */,
@@ -284,6 +291,7 @@
 				600024981CBE1F4800EE1577 /* CoreImage.framework */,
 				600024961CBE1F4100EE1577 /* CoreGraphics.framework */,
 				60AD3BC01CBDF0AA00BC02C3 /* QuartzCore.framework */,
+				158BF6BCDE5B9A418220606C /* libPods-NHNewsBoardPro.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1141,10 +1149,46 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/NHNewsBoardPro/Utils/Security",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/build/Release-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-all_load",
+					"-l\"AFNetworking\"",
+					"-l\"DKNightVersion\"",
+					"-l\"FMDB\"",
+					"-l\"FXBlurView\"",
+					"-l\"MJRefresh\"",
+					"-l\"Masonry\"",
+					"-l\"PBToolKits\"",
+					"-l\"Reachability\"",
+					"-l\"SDWebImage\"",
+					"-l\"SQLCipher\"",
+					"-l\"SSKeychain\"",
+					"-l\"SVProgressHUD\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = PullBear.NHNewsBoardPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "arm64 armv7 armv7s";
@@ -1164,10 +1208,46 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/NHNewsBoardPro/Utils/Security",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/build/Release-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-all_load",
+					"-l\"AFNetworking\"",
+					"-l\"DKNightVersion\"",
+					"-l\"FMDB\"",
+					"-l\"FXBlurView\"",
+					"-l\"MJRefresh\"",
+					"-l\"Masonry\"",
+					"-l\"PBToolKits\"",
+					"-l\"Reachability\"",
+					"-l\"SDWebImage\"",
+					"-l\"SQLCipher\"",
+					"-l\"SSKeychain\"",
+					"-l\"SVProgressHUD\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = PullBear.NHNewsBoardPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "arm64 armv7 armv7s";
