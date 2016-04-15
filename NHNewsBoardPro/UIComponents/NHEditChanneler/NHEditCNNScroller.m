@@ -200,10 +200,6 @@
     [self updateSeperatePoint];
     CGFloat tmp_point_y = NHBoundaryOffset*3+(size.height+cap)*rows-cap;
     
-//    UILabel *flag = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 2, tmp_point_y)];
-//    flag.backgroundColor = [UIColor pb_randomColor];
-//    [self insertSubview:flag atIndex:0];
-    
     //中部及下部
     counts = [self.others count];
     rows = counts/numPerLine;
@@ -242,19 +238,6 @@
         NSInteger __row = idx/numPerLine;NSInteger __col = idx%numPerLine;
         CGPoint origin = CGPointMake(NHBoundaryOffset+(size.width+cap)*__col, cur_y+(size.height+cap)*__row);
         bounds.origin = origin;
-        
-        //UIImageView *imgBg = [self verturalBgForBounds:bounds];
-        //[self.moreCnnView addSubview:imgBg];
-        //[self.moreBgItems addObject:imgBg];
-        
-//        NHMoreItem *tmp = [[NHMoreItem alloc] initWithFrame:bounds];
-//        tmp.tag = idx;
-//        tmp.titleLabel.font = titleFont;
-//        [tmp setTitle:obj forState:UIControlStateNormal];
-//        [tmp setTitleColor:titleColor forState:UIControlStateNormal];
-//        [tmp addTarget:self action:@selector(moreitemTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
-//        [self.moreCnnView addSubview:tmp];
-//        [self.otherItems addObject:tmp];
         
         NHOtherCnnItem *tmp = [[NHOtherCnnItem alloc] initWithFrame:bounds];
         tmp.tag = idx;
@@ -366,24 +349,40 @@
     }
 }
 
+//当添加__tag 越界时强制修正tag
+- (void)forceResortOtherCnn_tag {
+    @synchronized (self.otherItems) {
+        [self.otherItems enumerateObjectsUsingBlock:^(NHOtherCnnItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.tag = idx;
+        }];
+    }
+}
+
 //添加完毕新频道后 调整下方的moreview
 - (void)adjustMoreItemAfterAddNewChannel:(NSUInteger)__tag {
     
     NSUInteger tmpCounts = [self.otherItems count];
     if (__tag >= tmpCounts) {
         NSLog(@"\"%s\" occured error!",__FUNCTION__);
+        [self forceResortOtherCnn_tag];
         return;
     }
     
-    NSLog(@"__tag:%zd-----__count:%zd",__tag,tmpCounts);
+    //NSLog(@"__tag:%zd-----__count:%zd",__tag,tmpCounts);
     @synchronized (self.otherItems) {
-        for (int i = __tag+1; i < tmpCounts; i++) {
-            NHOtherCnnItem *tmp = [self.otherItems objectAtIndex:i];
-            tmp.tag = i-1;
-            //NSLog(@"moving:%zd---title:%@",i,tmp.titleLabel.text);
-            CGRect tmpBounds = [self getDestinationBoundsForMoreIndex:i-1];
-            [self animateWithView:tmp destBounds:tmpBounds];
-        }
+        weakify(self)
+        [self.otherItems enumerateObjectsUsingBlock:^(NHOtherCnnItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            strongify(self)
+            if (idx == __tag) {
+                [obj removeFromSuperview];
+            }
+            if (idx > __tag) {
+                obj.tag = idx-1;
+                //NSLog(@"moving:%zd---title:%@",i,tmp.titleLabel.text);
+                CGRect tmpBounds = [self getDestinationBoundsForMoreIndex:idx-1];
+                [self animateWithView:obj destBounds:tmpBounds];
+            }
+        }];
         
         [self.otherItems removeObjectAtIndex:__tag];
     }
@@ -483,12 +482,22 @@
     return (counts%self.numsPerLine == 1);
 }
 
+//当删除__tag 越界时强制修正tag
+- (void)forceResortExistCnn_tag {
+    @synchronized (self.existItems) {
+        [self.existItems enumerateObjectsUsingBlock:^(NHCnnItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.tag = idx;
+        }];
+    }
+}
+
 - (void)channelDeleteTouchEvent:(UIButton *)tmp {
     
     NSUInteger __exist_counts = [self.existItems count];
     NSUInteger __tag = tmp.tag;
     if (__exist_counts <= __tag) {
         NSLog(@"delete channel occured error!");
+        [self forceResortExistCnn_tag];
         return;
     }
     
@@ -498,7 +507,7 @@
     BOOL need_move = [self needMoveUpMoreView];
     NHCnnItem *tmp_cnn = [self.existItems objectAtIndex:__tag];
     NSString *__title = [tmp_cnn title];
-    NSLog(@"取消订阅栏目:%@",__title);
+    //NSLog(@"取消订阅栏目:%@",__title);
     
     //渐隐消失
     weakify(self)
@@ -506,7 +515,7 @@
         [UIView animateWithDuration:PBANIMATE_DURATION animations:^{
             tmp_cnn.alpha = 0;
         } completion:^(BOOL finished) {
-            [tmp_cnn removeFromSuperview];
+            //[tmp_cnn removeFromSuperview];
             
             if (need_move) {
                 strongify(self)
@@ -529,7 +538,7 @@
     self.others = [tmpArr copy];
     [self relayoutMoreCnnView];
     
-    //TODO:如果删除的是当前选中的cnn 则默认选中第一个
+    //如果删除的是当前选中的cnn 则默认选中第一个
     if ([__title isEqualToString:self.selectedCnn]) {
         self.selectedCnn = [NHNewsForceUpdateChannel copy];
     }
@@ -544,16 +553,20 @@
 
 - (void)adjustExistItems:(NSUInteger)__tag {
     
-    NSUInteger __exist_counts = [self.exists count];
-    
     @synchronized (self.existItems) {
-        for (int i = __tag+1; i < __exist_counts; i++) {
-            NHCnnItem *tmp = [self.existItems objectAtIndex:i];
-            tmp.tag = i-1;
-            //tmp.delBtn.tag = i-1;
-            CGRect bounds = [self getDestinationBoundsForExistIndex:i-1];
-            [self animateWithView:tmp destBounds:bounds];
-        }
+        weakify(self)
+        [self.existItems enumerateObjectsUsingBlock:^(NHCnnItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            strongify(self)
+            if (idx > __tag) {
+                obj.tag = idx-1;
+                CGRect bounds = [self getDestinationBoundsForExistIndex:idx-1];
+                [self animateWithView:obj destBounds:bounds];
+            }
+            if (idx == __tag) {
+                [obj removeFromSuperview];
+            }
+        }];
         
         [self.existItems removeObjectAtIndex:__tag];
     }
@@ -581,16 +594,17 @@
     bounds = [self getDestinationBoundsForMoreIndex:__tag];
     NHOtherCnnItem *add_tmp = [self m_newOtherCnn:bounds _title:title _tag:__tag];
     [self.moreCnnView addSubview:add_tmp];
-    NSUInteger __other_counts = [self.otherItems count];
     @synchronized (self.otherItems) {
-        for (int i = __tag; i < __other_counts; i++) {
-            NHOtherCnnItem *tmp = [self.otherItems objectAtIndex:i];
-            tmp.tag = i+1;
+        weakify(self)
+        [self.otherItems enumerateObjectsUsingBlock:^(NHOtherCnnItem *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            strongify(self)
+            obj.tag = idx+1;
             //NSLog(@"moving:%zd---title:%@",i,tmp.titleLabel.text);
-            CGRect tmpBounds = [self getDestinationBoundsForMoreIndex:i+1];
-            [self animateWithView:tmp destBounds:tmpBounds];
-        }
-        
+            CGRect tmpBounds = [self getDestinationBoundsForMoreIndex:idx+1];
+            [self animateWithView:obj destBounds:tmpBounds];
+        }];
+        //插入最新的 取消订阅的栏目
         [self.otherItems insertObject:add_tmp atIndex:__tag];
     }
     
@@ -671,7 +685,7 @@
             return;
         }
         //offset.y += NH_AUTO_SCROLL_STEP;
-        //TODO:在此可以开启新的RunLoop每次移动一像素
+        //TODO:在此可以开启新的RunLoop 按像素移动
         //此处为方便一步到位
         offset.y = __tmp_con_height-__tmp_fra_height;
         weakify(self)
@@ -687,7 +701,7 @@
                 return;
             }
             //offset.y -= NH_AUTO_SCROLL_STEP;
-            //TODO:在此可以开启新的RunLoop每次移动一像素
+            //TODO:在此可以开启新的RunLoop 按像素移动
             //此处为方便一步到位
             offset = CGPointZero;
             weakify(self)
@@ -793,13 +807,15 @@
 - (void)updateSubscribedCnnsTitleColor {
     
     @synchronized (self.existItems) {
-        for (NHCnnItem *tmp in self.existItems) {
-            BOOL selected = [self isSelected:tmp.title];
+        weakify(self)
+        [self.existItems enumerateObjectsUsingBlock:^(NHCnnItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            strongify(self)
+            BOOL selected = [self isSelected:obj.title];
             selected &= !self.dragEnable;
             //NSLog(@"building---->%@...",obj);
             UIColor *titleColor = selected?[UIColor redColor]:[UIColor lightGrayColor];
-            tmp.titleColor = titleColor;
-        }
+            obj.titleColor = titleColor;
+        }];
     }
     
 }
@@ -1085,15 +1101,10 @@
     return m_dst;
 }
 
-
-
-
-
-
 #pragma mark -- UIGesture Delegate --
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    CGPoint tmpP = [gestureRecognizer locationInView:self];
+//    CGPoint tmpP = [gestureRecognizer locationInView:self];
     
 //    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
 //        if (tmpP.y < self.seperatePoint.y && !self.dragEnable) {
