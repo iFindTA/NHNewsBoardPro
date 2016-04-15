@@ -304,7 +304,7 @@
 #pragma mark -- prevent scroller delegate --
 
 - (void)preventScroller:(NHPreventScroller *)scroller didShowCnn:(NSString * _Nonnull)cnn {
-    [_scriber subscriberSelectCnn:cnn];
+    [self.scriber subscriberSelectCnn:cnn];
 }
 
 - (void)preventScroller:(NHPreventScroller *)scroller didSelectNews:(NHNews *)info {
