@@ -372,16 +372,20 @@ static const int NH_MAX_LOAD_PAGE_NUM               = 6;
         NSUInteger __tmp_idx = [self getPageIdxForCnn:cnn];
         [self.cnnSets removeObjectAtIndex:__tmp_idx];
         @synchronized (self.cnnPageSets) {
-            NSUInteger __tmp_counts = [self.cnnPageSets count];
-            for (int i = __tmp_idx+1; i < __tmp_counts; i++) {
-                CGPoint __origin = CGPointMake(size.width*(i-1), 0);
-                bounds.origin = __origin;
-                NHPreventCustomer *__tmp_page = [self.cnnPageSets objectAtIndex:i];
-                __tmp_page.pageIdx = i-1;
-                PBMAIN(^{__tmp_page.frame = bounds;});
-            }
-            NHPreventCustomer *__tmp_page = [self.cnnPageSets objectAtIndex:__tmp_idx];
-            [__tmp_page removeFromSuperview];
+            //weakify(self)
+            [self.cnnPageSets enumerateObjectsUsingBlock:^(NHPreventCustomer * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                //strongify(self)
+                if (idx == __tmp_idx) {
+                    [obj removeFromSuperview];
+                }
+                if (idx > __tmp_idx) {
+                    CGPoint __origin = CGPointMake(size.width*(idx-1), 0);
+                    bounds.origin = __origin;
+                    //NHPreventCustomer *__tmp_page = [self.cnnPageSets objectAtIndex:idx];
+                    obj.pageIdx = idx-1;
+                    obj.frame = bounds;
+                }
+            }];
             [self.cnnPageSets removeObjectAtIndex:__tmp_idx];
         }
         [self updateContentSize];
@@ -425,15 +429,17 @@ static const int NH_MAX_LOAD_PAGE_NUM               = 6;
     //移动位置
     //NSUInteger __tmp_idx = [self getPageIdxForCnn:cnn];
     @synchronized (self.cnnPageSets) {
-        for (int i = __start_idx; i < __end_idx+1; i++) {
-            CGPoint __origin = CGPointMake(size.width*i, 0);
-            bounds.origin = __origin;
-            //NSLog(@"交换idx:%d--bounds:%@",i,NSStringFromCGRect(bounds));
-            NHPreventCustomer *__tmp_page = [self.cnnPageSets objectAtIndex:i];
-            //NSLog(@"target:%@",__tmp_page.cnn);
-            __tmp_page.pageIdx = i;
-            __tmp_page.frame = bounds;
-        }
+        [self.cnnPageSets enumerateObjectsUsingBlock:^(NHPreventCustomer * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (idx >= __start_idx && idx <= __end_idx) {
+                CGPoint __origin = CGPointMake(size.width*idx, 0);
+                bounds.origin = __origin;
+                //NSLog(@"交换idx:%d--bounds:%@",i,NSStringFromCGRect(bounds));
+                //NHPreventCustomer *__tmp_page = [self.cnnPageSets objectAtIndex:i];
+                //NSLog(@"target:%@",__tmp_page.cnn);
+                obj.pageIdx = idx;
+                obj.frame = bounds;
+            }
+        }];
     }
     
     
