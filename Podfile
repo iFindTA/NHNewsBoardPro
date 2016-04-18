@@ -1,6 +1,6 @@
 target "NHNewsBoardPro" do
 
-platform :ios, '8.0'
+platform :ios, '7.0'
 pod 'Masonry', '~> 0.6.3'
 pod 'PBToolKits', '~> 0.4.172'
 pod 'DKNightVersion', '~> 0.9.0'
