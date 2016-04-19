@@ -360,7 +360,6 @@ static const int NH_MAX_LOAD_PAGE_NUM               = 6;
         [self.cnnPageSets addObject:preventPage];
         [self.cnnSets addObject:cnn];
         
-        [self updateContentSize];
     }else{
         //取消订阅栏目
         if (![self.cnnSets containsObject:cnn]) {
@@ -388,7 +387,6 @@ static const int NH_MAX_LOAD_PAGE_NUM               = 6;
             }];
             [self.cnnPageSets removeObjectAtIndex:__tmp_idx];
         }
-        [self updateContentSize];
         
         //如果删除当前选中的栏目 则默认滚动到第一个栏目
         if ([cnn isEqualToString:self.selectedCnn]) {
@@ -396,6 +394,11 @@ static const int NH_MAX_LOAD_PAGE_NUM               = 6;
             [self updateSelectedCnn:NHNewsForceUpdateChannel];
         }
     }
+    
+    //更新内容宽度
+    [self updateContentSize];
+    //更新同一时刻最多显示页数
+    [self updatePreloadNums];
     
     //NSLog(@"取消、增加订阅后:%@",self.cnnSets);
     //TODO:保存当前列表到数据库

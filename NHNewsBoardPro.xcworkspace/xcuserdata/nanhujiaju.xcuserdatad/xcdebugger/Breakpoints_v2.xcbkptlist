@@ -302,9 +302,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "457"
-            endingLineNumber = "457"
-            landmarkName = "-preventScrollSort:destIdx:cnn:"
-            landmarkType = "5">
+            endingLineNumber = "457">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
