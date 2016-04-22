@@ -312,6 +312,20 @@ static const int NH_MAX_LOAD_PAGE_NUM               = 6;
     [__tmp_page viewDidAppear];
 }
 
+#pragma mark -- 内存紧张时处理
+- (void)didReceivedMemoryWarning {
+    @synchronized (self.cnnPageSets) {
+        weakify(self)
+        [self.cnnPageSets enumerateObjectsUsingBlock:^(NHPreventCustomer * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            strongify(self)
+            if (![obj.cnn isEqualToString:self.selectedCnn] && obj.state == NHPreventStateShowing) {
+                [obj reset2LowwerPowerState];
+            }
+        }];
+    }
+}
+
 #pragma mark -- 栏目编辑事件
 
 - (void)endReceivedTouchEvent {

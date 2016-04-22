@@ -326,6 +326,9 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    if (self.preventScroller) {
+        [self.preventScroller didReceivedMemoryWarning];
+    }
 }
 
 /*

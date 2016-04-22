@@ -36,6 +36,13 @@
  */
 - (void)viewDidAppear;
 
+/**
+ *  @brief 内存紧张时处理
+ *
+ *  @attention:当内存紧张时页面均置为lowPower state（除了当前显示页面）
+ */
+- (void)didReceivedMemoryWarning;
+
 #pragma mark -- 栏目编辑事件
 /**
  *  @brief 切换栏目

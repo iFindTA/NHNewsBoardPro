@@ -244,6 +244,10 @@
         [self.dataSources removeAllObjects];
         _dataSources = nil;
     }
+    if (_table != nil) {
+        [_table removeFromSuperview];
+        _table = nil;
+    }
     [self refreshTableUI];
     NSLog(@"栏目:%@---->置为低内存状态",self.cnn);
     [super reset2LowwerPowerState];
